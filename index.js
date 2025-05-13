@@ -18,19 +18,14 @@ app.use(passport.initialize());
 require('./routes/oAuthRoutes')(app);
 require('./routes/localAuthRoutes')(app);
 
-
-
-
-
 // HANDLING ROUTES IN PRODUCTION
 if (process.env.NODE_ENV === 'production') {
   // express will serve up production assets like main.js or main.css
-  app.use(express.static(path.join(__dirname,'/client/dist')));
+  app.use(express.static(path.join(__dirname, 'client/dist')));
 
-
-  app.get('*', (_, res) =>
-    res.sendFile(path.join(__dirname, '/client', 'dist', 'index.html'))
-  );
+  app.get('/{*any}', (_, res) => {
+    res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
+  });
 }
 
 const PORT = process.env.PORT || 8000;
