@@ -17,18 +17,25 @@ app.use(passport.initialize());
 require('./routes/oAuthRoutes')(app);
 require('./routes/localAuthRoutes')(app);
 
+
+
+
+
 // HANDLING ROUTES IN PRODUCTION
+const path = require('path');
+
+
 if (process.env.NODE_ENV === 'production') {
   // express will serve up production assets like main.js or main.css
-  app.use(express.static('client/dist'));
+  app.use(express.static(path.join(__dirname,'/client/dist')));
 
-  // express will serve up index.html from client if it does not recognize the route
   const path = require('path');
   app.get('*', (_, res) =>
-    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+    res.sendFile(path.join(__dirname, '/client', 'dist', 'index.html'))
   );
 }
-
+const data =path.join(__dirname, '/client', 'dist', 'index.html')
+console.log(data)
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT);
