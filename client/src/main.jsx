@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router';
-import Login from './features/auth/Login.jsx';
-import Register from './features/auth/Register.jsx';
+
+import App from './App.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
 
 // import axios from 'axios';
 
