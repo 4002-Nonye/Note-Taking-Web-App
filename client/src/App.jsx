@@ -1,13 +1,11 @@
-
+import { Outlet } from 'react-router';
 
 function App() {
-
-
   return (
     <>
-     Hello world!
+      <Outlet />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
