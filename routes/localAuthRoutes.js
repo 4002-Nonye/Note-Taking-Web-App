@@ -9,7 +9,7 @@ const User = mongoose.model('User');
 module.exports = (app) => {
   app.post('/api/register', async (req, res) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
- 
+
     const { email, password } = req.body;
 
     if (!emailRegex.test(email)) {
@@ -82,10 +82,8 @@ module.exports = (app) => {
       }
 
       // if passwords match
-
       setAuthCookie(res, existingUser._id);
-      if (comparePassword)
-        res.status(200).send({ message: 'Successfully logged in' });
+      res.status(200).send({ message: 'Successfully logged in' });
     } catch (err) {
       res.status(500).send({ error: err.message });
     }

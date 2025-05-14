@@ -23,6 +23,8 @@ if (process.env.NODE_ENV === 'production') {
   // express will serve up production assets like main.js or main.css
   app.use(express.static(path.join(__dirname, 'client/dist')));
 
+
+  //express will serve up index.html when it does not recognize a route 
   app.get('/{*any}', (_, res) => {
     res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
   });

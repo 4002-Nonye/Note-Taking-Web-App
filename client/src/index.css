@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bgColor: #f3f5f8;
+  --color-primaryBlue: #335cff;
+  --color-csGray: "#6B7280";
+}
+
+body {
+  @apply bg-bgColor font-sans m-auto;
+}
