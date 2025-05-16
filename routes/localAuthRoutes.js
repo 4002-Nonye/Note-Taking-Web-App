@@ -1,7 +1,5 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-const keys = require('../config/keys');
 const setAuthCookie = require('../utils/setAuthCookie');
 
 const User = mongoose.model('User');
@@ -67,6 +65,14 @@ module.exports = (app) => {
       if (!existingUser) {
         return res.status(404).send({
           error: 'User does not exist! Create an account to continue',
+        });
+      }
+
+      // If user exists but has no password (e.g., registered via Google)
+      if (!existingUser.password) {
+        return res.status(403).send({
+          error:
+            'This account was registered via Google. Please log in with Google.',
         });
       }
 

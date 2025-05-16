@@ -46,7 +46,7 @@ passport.use(
         }).save();
 
         // THIS ASSIGNS THE VALUE OF newUser TO req.user
-        await done(null, newUser);
+         done(null, newUser);
       }
     }
   )
