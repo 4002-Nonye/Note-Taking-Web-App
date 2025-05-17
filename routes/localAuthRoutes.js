@@ -1,10 +1,12 @@
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const setAuthCookie = require('../utils/setAuthCookie');
+const requireLogin = require('../middlewares/requireLogin');
 
 const User = mongoose.model('User');
 
 module.exports = (app) => {
+  // sign up a new user
   app.post('/api/register', async (req, res) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -50,6 +52,7 @@ module.exports = (app) => {
     }
   });
 
+  // login existing user
   app.post('/api/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -94,4 +97,46 @@ module.exports = (app) => {
       res.status(500).send({ error: err.message });
     }
   });
+
+  // change password
+  app.put(
+    '/api/account/settings/passwordchange',
+    requireLogin,
+    async (req, res) => {
+      const { currentPassword, password } = req.body;
+
+      try {
+        const existingUser = await User.findById(req.user.id);
+
+        // user signed up using google therefore can't change password because he doesn't have one
+        if (!existingUser.password) {
+          return res.status(400).send({
+            error: 'Password change not available for Google sign-in accounts.',
+          });
+        }
+
+        // check if current password matches existing password in db
+        const comparePassword = bcrypt.compareSync(
+          currentPassword,
+          existingUser.password
+        );
+
+        // current password does not match existing password
+        if (!comparePassword) {
+          return res.status(401).send({ error: 'Incorrect current password' });
+        }
+
+        // proceed to change the password if they match
+        // hash new password for security
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+        existingUser.password = hashedPassword;
+
+        await existingUser.save();
+        res.status(200).send({ message: 'Password updated successfully' });
+      } catch (err) {
+        res.status(500).send({ error: 'Failed to update password' });
+      }
+    }
+  );
 };

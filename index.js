@@ -18,6 +18,7 @@ app.use(passport.initialize());
 require('./routes/oAuthRoutes')(app);
 require('./routes/localAuthRoutes')(app);
 require('./routes/noteRoutes')(app);
+require('./routes/accountSettings')(app);
 
 // HANDLING ROUTES IN PRODUCTION
 if (process.env.NODE_ENV === 'production') {

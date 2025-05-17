@@ -15,8 +15,13 @@ function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm();
+    formState: { errors},
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
@@ -36,6 +41,7 @@ function Login() {
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
       className="mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
+      noValidate={true}
     >
       <AuthHeader
         logo={logo}

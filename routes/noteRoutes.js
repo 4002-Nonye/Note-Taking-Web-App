@@ -5,6 +5,13 @@ require('../models/Notes');
 const Notes = mongoose.model('Notes'); // to fetch the table of notes
 
 module.exports = (app) => {
+  // fetch all notes
+  app.get('/api/notes', requireLogin, async (req, res) => {
+    const notes = await Notes.find({ _user: req.user.id });
+    res.status(200).send({ notes });
+  });
+
+  // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
     const { content, title, lastEdited, tags } = req.body;
 
@@ -29,15 +36,16 @@ module.exports = (app) => {
     }
   });
 
+  // edit a note
   app.put('/api/note/:id', requireLogin, async (req, res) => {
     try {
       const filter = { _id: req.params.id, _user: req.user.id };
       // params.id => the document _id (selects the document where the _id === id from the param)
       // user.id => the current user logged in (makes sure that the current user can only change his document)
-      const { content, title, lastEdited, tags } = req.body;
+      // $set => updates only the fields provided in req.body to avoid overwriting unchanged data
       const updatedNote = await Notes.findOneAndUpdate(
         filter,
-        { content, title, lastEdited, tags },
+        { $set: req.body },
         { new: true }
       );
 
@@ -47,6 +55,31 @@ module.exports = (app) => {
       res.send({ message: 'Note updated successfully', note: updatedNote });
     } catch (err) {
       res.status(500).send({ error: 'Failed to update note' });
+    }
+  });
+
+  // fetch archived notes
+  app.get('/api/notes/archive', requireLogin, async (req, res) => {
+    const archivedNotes = await Notes.find({
+      archive: true,
+      _user: req.user.id,
+    });
+    res.status(200).send({ notes: archivedNotes });
+  });
+
+  // delete a note
+  app.delete('/api/note/del/:id', requireLogin, async (req, res) => {
+    try {
+      const deletedNote = await Notes.findOneAndDelete({
+        _id: req.params.id,
+        _user: req.user.id,
+      });
+      if (!deletedNote)
+        res.status(404).send({ error: 'Note not found or unauthorized' });
+
+      res.status(200).send({ message: 'Note successfully deleted' });
+    } catch (err) {
+      res.status(500).send('Failed to delete note');
     }
   });
 };

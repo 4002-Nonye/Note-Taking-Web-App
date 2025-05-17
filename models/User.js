@@ -7,6 +7,10 @@ const userSchema = new Schema(
     googleID: String,
     email: { type: String, lowercase: true, unique: true, trim: true },
     password: String,
+    settings: {
+      fontTheme: { type: String, default: 'sans-serif' },
+      colorTheme: { type: String, default: 'light' },
+    },
   },
   { timestamps: true }
 );
