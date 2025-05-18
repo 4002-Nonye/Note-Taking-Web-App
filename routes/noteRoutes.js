@@ -1,15 +1,55 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
+
 require('../models/Notes');
 
 const Notes = mongoose.model('Notes'); // to fetch the table of notes
 
+// select('-_user -__v')=> excludes the __v and _user field
+
 module.exports = (app) => {
   // fetch all notes
   app.get('/api/notes', requireLogin, async (req, res) => {
-    const notes = await Notes.find({ _user: req.user.id });
+    const notes = await Notes.find({ _user: req.user.id }).select(
+      '-_user -__v'
+    );
     res.status(200).send({ notes });
   });
+
+
+
+  // fetch archived notes
+  app.get('/api/notes/archive', requireLogin, async (req, res) => {
+    const archivedNotes = await Notes.find({
+      archive: true,
+      _user: req.user.id,
+    }).select('-_user -__v');
+    res.status(200).send({ notes: archivedNotes });
+  });
+
+
+
+
+  // fetch note by id
+  app.get('/api/note/:id', requireLogin, async (req, res) => {
+    try {
+      const note = await Notes.findOne({
+        _id: req.params.id,
+        _user: req.user.id,
+      }).select('-_user -__v');
+      if (!note) {
+        return res.status(404).send({ error: 'Note not found' });
+      }
+      res.status(200).send({ data: note });
+    } catch (err) {
+      res.status(500).send({
+        error: 'Failed to fetch note',
+      });
+    }
+  });
+
+
+
 
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
@@ -25,9 +65,11 @@ module.exports = (app) => {
       });
 
       await newNote.save();
+
+      const { __v, _user, ...safeToSendNotes } = newNote._doc;
       res.status(200).send({
         message: 'Note successfully created',
-        note: newNote,
+        note: safeToSendNotes,
       });
     } catch (err) {
       res.status(500).send({
@@ -35,6 +77,10 @@ module.exports = (app) => {
       });
     }
   });
+
+
+
+
 
   // edit a note
   app.put('/api/note/:id', requireLogin, async (req, res) => {
@@ -47,7 +93,7 @@ module.exports = (app) => {
         filter,
         { $set: req.body },
         { new: true }
-      );
+      ).select('-_user -__v');
 
       // if there is an error in the id
       if (!updatedNote) res.status(404).send({ error: 'Note not found' });
@@ -58,14 +104,10 @@ module.exports = (app) => {
     }
   });
 
-  // fetch archived notes
-  app.get('/api/notes/archive', requireLogin, async (req, res) => {
-    const archivedNotes = await Notes.find({
-      archive: true,
-      _user: req.user.id,
-    });
-    res.status(200).send({ notes: archivedNotes });
-  });
+
+
+
+  
 
   // delete a note
   app.delete('/api/note/del/:id', requireLogin, async (req, res) => {

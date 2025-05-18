@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const setAuthCookie = require('../utils/setAuthCookie');
 const requireLogin = require('../middlewares/requireLogin');
+const sanitizeUser = require('../utils/sanitizeUser');
 
 const User = mongoose.model('User');
 
@@ -19,7 +20,9 @@ module.exports = (app) => {
     }
     try {
       // check if user already exists
-      const existingUser = await User.findOne({ email });
+      const existingUser = await User.findOne({ email }).select(
+        '-_user -__v -updatedAt -password'
+      );
       if (existingUser) {
         if (!existingUser.password) {
           // Check if the user exists but registered via Google only (no password set)
@@ -33,8 +36,8 @@ module.exports = (app) => {
       }
 
       // hash password for security
-      const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
       // create new user
       const newUser = await new User({
@@ -46,7 +49,12 @@ module.exports = (app) => {
       // Send the JWT token as an HTTP-only cookie
       setAuthCookie(res, newUser._id);
 
-      res.status(201).send({ message: 'User successfully registered' });
+      // Destructure the user object to remove sensitive or unnecessary fields before sending to the client
+      const safeUser = sanitizeUser(newUser);
+      res.status(201).send({
+        message: 'User successfully registered',
+        data: safeUser,
+      });
     } catch (err) {
       res.status(500).send({ error: 'Server error during registration' });
     }
@@ -80,7 +88,7 @@ module.exports = (app) => {
       }
 
       // compare password to allow login if there is a user
-      const comparePassword = bcrypt.compareSync(
+      const comparePassword = await bcrypt.compare(
         password,
         existingUser.password
       );
@@ -92,51 +100,52 @@ module.exports = (app) => {
 
       // if passwords match
       setAuthCookie(res, existingUser._id);
-      res.status(200).send({ message: 'Successfully logged in' });
+
+      // Destructure the user object to remove sensitive or unnecessary fields before sending to the client
+      const safeUser = sanitizeUser(existingUser._doc);
+      res
+        .status(200)
+        .send({ message: 'Successfully logged in', data: safeUser });
     } catch (err) {
       res.status(500).send({ error: err.message });
     }
   });
 
   // change password
-  app.put(
-    '/api/account/settings/passwordchange',
-    requireLogin,
-    async (req, res) => {
-      const { currentPassword, password } = req.body;
+  app.put('/api/account/passwordchange', requireLogin, async (req, res) => {
+    const { currentPassword, password } = req.body;
 
-      try {
-        const existingUser = await User.findById(req.user.id);
+    try {
+      const existingUser = await User.findById(req.user.id);
 
-        // user signed up using google therefore can't change password because he doesn't have one
-        if (!existingUser.password) {
-          return res.status(400).send({
-            error: 'Password change not available for Google sign-in accounts.',
-          });
-        }
-
-        // check if current password matches existing password in db
-        const comparePassword = bcrypt.compareSync(
-          currentPassword,
-          existingUser.password
-        );
-
-        // current password does not match existing password
-        if (!comparePassword) {
-          return res.status(401).send({ error: 'Incorrect current password' });
-        }
-
-        // proceed to change the password if they match
-        // hash new password for security
-        const salt = bcrypt.genSaltSync(10);
-        const hashedPassword = bcrypt.hashSync(password, salt);
-        existingUser.password = hashedPassword;
-
-        await existingUser.save();
-        res.status(200).send({ message: 'Password updated successfully' });
-      } catch (err) {
-        res.status(500).send({ error: 'Failed to update password' });
+      // user signed up using google therefore can't change password because he doesn't have one
+      if (!existingUser.password) {
+        return res.status(400).send({
+          error: 'Password change not available for Google sign-in accounts.',
+        });
       }
+
+      // check if current password matches existing password in db
+      const comparePassword = await bcrypt.compare(
+        currentPassword,
+        existingUser.password
+      );
+
+      // current password does not match existing password
+      if (!comparePassword) {
+        return res.status(401).send({ error: 'Incorrect current password' });
+      }
+
+      // proceed to change the password if they match
+      // hash new password for security
+      const salt = bcrypt.genSaltSync(10);
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      existingUser.password = hashedPassword;
+
+      await existingUser.save();
+      res.status(200).send({ message: 'Password updated successfully' });
+    } catch (err) {
+      res.status(500).send({ error: 'Failed to update password' });
     }
-  );
+  });
 };

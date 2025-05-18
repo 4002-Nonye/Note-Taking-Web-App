@@ -18,8 +18,8 @@ function Login() {
     formState: { errors},
   } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "ojukwuchinonye@gmail.com",
+      password: "1234567890",
     },
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
