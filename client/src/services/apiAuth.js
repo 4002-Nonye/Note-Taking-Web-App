@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export async function loginUser(data) {
+export const login = async ({ email, password }) => {
   try {
-    await axios.post("/api/login", data);
+    const response = await axios.post("/api/login", { email, password });
+    return response.data;
   } catch (err) {
-    if (err) console.log(err.response.data.error);
+    if (err.response) throw err.response.data;
   }
-}
+};

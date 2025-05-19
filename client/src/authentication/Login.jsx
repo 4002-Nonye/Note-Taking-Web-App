@@ -1,21 +1,23 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 import { FcGoogle } from "react-icons/fc";
+import { ClipLoader } from "react-spinners";
+
+import { useLogin } from "./useLogin";
 
 import logo from "../assets/icon-logo.svg";
 import Button from "../components/Button";
 import AuthHeader from "../components/AuthHeader";
 import PasswordVisibility from "../components/PasswordVisibility";
-import { useForm } from "react-hook-form";
 import Errors from "../components/Errors";
-import axios from "axios";
 
 function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors},
+    formState: { errors },
   } = useForm({
     defaultValues: {
       email: "ojukwuchinonye@gmail.com",
@@ -23,15 +25,10 @@ function Login() {
     },
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const navigate = useNavigate();
+  const { login, isPending} = useLogin();
 
-  const onSubmit = async (data) => {
-    try {
-      await axios.post("/api/login", data);
-      navigate("/notes", { replace: true });
-    } catch (err) {
-      if (err) console.log(err.response.data.error);
-    }
+  const onSubmit = (data) => {
+    login(data);
   };
   const onError = (err) => {
     console.log(err);
@@ -95,7 +92,7 @@ function Login() {
         </div>
       </div>
 
-      <Button type="authBtn">Login</Button>
+      <Button type="authBtn">{isPending ? <ClipLoader color="white"/> : "Login"}</Button>
       <div className="my-6 w-[85%] border-t-2 border-gray-200" />
 
       <p>or Log in with:</p>
