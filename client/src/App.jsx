@@ -3,10 +3,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
-import Notes from "./pages/Notes";
 import AppLayout from "./components/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import NoteForm from "./components/NoteForm";
+import NoteCTA from "./components/NoteCTA";
+import Notes from "./pages/Notes";
+import Archive from "./pages/Archive";
 
 const queryClient = new QueryClient({
   queries: {
@@ -17,7 +20,6 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-
     element: <LoginPage />,
   },
   {
@@ -25,13 +27,20 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    element: <AppLayout />,
+    element: <AppLayout />, 
     children: [
       {
-        path: "/notes",
-        element: <Notes />,
+        path: "/notes", // 
+        element: <Notes />, 
+        children: [
+          {
+            path: ":noteId",
+            element: <NoteForm />,
+          },
+        ],
       },
-      // You can add more protected routes here
+
+      {path:'/archive',element:<Archive/>}
     ],
   },
 ]);

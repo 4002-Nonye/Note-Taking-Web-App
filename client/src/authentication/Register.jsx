@@ -94,7 +94,7 @@ function Register() {
       </div>
 
       <Button type="authBtn">
-        {isPending ? <ClipLoader color="white" /> : "Sign up"}
+        {isPending ? <ClipLoader color="white" size={22} /> : "Sign up"}
       </Button>
       <div className="my-6 w-[85%] border-t-2 border-gray-200" />
 

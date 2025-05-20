@@ -8,5 +8,16 @@
 }
 
 body {
-  @apply bg-bgColor font-sans m-auto;
+  @apply bg-bgColor m-auto font-sans;
+}
+ul li {
+  @apply list-none;
+}
+
+.grid-display {
+  grid-template-columns: 350px 1fr;
+}
+
+.navlink {
+  @apply flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-3 font-medium;
 }

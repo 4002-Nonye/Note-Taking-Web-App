@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import toast from "react-hot-toast";
 
-import { register as registerApi } from "../services/apiAuth";
+import { register as registerApi } from "../apis/apiAuth";
 
 export function useRegister() {
   const navigate = useNavigate();

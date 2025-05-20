@@ -92,7 +92,7 @@ function Login() {
         </div>
       </div>
 
-      <Button type="authBtn">{isPending ? <ClipLoader color="white"/> : "Login"}</Button>
+      <Button type="authBtn">{isPending ? <ClipLoader color="white" size={22}/> : "Login"}</Button>
       <div className="my-6 w-[85%] border-t-2 border-gray-200" />
 
       <p>or Log in with:</p>
