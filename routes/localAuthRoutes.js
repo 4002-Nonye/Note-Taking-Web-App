@@ -21,18 +21,19 @@ module.exports = (app) => {
     try {
       // check if user already exists
       const existingUser = await User.findOne({ email }).select(
-        '-_user -__v -updatedAt -password'
+        '-_user -__v -updatedAt'
       );
+
       if (existingUser) {
-        if (!existingUser.password) {
-          // Check if the user exists but registered via Google only (no password set)
-          return res.status(403).send({
-            error:
-              'This email is already registered via Google. Please log in with Google.',
-          });
-        }
-        // If user exists and already registered with email/password, block duplicate registration
         return res.status(409).send({ error: 'Email already exists' });
+      }
+
+      // Check if the user exists but registered via Google only (no password set)
+      if (existingUser && !existingUser.password) {
+        return res.status(403).send({
+          error:
+            'This email is already registered via Google. Please log in with Google.',
+        });
       }
 
       // hash password for security

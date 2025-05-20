@@ -1,32 +1,28 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { FcGoogle } from "react-icons/fc";
+import { ClipLoader } from "react-spinners";
+
+import { useRegister } from "./useRegister";
 
 import logo from "../assets/icon-logo.svg";
 import Button from "../components/Button";
 import AuthHeader from "../components/AuthHeader";
 import PasswordVisibility from "../components/PasswordVisibility";
 import Errors from "../components/Errors";
-import axios from "axios";
 
 function Register() {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+  const { register: signUp, isPending } = useRegister();
   const onSubmit = async (data) => {
-    try {
-      await axios.post("/api/register", data);
-      navigate("/notes", { replace: true });
-    } catch (err) {
-      if (err) console.log("Login failed:", err.response?.data || err.message);
-    }
+    signUp(data);
   };
   const onError = (err) => {
     console.log(err);
@@ -97,13 +93,19 @@ function Register() {
         </div>
       </div>
 
-      <Button type="authBtn">Sign up</Button>
+      <Button type="authBtn">
+        {isPending ? <ClipLoader color="white" /> : "Sign up"}
+      </Button>
       <div className="my-6 w-[85%] border-t-2 border-gray-200" />
 
       <p>or Log in with:</p>
 
       <Button type="googleBtn" purpose="link" href="/auth/google">
-        <FcGoogle /> <span className="text-gray-500 text-sm font-medium"> &nbsp; Google</span>
+        <FcGoogle />{" "}
+        <span className="text-sm font-medium text-gray-500">
+          {" "}
+          &nbsp; Google
+        </span>
       </Button>
 
       <div className="my-7 w-[85%] border-t-2 border-gray-200" />
