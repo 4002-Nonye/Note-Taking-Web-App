@@ -14,11 +14,11 @@ function NoteForm() {
 
     <div className="flex xl:flex-row flex-col-reverse w-full ">
       <div className="flex-grow border-r-[1px] border-gray-300">
-        <form className="flex h-[calc(100vh-5rem)] flex-col">
+        <form className="flex h-[calc(100vh-5rem)] flex-col pr-4">
           <input
             type="text"
             placeholder="Enter a title..."
-            className="mt-4 border-0 pl-4 text-2xl font-bold text-black outline-0 placeholder:text-black"
+            className="mt-4 border-0 pl-4 text-xl xl:text-2xl font-bold text-black outline-0 placeholder:text-black"
           />
           <div className="text-grey-300 mt-3 ml-4 flex text-sm">
             <label
