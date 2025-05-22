@@ -1,3 +1,5 @@
+
+
 import { FaRegClock } from "react-icons/fa6";
 import { FiTag } from "react-icons/fi";
 
@@ -7,11 +9,12 @@ import TextArea from "./TextArea";
 import Divider from "./Divider";
 
 function NoteForm() {
+   
   return (
+
     <div className="flex">
       <div className="flex-grow border-r-[1px] border-gray-300">
         <form className="flex h-[calc(100vh-5rem)] flex-col">
-        
           <input
             type="text"
             placeholder="Enter a title..."
@@ -25,7 +28,7 @@ function NoteForm() {
               <FiTag /> <span>Tags</span>
             </label>
             <input
-              className="border-px w-2/4 border-gray-400 p-2"
+              className="border-px w-[60%] border-gray-400 p-2"
               type="text"
               id="tags"
               name="tags"
@@ -46,6 +49,7 @@ function NoteForm() {
       </div>
       <NoteCTA />
     </div>
+  
   );
 }
 

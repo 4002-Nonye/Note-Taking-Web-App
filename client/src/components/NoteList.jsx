@@ -4,10 +4,10 @@ import NoteCard from "./NoteCard";
 
 function NoteList() {
   return (
-    <div className="border-r-[1px] border-gray-300 pt-5">
+    <div className="xl:border-r-[1px] border-gray-300 xl:pt-5">
       <div className="px-9">
         {" "}
-        <Button type="createBtn" customClass="m-auto w-4/4 ">
+        <Button type="createBtn" customClass="m-auto w-4/4 hidden xl:block ">
           + Create New Note
         </Button>
       </div>

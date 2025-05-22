@@ -10,10 +10,10 @@ import Nav from "./Nav";
 
 function Sidebar() {
   return (
-    <aside className=" h-screen w-[20%] border-r-[1px] border-gray-300 pt-7">
+    <aside className="h-screen  p-6 xl:p-0  bg-gray-200 xl:bg-inherit w-full border-gray-300 xl:w-[20%] xl:border-r-[1px] xl:pt-7">
       <img className="p-3" src={logo} alt="app-logo" />
 
-      <nav className="mt-3 flex flex-col gap-3 p-3">
+      <nav className="mt-3 hidden flex-col gap-3 p-3 xl:flex">
         <Nav to="/notes" icon={AiOutlineHome}>
           All Notes
         </Nav>
@@ -22,7 +22,7 @@ function Sidebar() {
         </Nav>
       </nav>
 
-      <div className=" mt-4 border-t-[1px] border-gray-300 p-3">
+      <div className="mt-4 hidden border-t-[1px] border-gray-300 p-3 xl:block">
         <h2 className="font-medium text-gray-500">Tags</h2>
 
         <ul className="mt-4 flex flex-col gap-3">

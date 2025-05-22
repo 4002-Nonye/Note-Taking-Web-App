@@ -48,7 +48,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <RouterProvider router={router} />
 
       <Toaster
@@ -67,8 +67,7 @@ function App() {
           style: {
             fontSize: "16px",
             maxWidth: "500px",
-            // padding: "16px 24px",
-            // color: "var(--color-brand-grey-700)",
+           
           },
         }}
       />

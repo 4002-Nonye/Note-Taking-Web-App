@@ -7,17 +7,17 @@
   --color-primaryBlue: #335cff;
   --color-csGray: "#6B7280";
 }
-
+*{
+    @apply font-mono
+}
 body {
-  @apply bg-bgColor m-auto h-screen overflow-hidden font-sans;
+  @apply bg-bgColor m-auto overflow-hidden h-screen  ;
 }
 ul li {
   @apply list-none;
 }
 
-.grid-display {
-  grid-template-columns: 300px 1fr;
-}
+
 
 .navlink {
   @apply flex w-full items-center justify-between gap-2 rounded-md px-2.5 py-3 font-medium;
@@ -34,3 +34,4 @@ ul li {
         scrollbar-width: none;  /* Firefox */
   }
 }
+
