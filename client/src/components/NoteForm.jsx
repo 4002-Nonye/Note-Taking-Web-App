@@ -12,7 +12,7 @@ function NoteForm() {
    
   return (
 
-    <div className="flex">
+    <div className="flex xl:flex-row flex-col-reverse w-full ">
       <div className="flex-grow border-r-[1px] border-gray-300">
         <form className="flex h-[calc(100vh-5rem)] flex-col">
           <input

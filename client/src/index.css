@@ -11,7 +11,7 @@
     @apply font-mono
 }
 body {
-  @apply bg-bgColor m-auto overflow-hidden h-screen  ;
+  @apply bg-bgColor m-auto   h-screen  ;
 }
 ul li {
   @apply list-none;

@@ -6,7 +6,7 @@ function Button({ children, type, customClass, purpose, href }) {
   const styles = {
     authBtn: "bg-primaryBlue w-[85%] text-white justify-center py-3",
     googleBtn: "mt-3 w-[85%] border-2 border-gray-300 text-2xl justify-center",
-    ctaBtn:'border-[1px] border-gray-300 w-3/4 flex items-center gap-3',
+    ctaBtn:'border-[1px] border-gray-300 w-full xl:w-3/4 flex items-center gap-3',
     createBtn:'bg-primaryBlue text-white justify-center py-3 '
   };
   if (purpose === "link")
