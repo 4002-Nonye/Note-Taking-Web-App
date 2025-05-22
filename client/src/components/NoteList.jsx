@@ -4,7 +4,7 @@ import NoteCard from "./NoteCard";
 
 function NoteList() {
   return (
-    <div className="xl:border-r-[1px] border-gray-300 xl:pt-5 pb-48 lg:pb-0">
+    <div className="xl:border-r-[1px] border-gray-300 xl:pt-5 pb-24 lg:pb-0">
       <div className="px-9">
         {" "}
         <Button type="createBtn" customClass="m-auto w-4/4 hidden xl:block ">
@@ -13,7 +13,7 @@ function NoteList() {
       </div>
 
       {/* <NoNotes /> */}
-      <div className="mt-7 flex flex-col gap-5 text-[13px] h-[30rem] custom-scrollbar  no-scrollbar overflow-y-scroll ">
+      <div className="mt-7 flex flex-col gap-5 text-[13px] ">
         <NoteCard />
       </div>
     </div>
