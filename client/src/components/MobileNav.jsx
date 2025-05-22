@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function MobileNav() {
   return (
-    <div className="fixed bottom-0 font-medium z-40 w-full xl:hidden border-t-[1px] bg-white border-gray-300">
+    <div className="fixed bottom-0 font-medium z-40 w-full xl:hidden border-t-[1px] bg-white border-gray-300 ">
       <ul className="flex justify-between px-9   py-6 ">
         <li>
           <Link to="/notes" className='flex flex-col items-center'>

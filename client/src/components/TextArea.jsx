@@ -2,7 +2,7 @@ import Button from "./Button";
 
 function TextArea() {
   return (
-    <div className="flex flex-1 flex-col p-4 pb-32">
+    <div className="flex flex-1 flex-col p-4 pb-32 xl:pb-2">
       <textarea
         className="no-scrollbar overflow-y-scroll min-h-[22rem] w-[85%] flex-1 resize-none text-sm leading-relaxed outline-0"
         placeholder="Write your notes here..."
