@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
@@ -10,6 +14,7 @@ import NoteForm from "./components/NoteForm";
 import NoteCTA from "./components/NoteCTA";
 import Notes from "./pages/Notes";
 import Archive from "./pages/Archive";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient({
   queries: {
@@ -27,11 +32,11 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    element: <AppLayout />, 
+    element: <AppLayout />,
     children: [
       {
-        path: "/notes", // 
-        element: <Notes />, 
+        path: "/notes",
+        element: <Notes />,
         children: [
           {
             path: ":noteId",
@@ -39,8 +44,34 @@ const router = createBrowserRouter([
           },
         ],
       },
-
-      {path:'/archive',element:<Archive/>}
+      {
+        path: "/archive",
+        element: <Archive />,
+        children: [
+          {
+            path: ":noteId",
+            element: <NoteForm isArchive={true} />,
+          },
+        ],
+      },
+      {
+        path: "/account/settings",
+        element: <Settings />,
+        children: [
+          {
+            index: true, //
+            element: <Navigate to="color-theme" replace={true} />,
+          },
+          {
+            path: "color-theme",
+            element: "ho",
+          },
+          {
+            path: "font-theme",
+            element: "hi",
+          },
+        ],
+      },
     ],
   },
 ]);
@@ -67,7 +98,6 @@ function App() {
           style: {
             fontSize: "16px",
             maxWidth: "500px",
-           
           },
         }}
       />

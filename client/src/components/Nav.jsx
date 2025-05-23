@@ -8,7 +8,7 @@ function Nav({ to, icon: Icon, children, className }) {
     <NavLink to={to}>
       {({ isActive }) => (
         <div
-          className={`navlink ${isActive ? "bg-gray-300" : ""} ${className}`}
+          className={`navlink  ${isActive ? "bg-gray-300" : ""} ${className}`}
           aria-current={isActive ? "page" : undefined}
         >
           <div className="inline-flex items-center gap-2">

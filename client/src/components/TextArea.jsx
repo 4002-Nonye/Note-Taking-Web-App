@@ -9,10 +9,10 @@ function TextArea() {
       ></textarea>
 
       <div className="mt-3 justify-end gap-5 hidden lg:flex">
-        <Button customClass="bg-primaryBlue text-white w-24 justify-center font-medium">
+        <Button customClass="bg-primaryBlue rounded-md text-white w-24 justify-center font-medium">
           Save Note
         </Button>
-        <Button customClass="bg-gray-300 text-black w-24 justify-center font-medium">
+        <Button customClass="bg-gray-300 rounded-md text-black w-24 justify-center font-medium">
           Cancel
         </Button>
       </div>

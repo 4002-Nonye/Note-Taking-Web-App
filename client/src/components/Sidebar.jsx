@@ -18,7 +18,7 @@ function Sidebar() {
           All Notes
         </Nav>
         <Nav to="/archive" icon={MdOutlineArchive}>
-          Archive Notes
+          Archived Notes
         </Nav>
       </nav>
 

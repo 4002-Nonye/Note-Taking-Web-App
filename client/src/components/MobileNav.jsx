@@ -3,43 +3,63 @@ import { MdOutlineArchive } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 
 function MobileNav() {
   return (
-    <div className="fixed bottom-0 font-medium z-40 w-full xl:hidden border-t-[1px] bg-white border-gray-300 ">
-      <ul className="flex justify-between px-9   py-6 ">
+    <div className="fixed bottom-0 z-40 w-full border-t-[1px] border-gray-300 bg-white font-medium xl:hidden">
+      <ul className="flex justify-between px-9 py-6">
         <li>
-          <Link to="/notes" className='flex flex-col items-center'>
-            <AiOutlineHome className="text-xl"/>
-            <span className='hidden md:block'>Home</span>
-          </Link>
+          <NavLink
+            to="/notes"
+            className={({ isActive }) =>
+              `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            }
+          >
+            <AiOutlineHome className="text-xl" />
+            <span className="hidden md:block">Home</span>
+          </NavLink>
         </li>
 
-        <li  className='flex flex-col items-center'>
+        <li className="flex flex-col items-center">
           <IoSearchOutline className="text-xl" />
-          <span className='hidden md:block'>Search</span>
+          <span className="hidden md:block">Search</span>
         </li>
 
-        <li  >
-          <Link to="/archive" className='flex flex-col items-center'>
+        <li>
+          <NavLink
+            to="/archive"
+            className={({ isActive }) =>
+              `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            }
+          >
             <MdOutlineArchive className="text-xl" />
-            <span className='hidden md:block'>Archived Notes</span>
-          </Link>
+            <span className="hidden md:block">Archived Notes</span>
+          </NavLink>
         </li>
 
-        <li  >
-          <Link to="/tags" className='flex flex-col items-center'>
-            <FiTag className="text-xl"/>
-            <span className='hidden md:block'>Tag</span>
-          </Link>
+        <li>
+          <NavLink
+            to="/tags"
+            className={({ isActive }) =>
+              `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            }
+          >
+            <FiTag className="text-xl" />
+            <span className="hidden md:block">Tag</span>
+          </NavLink>
         </li>
 
-        <li  >
-          <Link to="/settings" className='flex flex-col items-center'>
-            <IoSettingsOutline className="text-xl"/>
-            <span className='hidden md:block'>Settings</span>
-          </Link>
+        <li>
+          <NavLink
+            to="/account/settings"
+            className={({ isActive }) =>
+              `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            }
+          >
+            <IoSettingsOutline className="text-xl" />
+            <span className="hidden md:block">Settings</span>
+          </NavLink>
         </li>
       </ul>
     </div>

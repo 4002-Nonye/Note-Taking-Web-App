@@ -8,7 +8,7 @@ import Button from "./Button";
 import TextArea from "./TextArea";
 import Divider from "./Divider";
 
-function NoteForm() {
+function NoteForm({isArchive}) {
    
   return (
 
@@ -47,7 +47,7 @@ function NoteForm() {
           <TextArea />
         </form>
       </div>
-      <NoteCTA />
+      <NoteCTA isArchive={isArchive} />
     </div>
   
   );

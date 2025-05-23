@@ -1,10 +1,10 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+
 import Button from "./Button";
 import NoNotes from "./NoNotes";
 import NoteCard from "./NoteCard";
 
-function NoteList() {
+function ArchivedNotesList() {
   const [notes, setNotes] = useState([{}]);
 
   return (
@@ -20,10 +20,10 @@ function NoteList() {
       </div>
 
       <div className="no-scrollbar mt-7 flex flex-col gap-5 text-[13px] xl:h-[calc(100vh-16rem)] xl:overflow-y-auto">
-        {!notes.length ? <NoNotes  /> : <NoteCard />}
+        {!notes.length ? <NoNotes isArchive={true} /> : <NoteCard isArchive={true}/>}
       </div>
     </div>
   );
 }
 
-export default NoteList;
+export default ArchivedNotesList;
