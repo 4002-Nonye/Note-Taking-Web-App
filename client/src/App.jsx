@@ -15,6 +15,7 @@ import NoteCTA from "./components/NoteCTA";
 import Notes from "./pages/Notes";
 import Archive from "./pages/Archive";
 import Settings from "./pages/Settings";
+import ColorTab from "./components/ColorTab";
 
 const queryClient = new QueryClient({
   queries: {
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
           },
           {
             path: "color-theme",
-            element: "ho",
+            element: <ColorTab/>,
           },
           {
             path: "font-theme",

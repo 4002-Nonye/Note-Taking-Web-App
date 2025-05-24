@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+
 import Button from "./Button";
 import NoNotes from "./NoNotes";
 import NoteCard from "./NoteCard";
