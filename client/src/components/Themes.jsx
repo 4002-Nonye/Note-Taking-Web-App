@@ -1,5 +1,5 @@
 import { MdWbSunny } from "react-icons/md";
-import { FaFonticonsFi } from "react-icons/fa6";
+import { AiOutlineFontSize } from "react-icons/ai";
 
 import Nav from "./Nav";
 
@@ -10,7 +10,7 @@ function Themes() {
         Color Theme
       </Nav>
 
-      <Nav to="font-theme" icon={FaFonticonsFi}>
+      <Nav to="font-theme" icon={AiOutlineFontSize}>
         Font Theme
       </Nav>
      

@@ -7,11 +7,9 @@
   --color-primaryBlue: #335cff;
   --color-csGray: "#6B7280";
 }
-*{
-    @apply font-mono
-}
+
 body {
-  @apply bg-bgColor m-auto   h-screen  ;
+  @apply bg-bgColor m-auto h-screen   ;
 }
 ul li {
   @apply list-none;

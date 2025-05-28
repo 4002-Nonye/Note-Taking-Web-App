@@ -1,8 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import NoteList from "../components/NoteList";
+import { motion } from "framer-motion";
+
 import Header from "../components/Header";
-import NoNotes from "../components/NoNotes";
 import ArchivedNotesList from "../components/ArchivedNotesList";
 
 function Archive() {
@@ -23,18 +22,15 @@ function Archive() {
           <ArchivedNotesList />
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={location.key}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="w-full"
-          >
-            <Outlet />
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          key={location.key}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          className="w-full"
+        >
+          <Outlet />
+        </motion.div>
       </div>
     </>
   );
