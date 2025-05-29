@@ -1,24 +1,10 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+
 import { IoSunny, IoMoon } from "react-icons/io5";
+import { useTheme } from "../contexts/ThemeContext";
 
 function ColorTab() {
-  const [selectedTheme, setSelectedTheme] = useState(
-    () => localStorage.getItem("colorTheme") || "light",
-  );
-
-  useEffect(() => {
-    localStorage.setItem("colorTheme", selectedTheme);
-
-    const html = document.documentElement;
-
-    // HANDLE THEME COLOR
-    if (selectedTheme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  }, [selectedTheme]);
+  const { theme, handleChangeTheme } = useTheme();
 
   const options = [
     {
@@ -37,7 +23,7 @@ function ColorTab() {
 
   return (
     <div className="px-7 pt-9 text-sm">
-      <div className="mb-6">
+      <div className="mb-6 ">
         <h3 className="text-lg font-bold">Color Theme</h3>
         <p>Choose your color theme</p>
       </div>
@@ -49,14 +35,14 @@ function ColorTab() {
         className="flex flex-col gap-7"
       >
         {options.map((option) => {
-          const selected = option.id === selectedTheme;
+          const selected = option.id === theme;
 
           return (
             <motion.div
               key={option.id}
               layout
-              onClick={() => setSelectedTheme(option.id)}
-              className="relative flex w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
+              onClick={() => handleChangeTheme(option.id)}
+              className="relative flex xl:w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               {/* Animated background */}

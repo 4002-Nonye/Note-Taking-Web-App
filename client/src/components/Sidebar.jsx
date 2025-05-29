@@ -10,7 +10,7 @@ import Nav from "./Nav";
 
 function Sidebar() {
   return (
-    <aside className="h-screen p-3  lg:p-6 xl:p-0  bg-gray-200 xl:bg-inherit w-full border-gray-300 xl:w-[20%] xl:border-r-[1px] xl:pt-7">
+    <aside className=" p-3  lg:p-6 xl:p-0  bg-gray-200 xl:bg-inherit w-full border-gray-300 xl:w-[20%] xl:border-r-[1px] xl:pt-7">
       <img className="p-3" src={logo} alt="app-logo" />
 
       <nav className="mt-3 hidden flex-col gap-3 p-3 xl:flex">

@@ -44,7 +44,7 @@ function FontTab() {
               key={option.id}
               layout
               onClick={() => handleFontChange(option.id)}
-              className="relative flex w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
+              className="relative flex xl:w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               {/* Background Animation */}

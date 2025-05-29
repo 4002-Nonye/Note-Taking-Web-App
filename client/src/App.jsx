@@ -18,6 +18,7 @@ import Settings from "./pages/Settings";
 import ColorTab from "./components/ColorTab";
 import FontTab from "./components/FontTab";
 import { FontProvider } from "./contexts/FontContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient({
   queries: {
@@ -84,27 +85,29 @@ function App() {
     <QueryClientProvider client={queryClient}>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       <FontProvider>
-        <RouterProvider router={router} />
+        <ThemeProvider>
+          <RouterProvider router={router} />
 
-        <Toaster
-          position="top-center"
-          gutter={12}
-          containerStyle={{
-            margin: "8px",
-          }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 3000,
-            },
-            style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-            },
-          }}
-        />
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{
+              margin: "8px",
+            }}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 3000,
+              },
+              style: {
+                fontSize: "16px",
+                maxWidth: "500px",
+              },
+            }}
+          />
+        </ThemeProvider>
       </FontProvider>
     </QueryClientProvider>
   );

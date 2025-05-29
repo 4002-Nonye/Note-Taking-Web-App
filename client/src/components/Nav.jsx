@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 
 import { FaArrowRight } from "react-icons/fa6";
 
-function Nav({ to, icon: Icon, children, className }) {
+function Nav({ to, icon: Icon, children, className, arrowVisible }) {
   return (
     <NavLink to={to}>
       {({ isActive }) => (
         <div
-          className={`navlink  ${isActive ? "bg-gray-300" : ""} ${className}`}
+          className={`navlink ${isActive ? "bg-gray-300" : ""} ${className}`}
           aria-current={isActive ? "page" : undefined}
         >
-          <div className="inline-flex items-center gap-2">
+          <div className='inline-flex items-center gap-2'>
             {Icon && (
               <Icon
                 className={`text-xl ${isActive ? "text-primaryBlue" : ""}`}
@@ -21,7 +21,7 @@ function Nav({ to, icon: Icon, children, className }) {
             <span>{children}</span>
           </div>
 
-          {isActive && <FaArrowRight />}
+          {isActive && <FaArrowRight className={arrowVisible} />}
         </div>
       )}
     </NavLink>
@@ -35,4 +35,5 @@ Nav.propTypes = {
   icon: PropTypes.elementType,
   children: PropTypes.node,
   className: PropTypes.string,
+  arrowVisible: PropTypes.string,
 };
