@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import { IoSunny, IoMoon } from "react-icons/io5";
 import { useTheme } from "../contexts/ThemeContext";
 
@@ -42,33 +41,36 @@ function ColorTab() {
               key={option.id}
               layout
               onClick={() => handleChangeTheme(option.id)}
-              className="relative flex xl:w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
+              className="relative flex xl:w-2/4 cursor-pointer items-center justify-between gap-3 rounded-md border-[1px] border-gray-300 p-3"
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              {/* Animated background */}
-              {selected && (
-                <motion.div
-                  layoutId="color-highlight"
-                  className="absolute inset-0 z-0 rounded-md bg-gray-200"
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-              )}
+              {/* Left side content */}
+              <div className="flex items-center gap-3">
+                {/* Animated background */}
+                {selected && (
+                  <motion.div
+                    layoutId="color-highlight"
+                    className="absolute inset-0 z-0 rounded-md bg-gray-200"
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  />
+                )}
 
-              {/* Icon */}
-              <div className="z-10 rounded-md border-[1px] border-gray-300 p-3 text-2xl">
-                {option.icon}
+                {/* Icon */}
+                <div className="z-10 rounded-md border-[1px] border-gray-300 p-3 text-2xl">
+                  {option.icon}
+                </div>
+
+                {/* Text */}
+                <div className="z-10">
+                  <p className="font-bold">{option.title}</p>
+                  <p>{option.description}</p>
+                </div>
               </div>
 
-              {/* Text */}
-              <div className="z-10">
-                <p className="font-bold">{option.title}</p>
-                <p>{option.description}</p>
-              </div>
-
-              {/* Ring indicator */}
+              {/* Ring indicator - now part of the flex flow */}
               <motion.div
                 layout
-                className={`absolute right-6 z-10 h-2 w-2 rounded-full ring-4 ${
+                className={`z-10 h-2 w-2 rounded-full ring-4 ${
                   selected ? "ring-primaryBlue" : "ring-gray-400"
                 }`}
                 transition={{ type: "spring", stiffness: 300 }}

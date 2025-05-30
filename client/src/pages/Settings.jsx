@@ -8,7 +8,7 @@ function Settings() {
     <>
       <Header head="Settings" />
 
-      <div className="grid lg:h-screen  grid-cols-1 border-gray-300 xl:mt-5 lg:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="grid lg:h-screen  grid-cols-1 border-gray-300 xl:mt-5 lg:grid-cols-[300px_1fr] xl:border-t-[1px] mb-48 lg:mb-0">
         <div className="xl:border-r border-gray-300">
           <Themes />
         </div>

@@ -27,13 +27,13 @@ function Sidebar() {
 
         <ul className="mt-4 flex flex-col gap-3">
           <li>
-            <Link className="inline-flex h-full items-center gap-2 capitalize">
+            <Link to='notes/tags/work' className="inline-flex h-full items-center gap-2 capitalize">
               <FiTag className="text-xl" />{" "}
               <span className="text-sm">work</span>
             </Link>
           </li>
           <li>
-            <Link className="inline-flex h-full items-center gap-2 capitalize">
+            <Link to='notes/tags/cleaning' className="inline-flex h-full items-center gap-2 capitalize">
               <FiTag className="text-xl" />{" "}
               <span className="text-sm">cleaning</span>
             </Link>

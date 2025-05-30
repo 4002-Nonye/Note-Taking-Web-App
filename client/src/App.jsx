@@ -19,6 +19,7 @@ import ColorTab from "./components/ColorTab";
 import FontTab from "./components/FontTab";
 import { FontProvider } from "./contexts/FontContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Tags from "./pages/Tags";
 
 const queryClient = new QueryClient({
   queries: {
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
             element: <FontTab />,
           },
         ],
+      },
+      {
+        path: "/tags",
+        element: <Tags />,
       },
     ],
   },

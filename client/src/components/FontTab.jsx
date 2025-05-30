@@ -44,33 +44,36 @@ function FontTab() {
               key={option.id}
               layout
               onClick={() => handleFontChange(option.id)}
-              className="relative flex xl:w-2/4 cursor-pointer items-center gap-3 rounded-md border-[1px] border-gray-300 p-3"
+              className="relative flex xl:w-2/4 cursor-pointer items-center justify-between gap-3 rounded-md border-[1px] border-gray-300 p-3"
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              {/* Background Animation */}
-              {selected && (
-                <motion.div
-                  layoutId="highlight"
-                  className="absolute inset-0 z-0 rounded-md bg-gray-200"
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                />
-              )}
+              {/* Left side content */}
+              <div className="flex items-center gap-3">
+                {/* Background Animation */}
+                {selected && (
+                  <motion.div
+                    layoutId="highlight"
+                    className="absolute inset-0 z-0 rounded-md bg-gray-200"
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  />
+                )}
 
-              {/* Icon */}
-              <div className="z-10 rounded-md border-[1px] border-gray-300 p-3 text-2xl">
-                <FaFont />
+                {/* Icon */}
+                <div className="z-10 rounded-md border-[1px] border-gray-300 p-3 text-2xl">
+                  <FaFont />
+                </div>
+
+                {/* Text */}
+                <div className="z-10">
+                  <p className="font-bold">{option.title}</p>
+                  <p>{option.description}</p>
+                </div>
               </div>
 
-              {/* Text */}
-              <div className="z-10">
-                <p className="font-bold">{option.title}</p>
-                <p>{option.description}</p>
-              </div>
-
-              {/* Ring Indicator */}
+              {/* Ring Indicator - now part of the flex flow */}
               <motion.div
                 layout
-                className={`absolute right-6 z-10 h-2 w-2 rounded-full ring-4 ${
+                className={`z-10 h-2 w-2 rounded-full ring-4 ${
                   selected ? "ring-primaryBlue" : "ring-gray-400"
                 }`}
                 transition={{ type: "spring", stiffness: 300 }}
