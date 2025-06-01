@@ -20,6 +20,7 @@ import FontTab from "./components/FontTab";
 import { FontProvider } from "./contexts/FontContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Tags from "./pages/Tags";
+import NoteList from "./components/NoteList";
 
 const queryClient = new QueryClient({
   queries: {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":noteId",
-            element: <NoteForm />,
+            element: <NoteForm />, // Single note view/edit
           },
         ],
       },
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":noteId",
-            element: <NoteForm isArchive={true} />,
+            element: <NoteForm isArchive={true} />, // Archived note view/edit
           },
         ],
       },
@@ -64,8 +65,8 @@ const router = createBrowserRouter([
         element: <Settings />,
         children: [
           {
-            index: true, //
-            element: <Navigate to="color-theme" replace={true} />,
+            index: true,
+            element: <Navigate to="color-theme" replace />,
           },
           {
             path: "color-theme",
@@ -77,9 +78,16 @@ const router = createBrowserRouter([
           },
         ],
       },
+
       {
         path: "/tags",
         element: <Tags />,
+        children: [
+          {
+            path: ":tag",
+            element: "hiF",
+          },
+        ],
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import NoteList from "../components/NoteList";
 import Header from "../components/Header";
@@ -6,20 +6,24 @@ import NoNotes from "../components/NoNotes";
 
 function Notes() {
   const location = useLocation();
-  const isViewingNote = location.pathname !== "/notes";
+  const { tag } = useParams(); // Get tag from URL if it exists
+  const isViewingNote = location.pathname !== "/notes" && !location.pathname.startsWith("/tags");
+
+  const headerTitle = tag ? `Tagged Notes: ${tag}` : "All Notes";
 
   return (
     <>
       <Header
-        head="All Notes"
+        head={headerTitle}
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
       <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
+          className={`${
+            isViewingNote ? "hidden xl:block" : "block"
+          } border-r border-gray-300`}
         >
-          {" "}
-          <NoteList />
+          <NoteList tag={tag} />
         </div>
 
         <motion.div

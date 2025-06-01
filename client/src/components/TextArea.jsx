@@ -41,7 +41,8 @@ function TextArea() {
         value={value}
         onChange={setValue}
         placeholder="Write your notes here..."
-        className="no-scrollbar min-h-[22rem] w-[100%] flex-1 overflow-y-scroll text-sm leading-relaxed outline-0"
+        className="no-scrollbar  min-h-[22rem] w-[100%] flex-1 overflow-y-scroll text-sm leading-relaxed outline-0"
+        style={{ fontFamily: 'inherit' }}
       />
 
       <div className="mt-8 hidden justify-end gap-5 lg:flex">

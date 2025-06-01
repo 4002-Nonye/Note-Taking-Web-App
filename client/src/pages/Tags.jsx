@@ -13,13 +13,13 @@ function Tags() {
         <h2 className="text-2xl font-bold text-gray-500">Tags</h2>
         <ul className="mt-4 flex flex-col gap-3">
           <li className="border-b-[1px] border-gray-300 py-3">
-            <Link to="/notes/tags/work" className="inline-flex h-full items-center gap-2 capitalize">
+            <Link to="/tags/work" className="inline-flex h-full items-center gap-2 capitalize">
               <FiTag className="text-xl" />
               <span className="text-sm">work</span>
             </Link>
           </li>
           <li className="border-b-[1px] border-gray-300 py-3">
-            <Link to="/notes/tags/cleaning" className="inline-flex h-full items-center gap-2 capitalize">
+            <Link to="/tags/cleaning" className="inline-flex h-full items-center gap-2 capitalize">
               <FiTag className="text-xl" />
               <span className="text-sm">cleaning</span>
             </Link>
