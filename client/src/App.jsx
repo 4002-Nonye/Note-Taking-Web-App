@@ -21,6 +21,9 @@ import { FontProvider } from "./contexts/FontContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Tags from "./pages/Tags";
 import NoteList from "./components/NoteList";
+import FilteredTags from "./components/FilteredTags";
+import { NoteProvider } from "./contexts/NoteContext";
+import TaggedNotes from "./pages/TaggedNotes";
 
 const queryClient = new QueryClient({
   queries: {
@@ -61,6 +64,21 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: "/tags/:tag",
+        element: <TaggedNotes />,
+        children: [
+          {
+            path: "/tags/:tag/:id",
+            element: <NoteForm />,
+          },
+        ],
+      },
+
+      {
+        path: "/tags",
+        element: <Tags />,
+      },
+      {
         path: "/account/settings",
         element: <Settings />,
         children: [
@@ -78,17 +96,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-
-      {
-        path: "/tags",
-        element: <Tags />,
-        children: [
-          {
-            path: ":tag",
-            element: "hiF",
-          },
-        ],
-      },
     ],
   },
 ]);
@@ -97,31 +104,33 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      <FontProvider>
-        <ThemeProvider>
-          <RouterProvider router={router} />
+      <NoteProvider>
+        <FontProvider>
+          <ThemeProvider>
+            <RouterProvider router={router} />
 
-          <Toaster
-            position="top-center"
-            gutter={12}
-            containerStyle={{
-              margin: "8px",
-            }}
-            toastOptions={{
-              success: {
-                duration: 3000,
-              },
-              error: {
-                duration: 3000,
-              },
-              style: {
-                fontSize: "16px",
-                maxWidth: "500px",
-              },
-            }}
-          />
-        </ThemeProvider>
-      </FontProvider>
+            <Toaster
+              position="top-center"
+              gutter={12}
+              containerStyle={{
+                margin: "8px",
+              }}
+              toastOptions={{
+                success: {
+                  duration: 3000,
+                },
+                error: {
+                  duration: 3000,
+                },
+                style: {
+                  fontSize: "16px",
+                  maxWidth: "500px",
+                },
+              }}
+            />
+          </ThemeProvider>
+        </FontProvider>
+      </NoteProvider>
     </QueryClientProvider>
   );
 }

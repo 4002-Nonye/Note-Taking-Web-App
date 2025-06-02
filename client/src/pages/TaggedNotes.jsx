@@ -1,30 +1,33 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useMatch, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-
-import Header from "../components/Header";
 import NoteList from "../components/NoteList";
+import Header from "../components/Header";
+import NoNotes from "../components/NoNotes";
 import { useNotes } from "../contexts/NoteContext";
 
-function Archive() {
+function TaggedNotes() {
   const location = useLocation();
-  const isViewingNote = location.pathname !== "/archive";
-
+  const match = useMatch("/tags/:tag/:noteId");
+  const isViewingNote = !!match;
+  const { tag } = useParams();
   const { notes } = useNotes();
-
-  const filteredNotes = notes.filter((note) => note.isArchive === true);
+  const filteredNotes = notes.filter((note) => note.tags.includes(tag));
 
   return (
     <>
       <Header
-        head="Archived Notes"
+        head={`Notes Tagged: ${tag}`}
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
-
       <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
           className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
         >
-          <NoteList notes={filteredNotes} path='archive'/>
+          {filteredNotes.length === 0 ? (
+            <NoNotes />
+          ) : (
+            <NoteList notes={filteredNotes} path={`tags/${tag}`} />
+          )}
         </div>
 
         <motion.div
@@ -41,4 +44,4 @@ function Archive() {
   );
 }
 
-export default Archive;
+export default TaggedNotes;

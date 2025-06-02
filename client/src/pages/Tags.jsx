@@ -5,9 +5,7 @@ import Notes from "./Notes";
 function Tags() {
   return (
     <>
-      <div className="hidden xl:block overflow-hidden">
-        <Notes />
-      </div>
+     
 
       <div className="mt-4 px-5 xl:hidden">
         <h2 className="text-2xl font-bold text-gray-500">Tags</h2>
