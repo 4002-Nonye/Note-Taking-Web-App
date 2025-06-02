@@ -7,10 +7,16 @@ import { AiOutlineHome } from "react-icons/ai";
 import logo from "../assets/icon-logo.svg";
 
 import Nav from "./Nav";
+import { useNotes } from "../contexts/NoteContext";
 
 function Sidebar() {
+  const { notes } = useNotes();
+  const tags = notes.flatMap((note) => note.tags);
+
+  // avoid duplicate tags
+  const uniqueTags = [...new Set(tags)];
   return (
-    <aside className=" p-3  lg:p-6 xl:p-0  bg-gray-200 xl:bg-inherit w-full border-gray-300 xl:w-[20%] xl:border-r-[1px] xl:pt-7">
+    <aside className="w-full border-gray-300 bg-gray-200 p-3 lg:p-6 xl:w-[20%] xl:border-r-[1px] xl:bg-inherit xl:p-0 xl:pt-7">
       <img className="p-3" src={logo} alt="app-logo" />
 
       <nav className="mt-3 hidden flex-col gap-3 p-3 xl:flex">
@@ -26,18 +32,17 @@ function Sidebar() {
         <h2 className="font-medium text-gray-500">Tags</h2>
 
         <ul className="mt-4 flex flex-col gap-3">
-          <li>
-            <Link to='tags/work' className="inline-flex h-full items-center gap-2 capitalize">
-              <FiTag className="text-xl" />{" "}
-              <span className="text-sm">work</span>
-            </Link>
-          </li>
-          <li>
-            <Link to='tags/cleaning' className="inline-flex h-full items-center gap-2 capitalize">
-              <FiTag className="text-xl" />{" "}
-              <span className="text-sm">cleaning</span>
-            </Link>
-          </li>
+          {uniqueTags.map((tag) => (
+            <li key={tag}>
+              <Link
+                to={`tags/${tag}`}
+                className="inline-flex h-full items-center gap-2 capitalize"
+              >
+                <FiTag className="text-xl" />{" "}
+                <span className="text-sm">{tag}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </aside>
