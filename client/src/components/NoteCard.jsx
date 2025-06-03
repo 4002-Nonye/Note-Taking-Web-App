@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 function NoteCard({ note, path }) {
   return (
     <div key={note.id} className="flex flex-col">
-      <Link to={`/${path}/${note.id}`} className=" py-2 border-b-[1px] border-gray-300">
-        <h3 className="px-3 text-[16px] md:text-[18px] font-bold md:px-7 xl:text-sm">
+      <Link
+        to={`/${path}/${note.id}`}
+        className=" py-2 "
+      >
+        <h3 className="px-3 text-[16px] font-bold md:px-7 md:text-[18px] xl:text-sm">
           {note.title}
         </h3>
 
@@ -16,7 +19,9 @@ function NoteCard({ note, path }) {
           ))}
         </ul>
 
-        <p className="px-3 md:px-7">21 May, 2025</p>
+        <p className="px-3 md:px-7">
+          {note.date ? new Date(note.date).toLocaleDateString() : ""}
+        </p>
       </Link>
     </div>
   );

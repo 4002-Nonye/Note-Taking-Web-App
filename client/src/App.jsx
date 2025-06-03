@@ -24,6 +24,7 @@ import NoteList from "./components/NoteList";
 import FilteredTags from "./components/FilteredTags";
 import { NoteProvider } from "./contexts/NoteContext";
 import TaggedNotes from "./pages/TaggedNotes";
+import SearchTab from "./pages/SearchTab";
 
 const queryClient = new QueryClient({
   queries: {
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
       {
         path: "/tags",
         element: <Tags />,
+        children: [],
       },
       {
         path: "/account/settings",
@@ -95,6 +97,10 @@ const router = createBrowserRouter([
             element: <FontTab />,
           },
         ],
+      },
+      {
+        path: "/search",
+        element: <SearchTab />,
       },
     ],
   },

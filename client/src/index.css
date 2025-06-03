@@ -9,7 +9,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-    @apply m-auto h-screen bg-bgColor ;
+    @apply m-auto bg-bgColor ;
   }
 ul li {
   @apply list-none;

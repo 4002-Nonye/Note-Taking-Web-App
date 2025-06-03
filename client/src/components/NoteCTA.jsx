@@ -3,11 +3,16 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 function NoteCTA({ isArchive }) {
+  const navigate = useNavigate();
   return (
     <div className="flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:px-0">
-      <Button customClass="group flex gap-2  items-center xl:hidden text-sm">
+      <Button
+        onclick={() => navigate(-1)}
+        customClass="group flex gap-2  items-center xl:hidden text-sm"
+      >
         <FaArrowLeft className="group-hover:text-primaryBlue text-sm transition-all duration-500" />
         <span>Go back</span>
       </Button>

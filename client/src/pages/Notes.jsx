@@ -4,14 +4,12 @@ import NoteList from "../components/NoteList";
 import Header from "../components/Header";
 import NoNotes from "../components/NoNotes";
 import { useNotes } from "../contexts/NoteContext";
+import CreateButton from "../components/CreateButton";
 
 function Notes() {
   const location = useLocation();
-  //   const { tag } = useParams(); // Get tag from URL if it exists
   const isViewingNote =
     location.pathname !== "/notes" && !location.pathname.startsWith("/tags");
-
-  //   const headerTitle = tag ? `Tagged Notes: ${tag}` : "All Notes";
 
   const { notes } = useNotes();
 
@@ -23,11 +21,15 @@ function Notes() {
       />
       <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${
-            isViewingNote ? "hidden xl:block" : "block"
-          } border-r border-gray-300`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
         >
-          <NoteList notes={notes} path="notes" />
+          <CreateButton />
+
+          {notes?.length === 0 ? (
+            <NoNotes message="You don’t have any notes yet. Start a new note to capture your thoughts and ideas." />
+          ) : (
+            <NoteList notes={notes} path="notes" />
+          )}
         </div>
 
         <motion.div

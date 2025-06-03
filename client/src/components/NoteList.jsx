@@ -2,25 +2,18 @@ import Button from "./Button";
 import NoNotes from "./NoNotes";
 import NoteCard from "./NoteCard";
 
-function NoteList({ notes, path }) {
+function NoteList({ notes, path = 'notes' }) {
   return (
     <div className="border-gray-300 pb-24 xl:border-r-[1px] xl:pt-5 xl:pb-0">
-      <div className="px-9 text-2xl font-extrabold xl:text-base xl:font-medium">
-        <Button
-          type="createBtn"
-          customClass="m-auto xl:w-4/4 rounded-full fixed right-3 bottom-30 xl:relative xl:bottom-auto xl:right-auto xl:m-0 xl:ml-auto"
-        >
-          +<span className="hidden xl:block xl:pl-2">Create New Note</span>
-        </Button>
-      </div>
-
-      <div className="no-scrollbar mt-4 flex flex-col  text-[13px] xl:h-[calc(100vh-16rem)] xl:overflow-y-auto">
+      <div className="no-scrollbar mt-4 flex flex-col text-[13px] xl:h-[calc(100vh-16rem)] xl:overflow-y-auto">
         {!notes.length ? (
           <NoNotes />
         ) : (
-          notes.map((note) => (
-            <NoteCard key={note.id} note={note} path={path} />
-          ))
+          <div className="divide-y divide-gray-300">
+            {notes.map((note) => (
+              <NoteCard key={note.id} note={note} path={path} />
+            ))}
+          </div>
         )}
       </div>
     </div>

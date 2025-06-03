@@ -8,7 +8,7 @@ import MobileNav from "./MobileNav";
 
 function AppLayout() {
   return (
-    <div className="flex h-screen w-full flex-col xl:flex-row">
+    <div className="flex w-full flex-col xl:flex-row">
       <Sidebar />
 
       <div className="flex w-full flex-col">

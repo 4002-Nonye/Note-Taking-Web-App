@@ -6,35 +6,44 @@ import NoteList from "../components/NoteList";
 import { useNotes } from "../contexts/NoteContext";
 import CreateButton from "../components/CreateButton";
 import NoNotes from "../components/NoNotes";
+import SearchBar from "../components/SearchBar";
 
-function Archive() {
+function SearchTab() {
   const location = useLocation();
-  const isViewingNote = location.pathname !== "/archive";
+  const isViewingNote = location.pathname !== "/search";
 
-  const { notes } = useNotes();
-
-  const filteredNotes = notes.filter((note) => note.isArchive === true);
+  const { filteredNotes, searchQuery } = useNotes();
 
   return (
     <>
       <Header
-        head="Archived Notes"
+        head={
+          <>
+            <span className="hidden xl:block">
+              Showing results for: {searchQuery}{" "}
+            </span>
+
+            <span className="block xl:hidden">Search </span>
+          </>
+        }
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
+      <div className="block px-7 xl:hidden">
+        <SearchBar />
+      </div>
 
       <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
           className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
         >
           <CreateButton />
-          <p className="mt-3 px-7 text-sm">
-            All your archived notes are stored here. You can restore or delete
-            them anytime.
+          <p className="mt-3 px-7 text-sm xl:hidden">
+            All notes matching the search term "{searchQuery}” are shown here.
           </p>
           {filteredNotes?.length === 0 ? (
-            <NoNotes message="No notes have been archived yet. Move notes here for safekeeping, or create a new note." />
+            <NoNotes message="No notes match your search. Try a different keyword or create a new note." />
           ) : (
-            <NoteList notes={filteredNotes} path="archive" />
+            <NoteList notes={filteredNotes} />
           )}
         </div>
 
@@ -52,4 +61,4 @@ function Archive() {
   );
 }
 
-export default Archive;
+export default SearchTab;

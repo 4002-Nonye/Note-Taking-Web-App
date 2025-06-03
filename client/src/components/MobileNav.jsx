@@ -3,7 +3,7 @@ import { MdOutlineArchive } from "react-icons/md";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function MobileNav() {
   return (
@@ -22,8 +22,15 @@ function MobileNav() {
         </li>
 
         <li className="flex flex-col items-center">
-          <IoSearchOutline className="text-xl" />
-          <span className="hidden md:block">Search</span>
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            }
+          >
+            <IoSearchOutline className="text-xl" />
+            <span className="hidden md:block">Search</span>
+          </NavLink>
         </li>
 
         <li>
@@ -46,7 +53,7 @@ function MobileNav() {
             }
           >
             <FiTag className="text-xl" />
-            <span className="hidden md:block">Tag</span>
+            <span className="hidden md:block">Tags</span>
           </NavLink>
         </li>
 

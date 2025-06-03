@@ -10,6 +10,7 @@ const initialState = {
       content: "Complete project",
       tags: ["work", "server"],
       isArchive: false,
+      date: new Date(),
     },
     {
       id: 2,
@@ -17,6 +18,7 @@ const initialState = {
       content: "Buy groceries",
       tags: ["personal"],
       isArchive: true,
+      date: new Date(),
     },
     {
       id: 3,
@@ -24,16 +26,51 @@ const initialState = {
       content: "Team sync",
       tags: ["work"],
       isArchive: true,
+      date: new Date(),
     },
   ],
+  searchQuery: "",
 };
 
-const reducer = (state, action) => {};
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SET_SEARCH_QUERY":
+      return { ...state, searchQuery: action.payload };
+
+    default: {
+      state;
+    }
+  }
+};
 
 function NoteProvider({ children }) {
-  const [{ notes }, dispatch] = useReducer(reducer, initialState);
+  const [{ notes, searchQuery }, dispatch] = useReducer(reducer, initialState);
+
+  const handleSearch = (value) => {
+    dispatch({
+      type: "SET_SEARCH_QUERY",
+      payload: value,
+    });
+  };
+
+  const filteredNotes =
+  searchQuery.trim() === ""
+    ? []
+    : notes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          note.tags.some((tag) =>
+            tag.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+      );
+
   return (
-    <NoteContext.Provider value={{ notes }}>{children}</NoteContext.Provider>
+    <NoteContext.Provider
+      value={{ notes, filteredNotes, handleSearch, searchQuery }}
+    >
+      {children}
+    </NoteContext.Provider>
   );
 }
 

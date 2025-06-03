@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { FiTag } from "react-icons/fi";
 import { MdOutlineArchive } from "react-icons/md";
@@ -34,13 +34,21 @@ function Sidebar() {
         <ul className="mt-4 flex flex-col gap-3">
           {uniqueTags.map((tag) => (
             <li key={tag}>
-              <Link
+              <NavLink
                 to={`tags/${tag}`}
                 className="inline-flex h-full items-center gap-2 capitalize"
               >
-                <FiTag className="text-xl" />{" "}
-                <span className="text-sm">{tag}</span>
-              </Link>
+                {({ isActive }) => (
+                  <>
+                    <FiTag className="text-xl" />
+                    <span
+                      className={`text-sm ${isActive && "text-primaryBlue"}`}
+                    >
+                      {tag}
+                    </span>
+                  </>
+                )}
+              </NavLink>
             </li>
           ))}
         </ul>
