@@ -5,7 +5,7 @@ function Button({ children, type, customClass, purpose, href, onclick }) {
   const styles = {
     authBtn: "rounded-md bg-primaryBlue w-[85%] text-white justify-center py-3",
     googleBtn:
-      "rounded-md mt-3 w-[85%] border-2 border-gray-300 text-2xl justify-center",
+      "rounded-md mt-3 w-[85%] border-2 border-gray-300 text-2xl justify-center dark:border-darkBorder",
     ctaBtn:
       "rounded-md lg:border-[1px] border-gray-300  xl:w-3/4 flex items-center gap-3",
     createBtn:

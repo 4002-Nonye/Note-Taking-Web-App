@@ -37,7 +37,7 @@ function Login() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
-      className="mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
+      className="mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white  dark:bg-darkbg px-3 py-7 shadow-md"
       noValidate={true}
     >
       <AuthHeader
@@ -57,7 +57,7 @@ function Login() {
             name="userEmail"
             id="userEmail"
             placeholder="email@example.com"
-            className="border-gray w-full rounded-md border-2 border-gray-300 p-2 outline-0"
+            className="border-gray w-full rounded-md border-2 dark:text-gray-400 border-gray-300 dark:border-darkBorder  p-2 outline-0"
             {...register("email", {
               required: "Email address is required",
               pattern: {
@@ -79,13 +79,13 @@ function Login() {
             type={passwordVisible ? "text" : "password"}
             name="userPassword"
             id="userPassword"
-            className="mb-3 w-full rounded-md border-2 border-gray-300 p-2 outline-0"
+            className="mb-3 w-full rounded-md dark:text-gray-400 border-2 border-gray-300 dark:border-darkBorder p-2 outline-0"
             {...register("password", {
               required: "Password is required",
             })}
           />
           <PasswordVisibility
-            customClass="absolute top-10 right-2"
+            customClass="absolute top-10 right-2 dark:text-gray-400"
             passwordVisible={passwordVisible}
             setPasswordVisible={setPasswordVisible}
           />
@@ -93,9 +93,9 @@ function Login() {
       </div>
 
       <Button type="authBtn">{isPending ? <ClipLoader color="white" size={22}/> : "Login"}</Button>
-      <div className="my-6 w-[85%] border-t-2 border-gray-200" />
+      <div className="my-6 w-[85%] border-t-2 border-gray-200 dark:border-darkBorder" />
 
-      <p>or Log in with:</p>
+      <p className='dark:text-gray-400'>or Log in with:</p>
 
       <Button type="googleBtn" purpose="link" href="/auth/google">
         <FcGoogle />{" "}
@@ -105,9 +105,9 @@ function Login() {
         </span>
       </Button>
 
-      <div className="my-7 w-[85%] border-t-2 border-gray-200" />
+      <div className="my-7 w-[85%] border-t-2 border-gray-200 dark:border-darkBorder" />
 
-      <p>
+      <p  className="dark:text-gray-400">
         No account yet?{" "}
         <Link to="/register">
           <span className="text-primaryBlue underline">Sign up</span>

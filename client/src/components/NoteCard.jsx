@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function NoteCard({ note, path }) {
   return (
-    <div key={note.id} className="flex flex-col hover:bg-gray-200 dark:hover:bg-bgCard  transition-all duration-700">
+    <div key={note.id} className="flex flex-col hover:bg-gray-200 dark:hover:bg-bgCard  transition-colors duration-700">
       <Link
         to={`/${path}/${note.id}`}
         className=" py-2 "

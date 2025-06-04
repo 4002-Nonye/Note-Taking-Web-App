@@ -30,7 +30,7 @@ function Register() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
-      className="mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
+      className="dark:bg-darkbg mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md mb-6"
       noValidate
     >
       <AuthHeader
@@ -50,7 +50,7 @@ function Register() {
             name="userEmail"
             id="userEmail"
             placeholder="email@example.com"
-            className="border-gray w-full rounded-md border-2 border-gray-300 p-2 outline-0"
+            className="border-gray dark:border-darkBorder w-full rounded-md border-2 border-gray-300 p-2 outline-0 dark:text-gray-400"
             {...register("email", {
               required: "Email address is required",
               pattern: {
@@ -73,7 +73,7 @@ function Register() {
             name="userPassword"
             id="userPassword"
             autoComplete="true"
-            className="w-full rounded-md border-2 border-gray-300 p-2 text-sm text-gray-500 outline-0"
+            className="dark:border-darkBorder w-full rounded-md border-2 border-gray-300 p-2 text-sm text-gray-500 outline-0 dark:text-gray-400"
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -83,7 +83,7 @@ function Register() {
             })}
           />
           <PasswordVisibility
-            customClass="absolute top-10 right-2"
+            customClass="absolute top-10 right-2 dark:text-gray-400"
             passwordVisible={passwordVisible}
             setPasswordVisible={setPasswordVisible}
           />
@@ -96,9 +96,9 @@ function Register() {
       <Button type="authBtn">
         {isPending ? <ClipLoader color="white" size={22} /> : "Sign up"}
       </Button>
-      <div className="my-6 w-[85%] border-t-2 border-gray-200" />
+      <div className="dark:border-darkBorder my-6 w-[85%] border-t-2 border-gray-200" />
 
-      <p>or Log in with:</p>
+      <p className="dark:text-gray-400">or Log in with:</p>
 
       <Button type="googleBtn" purpose="link" href="/auth/google">
         <FcGoogle />{" "}
@@ -108,9 +108,9 @@ function Register() {
         </span>
       </Button>
 
-      <div className="my-7 w-[85%] border-t-2 border-gray-200" />
+      <div className="dark:border-darkBorder my-7 w-[85%] border-t-2 border-gray-200" />
 
-      <p>
+      <p className="dark:text-gray-400">
         Already have an account?{" "}
         <Link to="/">
           <span className="text-primaryBlue underline">Log in</span>

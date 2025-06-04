@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 function NoNotes({ message }) {
   return (
     
-      <p className="mt-3 rounded-md border-[1px] border-gray-300 dark:bg-bgCard bg-gray-200 p-3 text-sm font-light w-[80%]  mx-3 md:mx-7 dark:border-darkBorder ">
+      <div className="mt-3 rounded-md border-[1px] border-gray-300 dark:bg-bgCard bg-gray-200 p-3 text-sm font-light md:w-[80%] xl:m-auto
+        dark:border-darkBorder md:ml-7 xl:ml-0 w-[90%] ml-3">
         {message}
-      </p>
+      </div>
   
   );
 }

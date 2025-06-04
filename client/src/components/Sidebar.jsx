@@ -17,7 +17,7 @@ function Sidebar() {
   // avoid duplicate tags
   const uniqueTags = [...new Set(tags)];
   return (
-    <aside className="dark:border-darkBorder w-full border-gray-300 bg-gray-200 dark:bg-bgCard xl:dark:bg-darkbg p-3 lg:p-6 xl:w-[20%] xl:border-r-[1px] xl:bg-inherit xl:p-0 xl:pt-7">
+    <aside className="dark:border-darkBorder  w-full border-gray-300 bg-gray-200 dark:bg-bgCard xl:dark:bg-darkbg p-3 lg:p-6 xl:w-[20%] xl:border-r-[1px] xl:bg-inherit xl:p-0 xl:pt-7">
       <img src={darkLogo} alt="logo" className="block p-3 dark:hidden" />
 
       <img src={logo} alt="logo" className="hidden p-3 dark:block" />

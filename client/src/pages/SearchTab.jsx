@@ -32,13 +32,14 @@ function SearchTab() {
         <SearchBar />
       </div>
 
-      <div className="grid h-screen grid-cols-1 border-gray-300 dark:border-darkBorder xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="dark:border-darkBorder grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300 dark:border-darkBorder`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} dark:border-darkBorder border-r border-gray-300`}
         >
           <CreateButton />
-          <p className="mt-3 px-7 text-sm xl:hidden">
-            All notes matching the search term "{searchQuery}” are shown here.
+          <p className="mt-3 md:px-7  px-3 text-sm xl:hidden">
+            All notes matching the search term{" "}
+            {searchQuery ? `"${searchQuery}"` : ""} are shown here.
           </p>
           {filteredNotes?.length === 0 ? (
             <NoNotes message="No notes match your search. Try a different keyword or create a new note." />

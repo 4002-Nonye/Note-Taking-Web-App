@@ -17,7 +17,7 @@ const initialState = {
       title: "Shopping",
       content: "Buy groceries",
       tags: ["personal"],
-      isArchive: true,
+      isArchive: false,
       date: new Date(),
     },
     {
@@ -25,7 +25,7 @@ const initialState = {
       title: "Meeting",
       content: "Team sync",
       tags: ["work"],
-      isArchive: true,
+      isArchive: false,
       date: new Date(),
     },
   ],

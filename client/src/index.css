@@ -13,7 +13,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  @apply bg-bgColor dark:bg-darkbg m-auto dark:text-white;
+  @apply bg-bgColor  m-auto dark:text-white dark:bg-bgCard;
 }
 ul li {
   @apply list-none;
