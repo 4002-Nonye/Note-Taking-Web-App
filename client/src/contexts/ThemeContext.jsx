@@ -3,13 +3,13 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 const ThemeContext = createContext();
 
 const initialState = {
-  theme: "light",
+  themeColor: "light",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "SET_THEME":
-      return { ...state, theme: action.payload };
+      return { ...state, themeColor: action.payload };
 
     default:
       return state;
@@ -17,7 +17,7 @@ const reducer = (state, action) => {
 };
 
 const ThemeProvider = ({ children }) => {
-  const [{ theme }, dispatch] = useReducer(reducer, initialState);
+  const [{ themeColor }, dispatch] = useReducer(reducer, initialState);
 
   // persist theme to local storage
   useEffect(() => {
@@ -27,7 +27,6 @@ const ThemeProvider = ({ children }) => {
       type: "SET_THEME",
       payload: savedTheme,
     });
-   
   }, []);
 
   const handleChangeTheme = (theme) => {
@@ -36,7 +35,7 @@ const ThemeProvider = ({ children }) => {
     applyTheme(theme); //apply theme when user changes it
   };
   return (
-    <ThemeContext.Provider value={{ theme, handleChangeTheme }}>
+    <ThemeContext.Provider value={{ themeColor, handleChangeTheme }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -28,13 +28,13 @@ function SearchTab() {
         }
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
-      <div className="block px-7 xl:hidden">
+      <div className="block px-3 md:px-7 xl:hidden">
         <SearchBar />
       </div>
 
-      <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="grid h-screen grid-cols-1 border-gray-300 dark:border-darkBorder xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300 dark:border-darkBorder`}
         >
           <CreateButton />
           <p className="mt-3 px-7 text-sm xl:hidden">

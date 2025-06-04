@@ -1,18 +1,48 @@
-import React from "react";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
 import Header from "../components/Header";
 import Themes from "../components/Themes";
-import { Outlet } from "react-router-dom";
 
 function Settings() {
+  const { pathname } = useLocation();
+  const isRootSettings = pathname === "/account/settings";
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (isRootSettings && window.innerWidth >=1024) {
+        navigate("color-theme", { replace: true });
+      }
+    };
+      // Run on mount and on resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isRootSettings, navigate, pathname]);
+
   return (
     <>
-      <Header head="Settings" />
+      <Header
+        head="Settings"
+        customClass={isRootSettings ? "block" : "hidden lg:flex"}
+      />
 
-      <div className="grid lg:h-screen  grid-cols-1 border-gray-300 xl:mt-5 lg:grid-cols-[300px_1fr] xl:border-t-[1px] mb-48 lg:mb-0">
-        <div className="xl:border-r border-gray-300">
+      <div className="dark:border-darkBorder grid h-screen grid-cols-1 border-gray-300 lg:grid-cols-[300px_1fr] lg:mt-5 lg:border-t">
+        {/* Sidebar - Themes */}
+        <div
+          className={`${
+            isRootSettings ? "block" : "hidden"
+          } dark:border-darkBorder h-full border-r border-gray-300 lg:block`}
+        >
           <Themes />
         </div>
-        <Outlet />
+
+        {/* Main content - Outlet */}
+        <div className="w-full">
+          <Outlet />
+        </div>
       </div>
     </>
   );

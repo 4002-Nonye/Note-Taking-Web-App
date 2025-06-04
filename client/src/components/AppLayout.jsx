@@ -1,9 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Header from "./Header";
-import NoteList from "./NoteList";
-import Notes from "../pages/Notes";
+
 import MobileNav from "./MobileNav";
 
 function AppLayout() {

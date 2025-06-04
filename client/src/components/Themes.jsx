@@ -1,19 +1,33 @@
-import { MdWbSunny } from "react-icons/md";
+import { MdWbSunny, MdLogout } from "react-icons/md";
 import { AiOutlineFontSize } from "react-icons/ai";
-
+import { IoIosLock } from "react-icons/io";
 import Nav from "./Nav";
+import Button from "./Button";
+
+const navItems = [
+  { to: "color-theme", icon: MdWbSunny, label: "Color Theme" },
+  { to: "font-theme", icon: AiOutlineFontSize, label: "Font Theme" },
+  { to: "change-password", icon: IoIosLock, label: "Change Password" },
+];
 
 function Themes() {
   return (
-    <div className="m-auto flex lg:block  w-3/4 items-center justify-center gap-5 rounded-md bg-white p-3 px-4 shadow-lg lg:w-full lg:flex-col lg:items-start lg:justify-items-start lg:rounded-none lg:bg-inherit  lg:shadow-none xl:mt-5">
-      <Nav to="color-theme" icon={MdWbSunny} arrowVisible='lg:block hidden' className='w-full'>
-        <span className="hidden lg:block">Color Theme</span>
-      </Nav>
+    <>
+      <div className="m-auto flex w-full flex-col justify-center gap-4 rounded-md p-3 px-4 ">
+        {navItems.map((item) => (
+          <Nav key={item.to} to={item.to} icon={item.icon} className="w-full">
+            <span>{item.label}</span>
+          </Nav>
+        ))}
+      </div>
 
-      <Nav to="font-theme" icon={AiOutlineFontSize} arrowVisible='lg:block hidden' className='w-full'>
-        <span className="hidden lg:block">Font Theme</span>
-      </Nav>
-    </div>
+      <div className="dark:border-darkBorder my-3 w-full border-t border-gray-300" />
+
+      <Button customClass="px-7 items-center gap-2 w-full">
+        <MdLogout />
+        <span>Logout</span>
+      </Button>
+    </>
   );
 }
 

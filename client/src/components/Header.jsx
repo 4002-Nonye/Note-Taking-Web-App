@@ -8,7 +8,7 @@ import SearchBar from "./SearchBar";
 function Header({ head, customClass }) {
   return (
     <div
-      className={`mt-4 flex items-center justify-between px-3 py-4 md:px-7 xl:mt-0 ${customClass}`}
+      className={`mt-4 flex items-center justify-between px-3 py-4 md:px-7 xl:mt-0 ${customClass}  `}
     >
       <h1 className="text-2xl font-bold">{head}</h1>
 

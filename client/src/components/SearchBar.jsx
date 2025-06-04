@@ -1,7 +1,11 @@
-import { IoSearchOutline } from "react-icons/io5";
-import { useNotes } from "../contexts/NoteContext";
-import { useNavigate, useLocation } from "react-router-dom";
 import { useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { useNotes } from "../contexts/NoteContext";
+
+import { IoSearchOutline } from "react-icons/io5";
+
+
 
 function SearchBar() {
   const { handleSearch, searchQuery } = useNotes();
@@ -17,12 +21,11 @@ function SearchBar() {
     if (!hasNavigated.current && location.pathname !== "/search") {
       hasNavigated.current = true;
       navigate("/search");
-      autoFocus;
     }
   };
 
   return (
-    <div className="relative rounded-md border-[1px] border-gray-300 px-4 py-3">
+    <div className="relative rounded-md border-[1px] border-gray-300 dark:border-darkBorder px-4 py-3">
       <input
         value={searchQuery}
         name="search"
@@ -30,7 +33,7 @@ function SearchBar() {
         placeholder="Search by title, content or tags..."
         className="w-80 border-0 pl-5 outline-0"
         onChange={handleChange}
-        autoFocus={location.pathname === "/search"} 
+        autoFocus={location.pathname === "/search"}
       />
 
       <IoSearchOutline className="absolute top-3.5 left-2 text-xl" />

@@ -23,9 +23,9 @@ function ArchivedNotesList() {
 
       <div className="no-scrollbar mt-7 flex flex-col gap-5 text-[13px] xl:h-[calc(100vh-16rem)] xl:overflow-y-auto">
         {filteredNotes?.length === 0 ? (
-          <NoNotes isArchive={true} notes={filteredNotes} />
+          <NoNotes notes={filteredNotes} />
         ) : (
-          <NoteCard isArchive={true} notes={filteredNotes} path="archive" />
+          <NoteCard notes={filteredNotes} path="archive" />
         )}
       </div>
     </div>

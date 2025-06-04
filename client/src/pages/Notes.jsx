@@ -19,9 +19,9 @@ function Notes() {
         head="All Notes"
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
-      <div className="grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="grid h-screen grid-cols-1 border-gray-300 dark:border-darkBorder xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r dark:border-darkBorder border-gray-300`}
         >
           <CreateButton />
 

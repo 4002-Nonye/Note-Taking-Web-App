@@ -25,6 +25,7 @@ import FilteredTags from "./components/FilteredTags";
 import { NoteProvider } from "./contexts/NoteContext";
 import TaggedNotes from "./pages/TaggedNotes";
 import SearchTab from "./pages/SearchTab";
+import ChangePassword from "./components/ChangePassword";
 
 const queryClient = new QueryClient({
   queries: {
@@ -85,16 +86,16 @@ const router = createBrowserRouter([
         element: <Settings />,
         children: [
           {
-            index: true,
-            element: <Navigate to="color-theme" replace />,
-          },
-          {
             path: "color-theme",
             element: <ColorTab />,
           },
           {
             path: "font-theme",
             element: <FontTab />,
+          },
+          {
+            path: "change-password",
+            element: <ChangePassword />,
           },
         ],
       },

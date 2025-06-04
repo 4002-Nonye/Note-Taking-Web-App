@@ -5,12 +5,16 @@
   --color-bgColor: #f3f5f8;
   --color-primaryBlue: #335cff;
   --color-csGray: "#6B7280";
+  --color-darkbg: #0e121b;
+  --color-darkBorder: #22242f;
+  --color-bgCard: #232530;
+  --color-bgTag:#2B303B
 }
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-    @apply m-auto bg-bgColor ;
-  }
+  @apply bg-bgColor dark:bg-darkbg m-auto dark:text-white;
+}
 ul li {
   @apply list-none;
 }
@@ -30,4 +34,3 @@ ul li {
     scrollbar-width: none; /* Firefox */
   }
 }
-
