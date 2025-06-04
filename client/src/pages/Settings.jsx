@@ -30,7 +30,7 @@ function Settings() {
       />
 
       <div className="dark:border-darkBorder grid h-screen grid-cols-1 border-gray-300 lg:grid-cols-[300px_1fr] lg:mt-5 lg:border-t">
-        {/* Sidebar - Themes */}
+       
         <div
           className={`${
             isRootSettings ? "block" : "hidden"
@@ -39,7 +39,7 @@ function Settings() {
           <Themes />
         </div>
 
-        {/* Main content - Outlet */}
+      
         <div className="w-full">
           <Outlet />
         </div>

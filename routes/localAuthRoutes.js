@@ -114,7 +114,7 @@ module.exports = (app) => {
 
   // change password
   app.put('/api/account/passwordchange', requireLogin, async (req, res) => {
-    const { currentPassword, password } = req.body;
+    const { currentPassword, newPassword } = req.body;
 
     try {
       const existingUser = await User.findById(req.user.id);
@@ -140,7 +140,7 @@ module.exports = (app) => {
       // proceed to change the password if they match
       // hash new password for security
       const salt = bcrypt.genSaltSync(10);
-      const hashedPassword = bcrypt.hashSync(password, salt);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
       existingUser.password = hashedPassword;
 
       await existingUser.save();

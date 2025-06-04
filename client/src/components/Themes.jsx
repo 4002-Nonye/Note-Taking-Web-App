@@ -13,7 +13,7 @@ const navItems = [
 function Themes() {
   return (
     <>
-      <div className="m-auto flex w-full flex-col justify-center gap-4 rounded-md p-3 px-4 ">
+      <div className="m-auto flex w-full flex-col justify-center gap-2 rounded-md p-3 px-4 ">
         {navItems.map((item) => (
           <Nav key={item.to} to={item.to} icon={item.icon} className="w-full">
             <span>{item.label}</span>
