@@ -25,8 +25,8 @@ const formats = [
 
 function TextArea({ value, setValue }) {
   return (
-    <div className="flex h-screen flex-1 flex-col p-4">
-      <div className="max-h-[calc(100vh-10rem)] flex-1">
+    <div className="flex h-screen flex-1 flex-col pb-24 p-4 xl:pb-4">
+      <div className="max-h-[calc(100vh-10rem)] flex-1 ">
         <ReactQuill
           modules={modules}
           formats={formats}
@@ -34,7 +34,7 @@ function TextArea({ value, setValue }) {
           value={value}
           onChange={setValue}
           placeholder="Write your notes here..."
-          className="custom-quill-editor no-scrollbar h-full overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
+          className="custom-quill-editor no-scrollbar  h-full overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
           style={{ fontFamily: "inherit" }}
         />
       </div>
