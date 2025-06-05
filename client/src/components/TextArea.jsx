@@ -25,8 +25,8 @@ const formats = [
 
 function TextArea({ value, setValue }) {
   return (
-    <div className="flex h-screen flex-1 flex-col pb-24 p-4 xl:pb-4">
-      <div className="max-h-[calc(100vh-10rem)] flex-1 ">
+    <div className="flex  flex-col p-4 pb-24 xl:pb-4 ">
+      <div className="">
         <ReactQuill
           modules={modules}
           formats={formats}

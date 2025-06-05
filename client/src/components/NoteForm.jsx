@@ -12,9 +12,9 @@ function NoteForm({isArchive}) {
    
   return (
 
-    <div className="flex xl:flex-row flex-col-reverse h-screen w-full ">
+    <div className="flex xl:flex-row flex-col-reverse h-full w-full ">
       <div className="flex-grow border-r-[1px] border-gray-300 dark:border-darkBorder">
-        <form className="flex  flex-col pr-4">
+        <form className="flex  flex-col dark:bg-darkbg pr-4 pb-16 xl:pb-0">
           <input
             type="text"
             placeholder="Enter a title..."
