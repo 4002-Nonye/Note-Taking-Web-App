@@ -7,7 +7,8 @@ import { ClipLoader } from "react-spinners";
 
 import { useRegister } from "./useRegister";
 
-import logo from "../assets/icon-logo.svg";
+import logo from "../assets/icon-logo-white.svg";
+import darkLogo from "../assets/icon-logo.svg";
 import Button from "../components/Button";
 import AuthHeader from "../components/AuthHeader";
 import PasswordVisibility from "../components/PasswordVisibility";
@@ -30,14 +31,16 @@ function Register() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
-      className="dark:bg-darkbg mt-10 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md mb-6"
+      className="dark:bg-darkbg mt-10 mb-6 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
       noValidate
     >
       <AuthHeader
-        logo={logo}
         header="Create Your Account"
         subHead="Sign up to start organizing your notes and boost your productivity."
-      />
+      >
+        <img src={darkLogo} alt="logo" className="block p-3 dark:hidden" />
+        <img src={logo} alt="logo" className="hidden p-3 dark:block" />
+      </AuthHeader>
 
       <div className="mt-7 w-[85%]">
         <div className="flex flex-col gap-1">

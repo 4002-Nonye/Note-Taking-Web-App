@@ -28,6 +28,7 @@ function ColorTab() {
       subHead="Choose your color theme"
       themeName={themeColor}
       onChange={handleChangeTheme}
+      handleSave=''
     />
   );
 }

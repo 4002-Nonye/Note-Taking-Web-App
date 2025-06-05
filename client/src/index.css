@@ -8,12 +8,12 @@
   --color-darkbg: #0e121b;
   --color-darkBorder: #22242f;
   --color-bgCard: #232530;
-  --color-bgTag:#2B303B
+  --color-bgTag: #2b303b;
 }
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  @apply bg-bgColor  m-auto dark:text-white dark:bg-bgCard;
+  @apply bg-bgColor dark:bg-bgCard m-auto dark:text-white;
 }
 ul li {
   @apply list-none;
@@ -33,4 +33,42 @@ ul li {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+/* === React Quill Custom Dark Mode Styles === */
+
+.custom-quill-editor .ql-editor {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Dark mode styles */
+.dark .ql-container {
+  border-color: #3f3f46 !important; /* dark:border-darkBorder */
+}
+
+.dark .ql-toolbar {
+  border-color: #3f3f46 !important;
+
+  color: white;
+}
+
+.dark .ql-toolbar .ql-picker,
+.dark .ql-toolbar .ql-stroke,
+.dark .ql-toolbar .ql-fill,
+.dark .ql-toolbar .ql-picker-label,
+.dark .ql-toolbar .ql-picker-options {
+  color: white !important;
+  stroke: white !important;
+  fill: white !important;
+}
+
+.dark .ql-toolbar button:hover,
+.dark .ql-toolbar button.ql-active {
+  color: white !important;
+  stroke: white !important;
+}
+
+.dark .ql-editor.ql-blank::before {
+  color: #d1d5db !important; /* gray-300 */
+  opacity: 0.5;
 }

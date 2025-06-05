@@ -4,7 +4,7 @@ import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 
-function ThemeTab({ options, head, subHead, themeName, onChange }) {
+function ThemeTab({ options, head, subHead, themeName, onChange, handleSave }) {
   const navigate = useNavigate();
   return (
     <>
@@ -15,7 +15,7 @@ function ThemeTab({ options, head, subHead, themeName, onChange }) {
         <FaArrowLeft className="group-hover:text-primaryBlue text-sm transition-all duration-500" />
         <span>Settings</span>
       </Button>
-      <div className="px-7 xl:pt-9 pt-4 text-sm">
+      <div className="px-7 pt-4 text-sm xl:pt-9">
         <div className="mb-6">
           <h3 className="text-lg font-bold">{head}</h3>
           <p>{subHead}</p>
@@ -76,6 +76,14 @@ function ThemeTab({ options, head, subHead, themeName, onChange }) {
               </motion.div>
             );
           })}
+          <div className="relative mt-5 flex justify-end md:w-full xl:w-2/4">
+            <Button
+              customClass="bg-primaryBlue text-white rounded-md justify-center "
+              onclick={handleSave}
+            >
+              Save changes
+            </Button>
+          </div>
         </motion.div>
       </div>
     </>
@@ -90,4 +98,5 @@ ThemeTab.propTypes = {
   subHead: PropTypes.string,
   themeName: PropTypes.string,
   onChange: PropTypes.func,
+  handleSave: PropTypes.func,
 };

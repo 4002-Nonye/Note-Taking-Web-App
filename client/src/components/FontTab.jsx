@@ -1,4 +1,3 @@
-
 import { FaFont } from "react-icons/fa";
 import { useFont } from "../contexts/FontContext";
 import ThemeTab from "./ThemeTab";
@@ -34,6 +33,7 @@ function FontTab() {
       subHead="Choose your font theme"
       themeName={font}
       onChange={handleFontChange}
+      handleSave=""
     />
   );
 }

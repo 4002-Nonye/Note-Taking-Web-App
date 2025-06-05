@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function NoteCTA({ isArchive }) {
   const navigate = useNavigate();
   return (
-    <div className="flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:px-0">
+    <div className="flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:px-0 xl:border-b-0 dark:border-darkBorder">
       <Button
         onclick={() => navigate(-1)}
         customClass="group flex gap-2  items-center xl:hidden text-sm"

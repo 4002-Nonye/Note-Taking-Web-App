@@ -1,6 +1,7 @@
 import Button from "./Button";
 import NoNotes from "./NoNotes";
 import NoteCard from "./NoteCard";
+
 import { useNotes } from "../contexts/NoteContext";
 
 function ArchivedNotesList() {

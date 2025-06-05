@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -46,6 +47,12 @@ function ChangePassword() {
       </Button>
       <div className="px-7 pt-9 pb-7">
         <h3 className="mb-6 text-lg font-bold">Change Password</h3>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+        
+        >
 
         <form
           onSubmit={handleSubmit(onSubmit, onError)}
@@ -144,6 +151,7 @@ function ChangePassword() {
             </Button>
           </div>
         </form>
+        </motion.div>
       </div>
     </>
   );

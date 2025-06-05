@@ -5,7 +5,7 @@ import Button from "./Button";
 import { useState } from "react";
 
 function TextArea() {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
 
   const modules = {
     toolbar: [
@@ -32,18 +32,21 @@ function TextArea() {
     "bullet",
     "link",
   ];
+
   return (
     <div className="flex flex-1 flex-col p-4 pb-32 xl:pb-2">
-      <ReactQuill
-        modules={modules}
-        formats={formats}
-        theme="snow"
-        value={value}
-        onChange={setValue}
-        placeholder="Write your notes here..."
-        className="no-scrollbar  min-h-[22rem] w-[100%] flex-1 overflow-y-scroll text-sm leading-relaxed outline-0"
-        style={{ fontFamily: 'inherit' }}
-      />
+      <div className="rounded-md border border-gray-300 dark:border-darkBorder">
+        <ReactQuill
+          modules={modules}
+          formats={formats}
+          theme="snow"
+          value={value}
+          onChange={setValue}
+          placeholder="Write your notes here..."
+          className="custom-quill-editor no-scrollbar h-[22rem] w-full flex-1 overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
+          style={{ fontFamily: "inherit" }}
+        />
+      </div>
 
       <div className="mt-8 hidden justify-end gap-5 lg:flex">
         <Button customClass="bg-primaryBlue rounded-md text-white w-24 justify-center font-medium">
