@@ -10,7 +10,7 @@ function Tags() {
   return (
     <>
     
-      <div className="mt-4 px-5 xl:hidden">
+      <div className="mt-4 px-5 xl:hidden ">
         <h2 className="text-2xl font-bold text-gray-500">Tags</h2>
         <ul className="mt-4 flex flex-col gap-3">
           {uniqueTags.map((tag) => {

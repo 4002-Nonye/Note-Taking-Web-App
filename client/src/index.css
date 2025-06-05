@@ -42,10 +42,11 @@ ul li {
 .custom-quill-editor .ql-editor {
   word-break: break-word;
   white-space: pre-wrap;
-  height: 24rem;
+  height: 20rem;
   font-family: inherit;
 }
-.ql-container,.ql-toolbar {
+.ql-container,
+.ql-toolbar {
   font-family: inherit;
 }
 /* Dark mode styles */
@@ -78,4 +79,9 @@ ul li {
 .dark .ql-editor.ql-blank::before {
   color: #d1d5db !important; /* gray-300 */
   opacity: 0.5;
+}
+
+.dark .toast {
+  background-color: #232530 !important;
+  color:white !important
 }

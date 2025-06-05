@@ -1,4 +1,5 @@
-import Register from "../authentication/Register";
+import Register from "../features/authentication/Register";
+
 
 function RegisterPage() {
   return (

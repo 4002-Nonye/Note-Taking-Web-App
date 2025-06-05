@@ -1,10 +1,16 @@
-
 import { IoSunny, IoMoon } from "react-icons/io5";
 import { useTheme } from "../contexts/ThemeContext";
 import ThemeTab from "./ThemeTab";
 
+import { useEditSettings } from "../features/accountSettings/useEditSettings";
+
 function ColorTab() {
   const { themeColor, handleChangeTheme } = useTheme();
+  const { isPending, editAccountSettings } = useEditSettings();
+
+  const saveColorTheme = async () => {
+    editAccountSettings(themeColor);
+  };
 
   const options = [
     {
@@ -28,7 +34,8 @@ function ColorTab() {
       subHead="Choose your color theme"
       themeName={themeColor}
       onChange={handleChangeTheme}
-      handleSave=''
+      handleSave={saveColorTheme}
+      isPending={isPending}
     />
   );
 }

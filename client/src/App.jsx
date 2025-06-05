@@ -132,7 +132,11 @@ function App() {
                 style: {
                   fontSize: "16px",
                   maxWidth: "500px",
+                  textAlign: "center",
+                  backgroundColor: "#fff",
+                  color: "#000",
                 },
+                className: "toast",
               }}
             />
           </ThemeProvider>

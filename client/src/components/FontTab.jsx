@@ -2,8 +2,14 @@ import { FaFont } from "react-icons/fa";
 import { useFont } from "../contexts/FontContext";
 import ThemeTab from "./ThemeTab";
 
+import { useEditSettings } from "../features/accountSettings/useEditSettings";
+
 function FontTab() {
   const { font, handleFontChange } = useFont();
+  const { isPending, editAccountSettings } = useEditSettings();
+  const saveFontTheme = async () => {
+    editAccountSettings(font);
+  };
 
   const options = [
     {
@@ -33,7 +39,8 @@ function FontTab() {
       subHead="Choose your font theme"
       themeName={font}
       onChange={handleFontChange}
-      handleSave=""
+      handleSave={saveFontTheme}
+      isPending={isPending}
     />
   );
 }

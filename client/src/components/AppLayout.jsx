@@ -5,11 +5,10 @@ import MobileNav from "./MobileNav";
 
 function AppLayout() {
   return (
-    <div className="flex w-full flex-col xl:flex-row dark:bg-darkbg">
+    <div className="flex min-h-screen w-full flex-col xl:flex-row dark:bg-darkbg">
       <Sidebar />
 
-      <div className="flex w-full flex-col">
-     
+      <div className="flex w-full flex-col flex-1">
         <Outlet />
       </div>
 

@@ -3,8 +3,17 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
+import { ClipLoader } from "react-spinners";
 
-function ThemeTab({ options, head, subHead, themeName, onChange, handleSave }) {
+function ThemeTab({
+  options,
+  head,
+  subHead,
+  themeName,
+  onChange,
+  handleSave,
+  isPending,
+}) {
   const navigate = useNavigate();
   return (
     <>
@@ -78,10 +87,15 @@ function ThemeTab({ options, head, subHead, themeName, onChange, handleSave }) {
           })}
           <div className="relative mt-5 flex justify-end md:w-full xl:w-2/4">
             <Button
-              customClass="bg-primaryBlue text-white rounded-md justify-center "
+              customClass="bg-primaryBlue text-white rounded-md justify-center 
+              w-2/4 md:w-[20%] xl:w-[30%]"
               onclick={handleSave}
             >
-              Save changes
+              {isPending ? (
+                <ClipLoader color="white" size={22} />
+              ) : (
+                "Save changes"
+              )}
             </Button>
           </div>
         </motion.div>
@@ -99,4 +113,5 @@ ThemeTab.propTypes = {
   themeName: PropTypes.string,
   onChange: PropTypes.func,
   handleSave: PropTypes.func,
+  isPending: PropTypes.bool,
 };
