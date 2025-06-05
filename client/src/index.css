@@ -28,6 +28,9 @@ ul li {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .custom-quill-editor .ql-editor::-webkit-scrollbar{
+    display:none
+  }
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
@@ -39,6 +42,7 @@ ul li {
 .custom-quill-editor .ql-editor {
   word-break: break-word;
   white-space: pre-wrap;
+  height:24rem
 }
 
 /* Dark mode styles */
@@ -59,7 +63,7 @@ ul li {
 .dark .ql-toolbar .ql-picker-options {
   color: white !important;
   stroke: white !important;
-  fill: white !important;
+ 
 }
 
 .dark .ql-toolbar button:hover,

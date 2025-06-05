@@ -31,7 +31,7 @@ function Register() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
-      className="dark:bg-darkbg mt-10 mb-6 flex w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
+      className="dark:bg-darkbg mt-10  flex  w-[90%] mb-9 lg:mb-0 md:w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
       noValidate
     >
       <AuthHeader

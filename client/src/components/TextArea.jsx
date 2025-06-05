@@ -1,41 +1,32 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import Button from "./Button"; // Adjust the path to your Button component
 
-import Button from "./Button";
-import { useState } from "react";
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link"],
+    ["clean"],
+  ],
+};
 
-function TextArea() {
-  const [value, setValue] = useState("");
+const formats = [
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "list",
+  "bullet",
+  "link",
+];
 
-  const modules = {
-    toolbar: [
-      [{ font: [] }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ color: [] }, { background: [] }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link"],
-      ["clean"],
-    ],
-  };
-
-  const formats = [
-    "font",
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "color",
-    "background",
-    "list",
-    "bullet",
-    "link",
-  ];
-
+function TextArea({ value, setValue }) {
   return (
-    <div className="flex flex-1 flex-col p-4 pb-32 xl:pb-2">
-      <div className="rounded-md border border-gray-300 dark:border-darkBorder">
+    <div className="flex h-screen flex-1 flex-col p-4">
+      <div className="max-h-[calc(100vh-10rem)] flex-1">
         <ReactQuill
           modules={modules}
           formats={formats}
@@ -43,12 +34,13 @@ function TextArea() {
           value={value}
           onChange={setValue}
           placeholder="Write your notes here..."
-          className="custom-quill-editor no-scrollbar h-[22rem] w-full flex-1 overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
+          className="custom-quill-editor no-scrollbar h-full overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
           style={{ fontFamily: "inherit" }}
         />
       </div>
 
-      <div className="mt-8 hidden justify-end gap-5 lg:flex">
+      {/* Buttons fixed below editor */}
+      <div className="mt-4 hidden justify-end gap-5 lg:flex">
         <Button customClass="bg-primaryBlue rounded-md text-white w-24 justify-center font-medium">
           Save Note
         </Button>
