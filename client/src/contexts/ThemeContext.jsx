@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { useGetSettings } from "../features/accountSettings/useGetSettings";
 
 const ThemeContext = createContext();
 
@@ -18,20 +19,26 @@ const reducer = (state, action) => {
 
 const ThemeProvider = ({ children }) => {
   const [{ themeColor }, dispatch] = useReducer(reducer, initialState);
+  const { getAccountSettings, isPending } = useGetSettings();
 
-  // persist theme to local storage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("colorTheme") || "light";
-    applyTheme(savedTheme); // apply theme on initial load
+    if (isPending || !getAccountSettings) return;
+
+    // use theme from server or default
+    const serverTheme = getAccountSettings?.data.colorTheme || "light";
+    // Save to localStorage for future sessions
+    localStorage.setItem("colorTheme", serverTheme);
+
     dispatch({
       type: "SET_THEME",
-      payload: savedTheme,
+      payload: serverTheme,
     });
-  }, []);
+
+    applyTheme(serverTheme);
+  }, [getAccountSettings, isPending]);
 
   const handleChangeTheme = (theme) => {
     dispatch({ type: "SET_THEME", payload: theme });
-    localStorage.setItem("colorTheme", theme);
     applyTheme(theme); //apply theme when user changes it
   };
   return (
@@ -43,8 +50,7 @@ const ThemeProvider = ({ children }) => {
 
 const applyTheme = (selectedTheme) => {
   const html = document.documentElement;
-  // Always remove first to avoid duplicate classes
-  html.classList.remove("dark", "light");
+
   if (selectedTheme === "dark") html.classList.add("dark");
   else {
     html.classList.remove("dark");

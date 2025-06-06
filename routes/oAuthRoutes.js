@@ -1,4 +1,3 @@
-
 const requireLogin = require('../middlewares/requireLogin');
 const passport = require('passport');
 const setAuthCookie = require('../utils/setAuthCookie');
@@ -16,7 +15,6 @@ module.exports = (app) => {
     passport.authenticate('google', { session: false }),
 
     (req, res) => {
-      
       // Create a JWT token for the newly registered user
       // Send the JWT token as an HTTP-only cookie
       setAuthCookie(res, req.user.id);
@@ -24,10 +22,8 @@ module.exports = (app) => {
     }
   );
 
-  app.get('/api/current-user',requireLogin, (req, res) => {
-    
-    res.send(req.user);
-    
+  app.get('/api/current-user', requireLogin, (req, res) => {
+    res.status(200).send(req.user);
   });
 
   app.get('/api/logout', (_, res) => {

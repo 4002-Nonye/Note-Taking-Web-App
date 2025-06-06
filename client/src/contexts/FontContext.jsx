@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { useGetSettings } from "../features/accountSettings/useGetSettings";
 
 const FontContext = createContext();
 
@@ -18,18 +19,23 @@ function reducer(state, action) {
 
 const FontProvider = ({ children }) => {
   const [{ font }, dispatch] = useReducer(reducer, initialState);
+  const { getAccountSettings, isPending } = useGetSettings();
 
   // persist font
   useEffect(() => {
-    const savedFont = localStorage.getItem("fontTheme") || "sans-serif";
-    applyFontClass(savedFont);
+    if ( isPending || !getAccountSettings) return;
+
+    // use theme from server or default
+    const serverTheme = getAccountSettings?.data.fontTheme || "sans-serif";
+
+    localStorage.setItem("fontTheme", serverTheme);
+
     dispatch({
       type: "SET_FONT",
-      payload: savedFont,
+      payload: serverTheme,
     });
-
- 
-  }, []);
+    applyFontClass(serverTheme)
+  }, [isPending, getAccountSettings]);
 
   const handleFontChange = (newFont) => {
     dispatch({
@@ -37,8 +43,7 @@ const FontProvider = ({ children }) => {
       payload: newFont,
     });
 
-    localStorage.setItem("fontTheme", newFont);
-    applyFontClass(newFont)
+    applyFontClass(newFont);
   };
 
   // Apply font class to HTML element
@@ -68,7 +73,6 @@ const FontProvider = ({ children }) => {
       value={{
         font,
         handleFontChange,
-        
       }}
     >
       {children}

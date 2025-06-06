@@ -7,12 +7,11 @@ export function useEditSettings() {
   const mutation = useMutation({
     mutationFn: editAccountSettingsApi,
     onSuccess: (data) => {
-        console.log(data)
       toast.success(data.message);
-      queryClient.invalidateQueries(['accountSettings']);
+      queryClient.invalidateQueries(["accountSettings"]);
     },
     onError: (err) => {
-        console.log(err)
+      
       toast.error(err.error);
     },
   });

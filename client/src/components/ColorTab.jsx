@@ -4,12 +4,16 @@ import ThemeTab from "./ThemeTab";
 
 import { useEditSettings } from "../features/accountSettings/useEditSettings";
 
+
 function ColorTab() {
   const { themeColor, handleChangeTheme } = useTheme();
   const { isPending, editAccountSettings } = useEditSettings();
+  
 
   const saveColorTheme = async () => {
-    editAccountSettings(themeColor);
+    editAccountSettings({colorTheme:themeColor});
+    localStorage.setItem("colorTheme", themeColor);
+
   };
 
   const options = [

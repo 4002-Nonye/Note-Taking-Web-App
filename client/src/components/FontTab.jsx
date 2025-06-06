@@ -8,7 +8,8 @@ function FontTab() {
   const { font, handleFontChange } = useFont();
   const { isPending, editAccountSettings } = useEditSettings();
   const saveFontTheme = async () => {
-    editAccountSettings(font);
+    editAccountSettings({ fontTheme: font });
+    localStorage.setItem("fontTheme", font);
   };
 
   const options = [

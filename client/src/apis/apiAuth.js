@@ -27,3 +27,12 @@ export const login = async ({ email, password }) => {
     throw err.response.data;
   }
 };
+
+export const getUser = async () => {
+  try {
+    const response =await axios.get("/api/current-user", { withCredentials: true });
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
