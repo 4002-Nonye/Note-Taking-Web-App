@@ -4,8 +4,8 @@ import { getAccountSettings as getAccountSettingsApi } from "../../apis/apiAccou
 export function useGetSettings() {
   const query = useQuery({
     queryKey: ["accountSettings"],
-    queryFn: getAccountSettingsApi,
+    queryFn: () => getAccountSettingsApi(),
   });
 
-  return { getAccountSettings: query.data, isPending: query.isPending };
+  return { getAccountSettings: query.data, isPending: query.isFetching };
 }

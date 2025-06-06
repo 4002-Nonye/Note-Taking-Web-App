@@ -25,7 +25,7 @@ function Button({ children, type, customClass, purpose, href, onclick }) {
   else {
     return (
       <button
-        onClick={onclick}
+        onClick={ onclick}
         className={`${baseStyles} ${customClass} ${styles[type]}`}
       >
         {children}

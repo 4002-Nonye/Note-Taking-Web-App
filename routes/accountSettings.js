@@ -32,25 +32,22 @@ module.exports = (app) => {
         data: newSettings.settings,
       });
     } catch (err) {
-      console.error('Error updating settings:', err); // 👈 Add this
       res.status(500).send({ error: 'Failed to update settings' });
     }
   });
 
-  app.get('/api/account/settings', requireLogin, async (req, res) => {
+  app.get('/api/account/settings',requireLogin, async (req, res) => {
     try {
       const user = await Users.findById(req.user.id).select('settings');
-  
+
       if (!user) return res.status(404).send({ error: 'User not found' });
-  
+
       res.status(200).send({
         message: 'Settings fetched successfully',
         data: user.settings,
       });
     } catch (err) {
-      console.error('Error fetching settings:', err);
       res.status(500).send({ error: 'Failed to fetch settings' });
     }
   });
-  
 };

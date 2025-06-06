@@ -6,5 +6,5 @@ export function useUser() {
     queryKey: ["user"],
     queryFn: getUser,
   });
-  return { user: query.data, isLoading: query.isPending };
+  return { user: query.data, isLoading: query.isLoading };
 }

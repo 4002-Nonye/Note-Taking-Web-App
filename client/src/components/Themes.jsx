@@ -3,6 +3,7 @@ import { AiOutlineFontSize } from "react-icons/ai";
 import { IoIosLock } from "react-icons/io";
 import Nav from "./Nav";
 import Button from "./Button";
+import { useLogout } from "../features/authentication/useLogout";
 
 const navItems = [
   { to: "color-theme", icon: MdWbSunny, label: "Color Theme" },
@@ -11,9 +12,10 @@ const navItems = [
 ];
 
 function Themes() {
+  const { logout } = useLogout();
   return (
     <>
-      <div className="m-auto flex w-full flex-col justify-center gap-2 rounded-md p-3 px-4 ">
+      <div className="m-auto flex w-full flex-col justify-center gap-2 rounded-md p-3 px-4">
         {navItems.map((item) => (
           <Nav key={item.to} to={item.to} icon={item.icon} className="w-full">
             <span>{item.label}</span>
@@ -23,7 +25,7 @@ function Themes() {
 
       <div className="dark:border-darkBorder my-3 w-full border-t border-gray-300" />
 
-      <Button customClass="px-7 items-center gap-2 w-full">
+      <Button customClass="px-7 items-center gap-2 w-full" onclick={()=>logout()}>
         <MdLogout />
         <span>Logout</span>
       </Button>

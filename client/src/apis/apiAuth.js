@@ -51,3 +51,12 @@ export const changePassword = async ({ currentPassword, newPassword }) => {
     throw err.response.data;
   }
 };
+
+export const logout = async () => {
+  try {
+    const response = await axios.get("/api/logout");
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};

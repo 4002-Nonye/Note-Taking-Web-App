@@ -23,7 +23,7 @@ const FontProvider = ({ children }) => {
 
   // persist font
   useEffect(() => {
-    if ( isPending || !getAccountSettings) return;
+    if (isPending || !getAccountSettings) return;
 
     // use theme from server or default
     const serverTheme = getAccountSettings?.data.fontTheme || "sans-serif";
@@ -34,7 +34,7 @@ const FontProvider = ({ children }) => {
       type: "SET_FONT",
       payload: serverTheme,
     });
-    applyFontClass(serverTheme)
+    applyFontClass(serverTheme);
   }, [isPending, getAccountSettings]);
 
   const handleFontChange = (newFont) => {

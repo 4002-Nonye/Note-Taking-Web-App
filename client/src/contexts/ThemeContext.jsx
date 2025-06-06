@@ -19,6 +19,7 @@ const reducer = (state, action) => {
 
 const ThemeProvider = ({ children }) => {
   const [{ themeColor }, dispatch] = useReducer(reducer, initialState);
+
   const { getAccountSettings, isPending } = useGetSettings();
 
   useEffect(() => {

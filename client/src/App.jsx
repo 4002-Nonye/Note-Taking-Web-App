@@ -11,7 +11,7 @@ import AppLayout from "./components/AppLayout";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import NoteForm from "./components/NoteForm";
-import NoteCTA from "./components/NoteCTA";
+
 import Notes from "./pages/Notes";
 import Archive from "./pages/Archive";
 import Settings from "./pages/Settings";
@@ -20,12 +20,12 @@ import FontTab from "./components/FontTab";
 import { FontProvider } from "./contexts/FontContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Tags from "./pages/Tags";
-import NoteList from "./components/NoteList";
-import FilteredTags from "./components/FilteredTags";
+
 import { NoteProvider } from "./contexts/NoteContext";
 import TaggedNotes from "./pages/TaggedNotes";
 import SearchTab from "./pages/SearchTab";
 import ChangePassword from "./components/ChangePassword";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 const queryClient = new QueryClient({
   queries: {
@@ -43,7 +43,11 @@ const router = createBrowserRouter([
     element: <RegisterPage />,
   },
   {
-    element: <AppLayout />,
+    element: (
+      <ProtectedRoutes>
+        <AppLayout />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         path: "/notes",
@@ -130,7 +134,7 @@ function App() {
                   duration: 3000,
                 },
                 style: {
-                  fontSize: "16px",
+                  fontSize: "14px",
                   maxWidth: "500px",
                   textAlign: "center",
                   backgroundColor: "#fff",
