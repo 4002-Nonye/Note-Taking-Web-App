@@ -19,10 +19,11 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       email: "ojukwuchinonye@gmail.com",
-      password: "1234567890",
+      password: "1234509000007",
     },
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -30,6 +31,7 @@ function Login() {
 
   const onSubmit = (data) => {
     login(data);
+    reset();
   };
   const onError = (err) => {
     console.log(err);
@@ -38,15 +40,11 @@ function Login() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
-      className="dark:bg-darkbg mt-10 flex w-[90%] mb-9 lg:mb-0 md:w-[30rem] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md"
+      className="dark:bg-darkbg mt-10 mb-9 flex w-[90%] flex-col items-center rounded-md bg-white px-3 py-7 shadow-md md:w-[30rem] lg:mb-0"
       noValidate={true}
     >
-      <AuthHeader
-      
-        header="Welcome to Note"
-        subHead="Please login to continue"
-      >
-               <img src={darkLogo} alt="logo" className="block p-3 dark:hidden" />
+      <AuthHeader header="Welcome to Note" subHead="Please login to continue">
+        <img src={darkLogo} alt="logo" className="block p-3 dark:hidden" />
         <img src={logo} alt="logo" className="hidden p-3 dark:block" />
       </AuthHeader>
 
@@ -96,7 +94,10 @@ function Login() {
         </div>
       </div>
 
-      <Button type="authBtn">
+      <Button
+        type="authBtn"
+        customClass={isPending ? "pointer-events-none" : ""}
+      >
         {isPending ? <ClipLoader color="white" size={22} /> : "Login"}
       </Button>
       <div className="dark:border-darkBorder my-6 w-[85%] border-t-2 border-gray-200" />

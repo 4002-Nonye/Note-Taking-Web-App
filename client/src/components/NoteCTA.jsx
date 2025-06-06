@@ -1,21 +1,16 @@
 import { MdOutlineArchive } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { FaArrowLeft } from "react-icons/fa";
 
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
+
+import MoveBack from "./MoveBack";
 
 function NoteCTA({ isArchive }) {
-  const navigate = useNavigate();
+
   return (
     <div className="flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:px-0 xl:border-b-0 dark:border-darkBorder">
-      <Button
-        onclick={() => navigate(-1)}
-        customClass="group flex gap-2  items-center xl:hidden text-sm"
-      >
-        <FaArrowLeft className="group-hover:text-primaryBlue text-sm transition-all duration-500" />
-        <span>Go back</span>
-      </Button>
+      <MoveBack text='Go back' navigateTo={-1} className='group flex gap-2  items-center xl:hidden text-sm'/>
+     
 
       <div className="flex items-center gap-3 xl:w-64 xl:flex-col xl:gap-6">
         <Button customClass="group justify-center  items-center" type="ctaBtn">

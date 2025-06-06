@@ -30,7 +30,22 @@ export const login = async ({ email, password }) => {
 
 export const getUser = async () => {
   try {
-    const response =await axios.get("/api/current-user", { withCredentials: true });
+    const response = await axios.get("/api/current-user", {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
+
+export const changePassword = async ({ currentPassword, newPassword }) => {
+  try {
+    const response = await axios.put(
+      "/api/account/passwordchange",
+      { currentPassword, newPassword },
+      { withCredentials: true },
+    );
     return response.data;
   } catch (err) {
     throw err.response.data;

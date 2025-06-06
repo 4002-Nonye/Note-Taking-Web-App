@@ -96,7 +96,7 @@ function Register() {
         </div>
       </div>
 
-      <Button type="authBtn">
+      <Button type="authBtn"  customClass={isPending ? "pointer-events-none" : ""}>
         {isPending ? <ClipLoader color="white" size={22} /> : "Sign up"}
       </Button>
       <div className="dark:border-darkBorder my-6 w-[85%] border-t-2 border-gray-200" />

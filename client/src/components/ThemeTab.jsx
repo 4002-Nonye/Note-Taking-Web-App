@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import Button from "./Button";
-import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa6";
+
 import { ClipLoader } from "react-spinners";
+import MoveBack from "./MoveBack";
 
 function ThemeTab({
   options,
@@ -14,16 +14,14 @@ function ThemeTab({
   handleSave,
   isPending,
 }) {
-  const navigate = useNavigate();
   return (
     <>
-      <Button
-        onclick={() => navigate("/account/settings")}
-        customClass="group flex gap-2 pt-3 px-3 text-gray-500 block lg:hidden  items-center xl:hidden text-sm"
-      >
-        <FaArrowLeft className="group-hover:text-primaryBlue text-sm transition-all duration-500" />
-        <span>Settings</span>
-      </Button>
+      <MoveBack
+        text="Settings"
+        navigateTo="/account/settings"
+        className="group flex items-center gap-2 px-3 pt-3 text-sm text-gray-500 lg:hidden"
+      />
+
       <div className="px-7 pt-4 text-sm xl:pt-9">
         <div className="mb-6">
           <h3 className="text-lg font-bold">{head}</h3>
@@ -87,8 +85,8 @@ function ThemeTab({
           })}
           <div className="relative mt-5 flex justify-end md:w-full xl:w-2/4">
             <Button
-              customClass="bg-primaryBlue text-white rounded-md justify-center 
-              w-2/4 md:w-[20%] xl:w-[30%]"
+              customClass={`bg-primaryBlue text-white rounded-md justify-center 
+              w-2/4 md:w-[20%] xl:w-[30%] ${isPending ? "pointer-events-none" : ""}`}
               onclick={handleSave}
             >
               {isPending ? (
