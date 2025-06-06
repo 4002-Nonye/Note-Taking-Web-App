@@ -4,13 +4,18 @@ import ThemeTab from "./ThemeTab";
 
 import { useEditSettings } from "../features/accountSettings/useEditSettings";
 
+
 function FontTab() {
   const { font, handleFontChange } = useFont();
   const { isPending, editAccountSettings } = useEditSettings();
+ 
+
   const saveFontTheme = async () => {
     editAccountSettings({ fontTheme: font });
     localStorage.setItem("fontTheme", font);
   };
+
+ 
 
   const options = [
     {

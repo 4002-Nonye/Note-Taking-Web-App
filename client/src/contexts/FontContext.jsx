@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { useGetSettings } from "../features/accountSettings/useGetSettings";
+import { createContext, useCallback, useContext, useReducer } from "react";
+
 
 const FontContext = createContext();
 
@@ -19,37 +19,10 @@ function reducer(state, action) {
 
 const FontProvider = ({ children }) => {
   const [{ font }, dispatch] = useReducer(reducer, initialState);
-  const { getAccountSettings, isPending } = useGetSettings();
 
-  // persist font
-  useEffect(() => {
-    if (isPending || !getAccountSettings) return;
-
-    // use theme from server or default
-    const serverTheme = getAccountSettings?.data.fontTheme || "sans-serif";
-
-    localStorage.setItem("fontTheme", serverTheme);
-
-    dispatch({
-      type: "SET_FONT",
-      payload: serverTheme,
-    });
-    applyFontClass(serverTheme);
-  }, [isPending, getAccountSettings]);
-
-  const handleFontChange = (newFont) => {
-    dispatch({
-      type: "SET_FONT",
-      payload: newFont,
-    });
-
-    applyFontClass(newFont);
-  };
-
-  // Apply font class to HTML element
-  const applyFontClass = (selectedFont) => {
+  const applyFontClass = useCallback((selectedFont) => {
     const html = document.documentElement;
-
+  
     html.classList.remove("font-sans", "font-serif", "font-mono");
     switch (selectedFont) {
       case "sans-serif":
@@ -61,18 +34,37 @@ const FontProvider = ({ children }) => {
       case "mono":
         html.classList.add("font-mono");
         break;
-
       default:
         html.classList.add("font-sans");
         break;
     }
-  };
+  }, []);
+  
+  const handleFontChange = useCallback((newFont) => {
+    dispatch({
+      type: "SET_FONT",
+      payload: newFont,
+    });
+  
+    applyFontClass(newFont);
+  }, [dispatch, applyFontClass]);
+  
+  const handleServerTheme = useCallback((serverTheme) => {
+    dispatch({
+      type: "SET_THEME",
+      payload: serverTheme,
+    });
+  
+    handleFontChange(serverTheme);
+  }, [dispatch, handleFontChange]);
+  
 
   return (
     <FontContext.Provider
       value={{
         font,
         handleFontChange,
+        handleServerTheme
       }}
     >
       {children}

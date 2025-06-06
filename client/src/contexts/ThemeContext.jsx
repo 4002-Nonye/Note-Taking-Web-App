@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
-import { useGetSettings } from "../features/accountSettings/useGetSettings";
+import { createContext, useCallback, useContext, useReducer } from "react";
 
 const ThemeContext = createContext();
 
@@ -20,42 +19,41 @@ const reducer = (state, action) => {
 const ThemeProvider = ({ children }) => {
   const [{ themeColor }, dispatch] = useReducer(reducer, initialState);
 
-  const { getAccountSettings, isPending } = useGetSettings();
+  const handleServerTheme = useCallback(
+    (serverTheme) => {
+      dispatch({
+        type: "SET_THEME",
+        payload: serverTheme,
+      });
 
-  useEffect(() => {
-    if (isPending || !getAccountSettings) return;
+      applyTheme(serverTheme);
+    },
+    [dispatch],
+  );
 
-    // use theme from server or default
-    const serverTheme = getAccountSettings?.data.colorTheme || "light";
-    // Save to localStorage for future sessions
-    localStorage.setItem("colorTheme", serverTheme);
+  const handleChangeTheme = useCallback(
+    (theme) => {
+      dispatch({ type: "SET_THEME", payload: theme });
+      applyTheme(theme);
+    },
+    [dispatch],
+  );
 
-    dispatch({
-      type: "SET_THEME",
-      payload: serverTheme,
-    });
+  const applyTheme = (selectedTheme) => {
+    const html = document.documentElement;
 
-    applyTheme(serverTheme);
-  }, [getAccountSettings, isPending]);
-
-  const handleChangeTheme = (theme) => {
-    dispatch({ type: "SET_THEME", payload: theme });
-    applyTheme(theme); //apply theme when user changes it
+    if (selectedTheme === "dark") html.classList.add("dark");
+    else {
+      html.classList.remove("dark");
+    }
   };
   return (
-    <ThemeContext.Provider value={{ themeColor, handleChangeTheme }}>
+    <ThemeContext.Provider
+      value={{ themeColor, handleChangeTheme, handleServerTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   );
-};
-
-const applyTheme = (selectedTheme) => {
-  const html = document.documentElement;
-
-  if (selectedTheme === "dark") html.classList.add("dark");
-  else {
-    html.classList.remove("dark");
-  }
 };
 
 const useTheme = () => {

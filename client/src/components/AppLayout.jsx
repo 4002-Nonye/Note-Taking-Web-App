@@ -2,13 +2,40 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import MobileNav from "./MobileNav";
+import { useGetSettings } from "../features/accountSettings/useGetSettings";
+import { useEffect } from "react";
+import { useFont } from "../contexts/FontContext";
+import { useTheme } from "../contexts/ThemeContext";
 
 function AppLayout() {
+  const { getAccountSettings, isPending: isLoading } = useGetSettings();
+  const { handleServerTheme: handleServerThemeColor } = useTheme();
+  const { handleServerTheme: handleServerThemeFont } = useFont();
+
+  useEffect(() => {
+    if (isLoading || !getAccountSettings) return;
+
+    // use theme from server or default
+    const serverThemeColor = getAccountSettings?.data.colorTheme || "light";
+    const serverThemeFont = getAccountSettings?.data.fontTheme || "sans-serif";
+    localStorage.setItem("colorTheme", serverThemeColor);
+    // Save to localStorage for future sessions
+    localStorage.setItem("fontTheme", serverThemeFont);
+
+    handleServerThemeColor(serverThemeColor);
+    handleServerThemeFont(serverThemeFont);
+  }, [
+    getAccountSettings,
+    isLoading,
+    handleServerThemeColor,
+    handleServerThemeFont,
+  ]);
+
   return (
-    <div className="flex min-h-screen w-full flex-col xl:flex-row dark:bg-darkbg">
+    <div className="dark:bg-darkbg flex min-h-screen w-full flex-col xl:flex-row">
       <Sidebar />
 
-      <div className="flex w-full flex-col flex-1">
+      <div className="flex w-full flex-1 flex-col">
         <Outlet />
       </div>
 
