@@ -3,19 +3,23 @@ import { useTheme } from "../contexts/ThemeContext";
 import ThemeTab from "./ThemeTab";
 
 import { useEditSettings } from "../features/accountSettings/useEditSettings";
-
+import toast from "react-hot-toast";
 
 function ColorTab() {
   const { themeColor, handleChangeTheme } = useTheme();
   const { isPending, editAccountSettings } = useEditSettings();
 
-
   const saveColorTheme = async () => {
+    // prevent save when no change was made
+    const prevTheme = localStorage.getItem("colorTheme");
+    if (prevTheme && prevTheme === themeColor) {
+     toast("No changes were made");
+      return;
+    }
+
     editAccountSettings({ colorTheme: themeColor });
     localStorage.setItem("colorTheme", themeColor);
   };
-
-
 
   const options = [
     {

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
+const sanitizeHtml = require('../utils/sanitizeHtml');
 
 require('../models/Notes');
 
@@ -16,8 +17,6 @@ module.exports = (app) => {
     res.status(200).send({ notes });
   });
 
-
-
   // fetch archived notes
   app.get('/api/notes/archive', requireLogin, async (req, res) => {
     const archivedNotes = await Notes.find({
@@ -26,9 +25,6 @@ module.exports = (app) => {
     }).select('-_user -__v');
     res.status(200).send({ notes: archivedNotes });
   });
-
-
-
 
   // fetch note by id
   app.get('/api/note/:id', requireLogin, async (req, res) => {
@@ -48,16 +44,16 @@ module.exports = (app) => {
     }
   });
 
-
-
-
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
     const { content, title, lastEdited, tags } = req.body;
 
+    // sanitize content to prevent xss attacks
+    const sanitizedContent = sanitizeHtml(content);
+
     try {
       const newNote = new Notes({
-        content,
+        content: sanitizedContent,
         title,
         lastEdited,
         tags: tags.split(','), // returns an array of string
@@ -77,10 +73,6 @@ module.exports = (app) => {
       });
     }
   });
-
-
-
-
 
   // edit a note
   app.put('/api/note/:id', requireLogin, async (req, res) => {
@@ -103,11 +95,6 @@ module.exports = (app) => {
       res.status(500).send({ error: 'Failed to update note' });
     }
   });
-
-
-
-
-  
 
   // delete a note
   app.delete('/api/note/del/:id', requireLogin, async (req, res) => {

@@ -18,9 +18,11 @@ function AppLayout() {
     // use theme from server or default
     const serverThemeColor = getAccountSettings?.data.colorTheme || "light";
     const serverThemeFont = getAccountSettings?.data.fontTheme || "sans-serif";
-    localStorage.setItem("colorTheme", serverThemeColor);
+  
+
     // Save to localStorage for future sessions
     localStorage.setItem("fontTheme", serverThemeFont);
+    localStorage.setItem("colorTheme", serverThemeColor);
 
     handleServerThemeColor(serverThemeColor);
     handleServerThemeFont(serverThemeFont);

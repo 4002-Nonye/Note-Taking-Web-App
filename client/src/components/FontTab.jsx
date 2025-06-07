@@ -3,6 +3,7 @@ import { useFont } from "../contexts/FontContext";
 import ThemeTab from "./ThemeTab";
 
 import { useEditSettings } from "../features/accountSettings/useEditSettings";
+import toast from "react-hot-toast";
 
 
 function FontTab() {
@@ -11,6 +12,12 @@ function FontTab() {
  
 
   const saveFontTheme = async () => {
+     // prevent save when no change was made
+     const prevTheme = localStorage.getItem("fontTheme");
+     if (prevTheme && prevTheme === font) {
+      toast("No changes were made");
+       return;
+     }
     editAccountSettings({ fontTheme: font });
     localStorage.setItem("fontTheme", font);
   };

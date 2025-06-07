@@ -1,6 +1,8 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { Controller } from "react-hook-form"; // <-- import here
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import Button from "./Button"; // Adjust the path to your Button component
 
 const modules = {
   toolbar: [
@@ -23,33 +25,32 @@ const formats = [
   "link",
 ];
 
-function TextArea({ value, setValue }) {
+function TextArea({ control }) {
   return (
-    <div className="flex  flex-col p-4 pb-24 xl:pb-4 ">
-      <div className="">
-        <ReactQuill
-          modules={modules}
-          formats={formats}
-          theme="snow"
-          value={value}
-          onChange={setValue}
-          placeholder="Write your notes here..."
-          className="custom-quill-editor no-scrollbar  h-full overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
-          style={{ fontFamily: "inherit" }}
-        />
-      </div>
-
-      {/* Buttons fixed below editor */}
-      <div className="mt-4 hidden justify-end gap-5 lg:flex">
-        <Button customClass="bg-primaryBlue rounded-md text-white w-24 justify-center font-medium">
-          Save Note
-        </Button>
-        <Button customClass="bg-gray-300 rounded-md text-black w-24 justify-center font-medium">
-          Cancel
-        </Button>
-      </div>
+    <div className="flex flex-col p-4 pb-24 xl:pb-4">
+      <Controller
+        control={control}
+        name="content"
+        rules={{ required: "Provide a valid content" }}
+        render={({ field: { value, onChange } }) => (
+          <ReactQuill
+            value={value}
+            onChange={onChange}
+            modules={modules}
+            formats={formats}
+            theme="snow"
+            placeholder="Write your notes here..."
+            className="custom-quill-editor no-scrollbar h-full overflow-y-auto text-sm leading-relaxed outline-0 dark:text-white dark:placeholder:text-white"
+            style={{ fontFamily: "inherit" }}
+          />
+        )}
+      />
     </div>
   );
 }
+
+TextArea.propTypes = {
+  control: PropTypes.object.isRequired,
+};
 
 export default TextArea;

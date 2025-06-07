@@ -3,29 +3,32 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useUser } from "../features/authentication/useUser";
 import { ClipLoader } from "react-spinners";
-import { useTheme } from "../contexts/ThemeContext";
+
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
   const { isLoading, user } = useUser();
-  const { themeColor } = useTheme();
+
 
   useEffect(() => {
     if (!user && !isLoading) navigate("/");
   }, [isLoading, navigate, user]);
 
-  if (isLoading)
+  if (isLoading) {
+    const isDark = document.documentElement.classList.contains("dark");
+
     return (
       <div className="flex h-screen items-center justify-center">
         <ClipLoader
           size={50}
-          color={themeColor === "dark" ? "#ffffff" : "#000000"}
+          color={isDark ? "#ffffff" : "#000000"}
           cssOverride={{
             borderWidth: "5px",
           }}
         />
       </div>
     );
+  }
 
   if (user) return children;
 
