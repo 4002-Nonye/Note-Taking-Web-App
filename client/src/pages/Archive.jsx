@@ -8,15 +8,15 @@ import CreateButton from "../components/CreateButton";
 import NoNotes from "../components/NoNotes";
 import { useGetNotes } from "../features/notes/useGetNotes";
 
-
 function Archive() {
   const location = useLocation();
   const isViewingNote = location.pathname !== "/archive";
 
-  const { notes } = useGetNotes();
+  const { notes, isPending } = useGetNotes();
 
-  const filteredNotes = notes.notes.filter((note) => note.isArchive === true);
+  if (isPending) return;
 
+  const filteredNotes = notes.notes.filter((note) => note.archive === true);
 
   return (
     <>

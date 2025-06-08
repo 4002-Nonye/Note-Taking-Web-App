@@ -11,7 +11,6 @@ export const createNote = async (newNote) => {
     );
     return response.data;
   } catch (err) {
-    console.log(err)
     throw err.response.data;
   }
 };
@@ -39,7 +38,6 @@ export const getNoteById = async (id) => {
 };
 
 export const editNote = async ({ id, updatedContent }) => {
-  console.log(updatedContent);
   try {
     const response = await axios.put(
       `/api/note/edit/${id}`,

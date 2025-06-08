@@ -34,18 +34,18 @@ function NoteForm({ isArchive }) {
     );
 
   return (
-    <div className="flex h-full w-full flex-col-reverse xl:flex-row">
-      <div className="dark:border-darkBorder flex-grow border-r-[1px] border-gray-300">
-        {isError ? (
-          <div className="mt-10 flex items-center justify-center">
-            {error.error}💥
-          </div>
-        ) : (
-          <Form note={noteId ? note?.data : {}} isPending={isPending} />
-        )}
-      </div>
-
-      {!isError && <NoteCTA isArchive={isArchive} />}
+    <div >
+      {isError ? (
+        <div className="mt-10 flex items-center justify-center">
+          {error.error}💥
+        </div>
+      ) : (
+        <Form
+          note={noteId ? note?.data : {}}
+          isPending={isPending}
+          isError={isError}
+        />
+      )}
     </div>
   );
 }

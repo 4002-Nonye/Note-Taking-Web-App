@@ -36,7 +36,7 @@ function Sidebar() {
       <div className="dark:border-darkBorder mt-4 hidden border-t-[1px] border-gray-300 p-3 xl:block">
         <h2 className="font-medium text-gray-500">Tags</h2>
 
-        <ul className="mt-4 flex flex-col gap-3">
+        <ul className="mt-4 flex flex-col gap-3 h-96 overflow-auto no-scrollbar">
           {uniqueTags.map((tag) => (
             <li key={tag}>
               <NavLink

@@ -20,10 +20,11 @@ function TaggedNotes() {
   const match = useMatch("/tags/:tag/:noteId");
   const isViewingNote = !!match;
   const { tag } = useParams();
-  const { notes } = useGetNotes()
-  const filteredNotes = notes.notes.filter((note) => note.tags.includes(tag));
-  const navigate = useNavigate();
+  const { notes, isPending } = useGetNotes();
 
+  const navigate = useNavigate();
+  if (isPending) return;
+  const filteredNotes = notes.notes.filter((note) => note.tags.includes(tag));
   return (
     <>
       {!isViewingNote && (
@@ -39,9 +40,9 @@ function TaggedNotes() {
         head={`Notes Tagged: ${tag}`}
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
-      <div className="grid h-screen grid-cols-1 border-gray-300  dark:border-darkBorder xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="dark:border-darkBorder grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300 dark:border-darkBorder`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} dark:border-darkBorder border-r border-gray-300`}
         >
           <CreateButton />
 

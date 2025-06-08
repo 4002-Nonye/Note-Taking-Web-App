@@ -10,5 +10,6 @@ export function useGetNotes() {
     notes: query.data,
     isPending: query.isPending,
     isError: query.isError,
+    error :query.error
   };
 }
