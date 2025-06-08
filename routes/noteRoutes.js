@@ -46,7 +46,7 @@ module.exports = (app) => {
 
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
-    console.log(req.body);
+  
     const { content, title, lastEdited, tags } = req.body;
 
     // sanitize content to prevent xss attacks

@@ -8,7 +8,7 @@ export const cleanTags = (tags) => {
 
   // If it's a string, split then clean
   return tags
-    .split(",")
+    .split(", ")
     .map((tag) => tag.trim())
     .filter((tag) => tag.length > 0);
 };

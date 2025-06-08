@@ -19,38 +19,18 @@ function Form({ note = {}, isPending }) {
 
   const { createNote, isPending: isCreatingNote } = useCreateNote();
   const { editNote, isPending: isEditingNote } = useEditNote();
+  const { title, content, tags, lastEdited } = editValues;
 
   const {
     control,
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      title: "",
-      tags: "",
-      content: "",
-    },
+    defaultValues: { title, content, tags, lastEdited },
   });
 
   // Reset form when note changes
-  useEffect(() => {
-    if (note && !isPending) {
-      reset({
-        title: editValues.title || "",
-        tags: editValues.tags || "",
-        content: editValues.content || "",
-      });
-    }
-  }, [
-    note,
-    editValues.title,
-    editValues.tags,
-    editValues.content,
-    isPending,
-    reset,
-  ]);
 
   const onSubmit = async (data) => {
     const date = new Date();
