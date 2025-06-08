@@ -51,6 +51,7 @@ module.exports = (app) => {
 
     // sanitize content to prevent xss attacks
     const sanitizedContent = sanitizeHtml(content);
+    console.log(sanitizedContent)
 
     try {
       const newNote = new Notes({
