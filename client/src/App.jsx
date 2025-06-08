@@ -57,6 +57,10 @@ const router = createBrowserRouter([
             path: ":noteId",
             element: <NoteForm />, // Single note view/edit
           },
+          {
+            path: "new",
+            element: <NoteForm />, // create new note
+          },
         ],
       },
       {
@@ -74,7 +78,7 @@ const router = createBrowserRouter([
         element: <TaggedNotes />,
         children: [
           {
-            path: "/tags/:tag/:id",
+            path: "/tags/:tag/:noteId",
             element: <NoteForm />,
           },
         ],
@@ -106,6 +110,12 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchTab />,
+        children: [
+          {
+            path: ":noteId",
+            element: <NoteForm />, // Single note view/edit
+          },
+        ],
       },
     ],
   },

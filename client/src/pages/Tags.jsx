@@ -1,11 +1,13 @@
 import { FiTag } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useNotes } from "../contexts/NoteContext";
+import { useGetNotes } from "../features/notes/useGetNotes";
 
 
 function Tags() {
-  const { notes } = useNotes();
-  const tags = notes.flatMap((note) => note.tags);
+  const { notes,isPending } = useGetNotes();
+  if(isPending) return
+ 
+  const tags = notes.notes.flatMap((note) => note.tags);
   const uniqueTags = [...new Set(tags)];
   return (
     <>

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Button({ children, type, customClass, purpose, href, onclick }) {
   const baseStyles = "flex outline-0   p-2 text-center cursor-pointer";
@@ -25,7 +26,8 @@ function Button({ children, type, customClass, purpose, href, onclick }) {
   else {
     return (
       <button
-        onClick={ onclick}
+       
+        onClick={onclick}
         className={`${baseStyles} ${customClass} ${styles[type]}`}
       >
         {children}

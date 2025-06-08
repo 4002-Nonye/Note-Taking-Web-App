@@ -8,16 +8,18 @@ import logo from "../assets/icon-logo-white.svg";
 import darkLogo from "../assets/icon-logo.svg";
 
 import Nav from "./Nav";
-import { useNotes } from "../contexts/NoteContext";
+
+import { useGetNotes } from "../features/notes/useGetNotes";
 
 function Sidebar() {
-  const { notes } = useNotes();
-  const tags = notes.flatMap((note) => note.tags);
+  const { notes, isPending } = useGetNotes();
+  if (isPending) return;
+  const tags = notes.notes.flatMap((note) => note.tags);
 
   // avoid duplicate tags
   const uniqueTags = [...new Set(tags)];
   return (
-    <aside className="dark:border-darkBorder  w-full border-gray-300 bg-gray-200 dark:bg-bgCard xl:dark:bg-darkbg p-3 lg:p-6 xl:w-[20%] xl:border-r-[1px] xl:bg-inherit xl:p-0 xl:pt-7">
+    <aside className="dark:border-darkBorder dark:bg-bgCard xl:dark:bg-darkbg w-full border-gray-300 bg-gray-200 p-3 lg:p-6 xl:w-[20%] xl:border-r-[1px] xl:bg-inherit xl:p-0 xl:pt-7">
       <img src={darkLogo} alt="logo" className="block p-3 dark:hidden" />
 
       <img src={logo} alt="logo" className="hidden p-3 dark:block" />
@@ -31,7 +33,7 @@ function Sidebar() {
         </Nav>
       </nav>
 
-      <div className="mt-4 hidden border-t-[1px] border-gray-300 dark:border-darkBorder p-3 xl:block">
+      <div className="dark:border-darkBorder mt-4 hidden border-t-[1px] border-gray-300 p-3 xl:block">
         <h2 className="font-medium text-gray-500">Tags</h2>
 
         <ul className="mt-4 flex flex-col gap-3">

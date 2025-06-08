@@ -7,12 +7,25 @@ import { useNotes } from "../contexts/NoteContext";
 import CreateButton from "../components/CreateButton";
 import NoNotes from "../components/NoNotes";
 import SearchBar from "../components/SearchBar";
+import { useGetNotes } from "../features/notes/useGetNotes";
 
 function SearchTab() {
   const location = useLocation();
   const isViewingNote = location.pathname !== "/search";
 
-  const { filteredNotes, searchQuery } = useNotes();
+  const { searchQuery } = useNotes();
+  const { notes } = useGetNotes();
+  const filteredNotes =
+    searchQuery.trim() === ""
+      ? []
+      : notes.notes.filter(
+          (note) =>
+            note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            note.tags.some((tag) =>
+              tag.toLowerCase().includes(searchQuery.toLowerCase()),
+            ),
+        );
 
   return (
     <>
@@ -37,14 +50,14 @@ function SearchTab() {
           className={`${isViewingNote ? "hidden xl:block" : "block"} dark:border-darkBorder border-r border-gray-300`}
         >
           <CreateButton />
-          <p className="mt-3 md:px-7  px-3 text-sm xl:hidden">
+          <p className="mt-3 px-3 text-sm md:px-7 xl:hidden">
             All notes matching the search term{" "}
             {searchQuery ? `"${searchQuery}"` : ""} are shown here.
           </p>
           {filteredNotes?.length === 0 ? (
             <NoNotes message="No notes match your search. Try a different keyword or create a new note." />
           ) : (
-            <NoteList notes={filteredNotes} />
+            <NoteList notes={filteredNotes} path={`search`}/>
           )}
         </div>
 

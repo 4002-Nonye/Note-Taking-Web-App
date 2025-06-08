@@ -9,18 +9,19 @@ import { motion } from "framer-motion";
 import NoteList from "../components/NoteList";
 import Header from "../components/Header";
 import NoNotes from "../components/NoNotes";
-import { useNotes } from "../contexts/NoteContext";
+
 import Button from "../components/Button";
 import CreateButton from "../components/CreateButton";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useGetNotes } from "../features/notes/useGetNotes";
 
 function TaggedNotes() {
   const location = useLocation();
   const match = useMatch("/tags/:tag/:noteId");
   const isViewingNote = !!match;
   const { tag } = useParams();
-  const { notes } = useNotes();
-  const filteredNotes = notes.filter((note) => note.tags.includes(tag));
+  const { notes } = useGetNotes()
+  const filteredNotes = notes.notes.filter((note) => note.tags.includes(tag));
   const navigate = useNavigate();
 
   return (

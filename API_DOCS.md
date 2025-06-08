@@ -33,7 +33,7 @@ This document describes the available API endpoints for the MERN note-taking app
 - Create a new note.
 - **Request Body:** `{ title, content, tags, archive }`
 
-### PUT /api/note/:id
+### PUT /api/note/edit/:id
 
 - Update a note by ID.
 - **Request Body (any field):** `{ title, content, tags, archive, lastEdited }`

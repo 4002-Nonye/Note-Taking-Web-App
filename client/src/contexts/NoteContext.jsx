@@ -53,21 +53,11 @@ function NoteProvider({ children }) {
     });
   };
 
-  const filteredNotes =
-  searchQuery.trim() === ""
-    ? []
-    : notes.filter(
-        (note) =>
-          note.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          note.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          note.tags.some((tag) =>
-            tag.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-      );
+  
 
   return (
     <NoteContext.Provider
-      value={{ notes, filteredNotes, handleSearch, searchQuery }}
+      value={{ notes, handleSearch, searchQuery }}
     >
       {children}
     </NoteContext.Provider>

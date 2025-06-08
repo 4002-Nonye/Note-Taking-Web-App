@@ -46,6 +46,7 @@ module.exports = (app) => {
 
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
+    console.log(req.body);
     const { content, title, lastEdited, tags } = req.body;
 
     // sanitize content to prevent xss attacks
@@ -56,7 +57,7 @@ module.exports = (app) => {
         content: sanitizedContent,
         title,
         lastEdited,
-        tags: tags.split(','), // returns an array of string
+        tags,
         _user: req.user.id,
       });
 
@@ -75,7 +76,7 @@ module.exports = (app) => {
   });
 
   // edit a note
-  app.put('/api/note/:id', requireLogin, async (req, res) => {
+  app.put('/api/note/edit/:id', requireLogin, async (req, res) => {
     try {
       const filter = { _id: req.params.id, _user: req.user.id };
       // params.id => the document _id (selects the document where the _id === id from the param)

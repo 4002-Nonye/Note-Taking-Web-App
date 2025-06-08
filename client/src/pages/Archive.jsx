@@ -1,19 +1,22 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 import Header from "../components/Header";
 import NoteList from "../components/NoteList";
-import { useNotes } from "../contexts/NoteContext";
+
 import CreateButton from "../components/CreateButton";
 import NoNotes from "../components/NoNotes";
+import { useGetNotes } from "../features/notes/useGetNotes";
+
 
 function Archive() {
   const location = useLocation();
   const isViewingNote = location.pathname !== "/archive";
 
-  const { notes } = useNotes();
+  const { notes } = useGetNotes();
 
-  const filteredNotes = notes.filter((note) => note.isArchive === true);
+  const filteredNotes = notes.notes.filter((note) => note.isArchive === true);
+
 
   return (
     <>
@@ -22,12 +25,12 @@ function Archive() {
         customClass={isViewingNote ? "hidden xl:flex" : "block"}
       />
 
-      <div className="grid h-screen grid-cols-1 dark:border-darkBorder border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
+      <div className="dark:border-darkBorder grid h-screen grid-cols-1 border-gray-300 xl:mt-5 xl:grid-cols-[300px_1fr] xl:border-t-[1px]">
         <div
-          className={`${isViewingNote ? "hidden xl:block" : "block"} border-r border-gray-300 dark:border-darkBorder`}
+          className={`${isViewingNote ? "hidden xl:block" : "block"} dark:border-darkBorder border-r border-gray-300`}
         >
           <CreateButton />
-          <p className="mt-3 px-3 md:px-7 text-sm">
+          <p className="mt-3 px-3 text-sm md:px-7">
             All your archived notes are stored here. You can restore or delete
             them anytime.
           </p>
