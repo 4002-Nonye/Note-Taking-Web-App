@@ -12,7 +12,7 @@ import darkLogo from "../../assets/icon-logo.svg";
 import Button from "../../components/Button";
 import AuthHeader from "../../components/AuthHeader";
 import PasswordVisibility from "../../components/PasswordVisibility";
-import Errors from "../../components/Errors";
+import ErrMsg from "../../components/ErrMsg";
 
 function Login() {
   const {
@@ -52,7 +52,7 @@ function Login() {
         <div className="flex flex-col gap-1">
           <div className="flex justify-between">
             <label htmlFor="userEmail">Email</label>
-            {errors.email && <Errors err={errors.email.message} />}
+            {errors.email && <ErrMsg err={errors.email.message} />}
           </div>
           <input
             type="email"
@@ -73,7 +73,7 @@ function Login() {
         <div className="relative mt-4 flex flex-col gap-1">
           <div className="flex justify-between">
             <label htmlFor="userPassword">Password</label>
-            {errors.password && <Errors err={errors.password.message} />}
+            {errors.password && <ErrMsg err={errors.password.message} />}
           </div>
 
           <input

@@ -33,6 +33,7 @@ export const getUser = async () => {
     const response = await axios.get("/api/current-user", {
       withCredentials: true,
     });
+ 
     return response.data;
   } catch (err) {
     throw err.response.data;

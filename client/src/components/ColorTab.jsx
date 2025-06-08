@@ -13,7 +13,7 @@ function ColorTab() {
     // prevent save when no change was made
     const prevTheme = localStorage.getItem("colorTheme");
     if (prevTheme && prevTheme === themeColor) {
-     toast("No changes were made");
+     toast("No changes were made",{ icon: "⚠️" });
       return;
     }
 

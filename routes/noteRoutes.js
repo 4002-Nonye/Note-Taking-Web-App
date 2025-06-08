@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const sanitizeHtml = require('../utils/sanitizeHtml');
@@ -47,12 +46,11 @@ module.exports = (app) => {
 
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
-  
     const { content, title, lastEdited, tags } = req.body;
 
     // sanitize content to prevent xss attacks
     const sanitizedContent = sanitizeHtml(content);
-    console.log(sanitizedContent)
+    console.log(sanitizedContent);
 
     try {
       const newNote = new Notes({
@@ -65,7 +63,7 @@ module.exports = (app) => {
 
       await newNote.save();
 
-      const { __v, _user, ...safeToSendNotes } = newNote._doc;
+      const { __v, ...safeToSendNotes } = newNote._doc;
       res.status(200).send({
         message: 'Note successfully created',
         note: safeToSendNotes,
@@ -88,7 +86,7 @@ module.exports = (app) => {
         filter,
         { $set: req.body },
         { new: true }
-      ).select('-_user -__v');
+      ).select(' -__v');
 
       // if there is an error in the id
       if (!updatedNote) res.status(404).send({ error: 'Note not found' });

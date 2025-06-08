@@ -13,24 +13,39 @@ import { useGetNoteById } from "../features/notes/useGetNoteById";
 import Form from "./Form";
 
 function NoteForm({ isArchive }) {
+  const isDark = document.documentElement.classList.contains("dark");
+
   const { noteId } = useParams();
 
-  // Only fetch note if we're in edit mode (noteId exists)
-  const { note, isPending } = useGetNoteById(noteId, {
-    enabled: !!noteId, // Only run the query if noteId exists
-  });
+  const { note, isPending, isError, error } = useGetNoteById(noteId);
 
   // If we're editing and still loading, show loading state
-  if (noteId && isPending) return <div>Loading...</div>;
+  if (noteId && isPending)
+    return (
+      <div className="flex h-full items-center justify-center">
+        <ClipLoader
+          size={50}
+          color={isDark ? "#ffffff" : "#000000"}
+          cssOverride={{
+            borderWidth: "5px",
+          }}
+        />
+      </div>
+    );
 
   return (
     <div className="flex h-full w-full flex-col-reverse xl:flex-row">
       <div className="dark:border-darkBorder flex-grow border-r-[1px] border-gray-300">
-        {/* Pass null as note when creating new note */}
-        <Form note={noteId ? note?.data : {}} isPending={isPending} />
+        {isError ? (
+          <div className="mt-10 flex items-center justify-center">
+            {error.error}💥
+          </div>
+        ) : (
+          <Form note={noteId ? note?.data : {}} isPending={isPending} />
+        )}
       </div>
 
-      <NoteCTA isArchive={isArchive} />
+      {!isError && <NoteCTA isArchive={isArchive} />}
     </div>
   );
 }

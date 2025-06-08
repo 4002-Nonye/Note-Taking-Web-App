@@ -8,7 +8,7 @@ export function useEditNote() {
     mutationFn: editNoteApi,
     onSuccess: (data) => {
       toast.success(data.message);
-      queryClient.invalidateQueries(["note"]);
+      queryClient.invalidateQueries(["note", data.note._id]);
     },
     onError: (err) => {
       toast.error(err.error);

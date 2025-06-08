@@ -7,6 +7,7 @@ export function useCreateNote() {
   const mutation = useMutation({
     mutationFn: createNoteApi,
     onSuccess: (data) => {
+      console.log(data)
       toast.success(data.message);
     queryClient.invalidateQueries(['notes'])
     },

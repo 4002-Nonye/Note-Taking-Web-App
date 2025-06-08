@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 
 import PasswordVisibility from "./PasswordVisibility";
 import Button from "./Button";
-import Errors from "./Errors";
+
 import { useChangePassword } from "../features/authentication/useChangePassword";
 import { useVisibility } from "../utils/useVisibility";
 import MoveBack from "./MoveBack";
 import { ClipLoader } from "react-spinners";
+import ErrMsg from "./ErrMsg";
 
 function ChangePassword() {
   const { visibility, toggleVisibility } = useVisibility();
@@ -85,7 +86,7 @@ function ChangePassword() {
                 setPasswordVisible={() => toggleVisibility("current")}
               />
               {errors.currentPassword && (
-                <Errors err={errors.currentPassword.message} />
+                <ErrMsg err={errors.currentPassword.message} />
               )}
             </div>
 
@@ -118,7 +119,7 @@ function ChangePassword() {
                 At least 8 characters
               </p>
               {errors.newPassword && (
-                <Errors err={errors.newPassword.message} />
+                <ErrMsg err={errors.newPassword.message} />
               )}
             </div>
 
@@ -146,7 +147,7 @@ function ChangePassword() {
                 setPasswordVisible={() => toggleVisibility("confirm")}
               />
               {errors.confirmPassword && (
-                <Errors err={errors.confirmPassword.message} />
+                <ErrMsg err={errors.confirmPassword.message} />
               )}
             </div>
 

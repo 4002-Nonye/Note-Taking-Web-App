@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { formatDate } from "../utils/formatDate";
 import { FiTag } from "react-icons/fi";
@@ -11,9 +10,12 @@ import Button from "./Button";
 import { ClipLoader } from "react-spinners";
 import { cleanTags } from "../utils/cleanTags";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import ErrMsg from "./ErrMsg";
 
-function Form({ note = {}, isPending }) {
+function Form({ note = {} }) {
   const navigate = useNavigate();
+
   const { _id: editId, ...editValues } = note;
   const isEditSession = Boolean(editId);
 
@@ -27,12 +29,17 @@ function Form({ note = {}, isPending }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: { title, content, tags, lastEdited },
+    defaultValues: isEditSession ? { title, content, tags } : {},
   });
 
-  // Reset form when note changes
-
   const onSubmit = async (data) => {
+    const newData = JSON.stringify(data);
+    const prevData = JSON.stringify({ title, content, tags });
+    if (newData === prevData) {
+      toast("No changes were made", { icon: "⚠️" });
+      return;
+    }
+
     const date = new Date();
 
     const cleanedTags = cleanTags(data.tags);
@@ -62,14 +69,17 @@ function Form({ note = {}, isPending }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       className="dark:bg-darkbg flex flex-col pr-4 pb-16 xl:pb-0"
     >
-      <input
-        type="text"
-        placeholder="Enter a title..."
-        className="mt-4 border-0 pl-4 text-xl font-bold text-black outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
-        {...register("title", {
-          required: "Provide a valid title",
-        })}
-      />
+      <div className="flex justify-between items-center">
+        <input
+          type="text"
+          placeholder="Enter a title..."
+          className="mt-4  border-0 pl-4 text-xl font-bold text-black outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
+          {...register("title", {
+            required: "Provide a valid title",
+          })}
+        />
+        {errors.title && <ErrMsg err={errors.title.message} />}
+      </div>
 
       <div className="mt-3 ml-4 flex text-sm text-gray-700 dark:text-gray-500">
         <label
@@ -88,6 +98,7 @@ function Form({ note = {}, isPending }) {
             required: "Provide a valid tag",
           })}
         />
+         {errors.tags && <ErrMsg err={errors.tags.message} />}
       </div>
 
       <div className="mt-3 mb-3 ml-4 flex text-sm text-gray-700 dark:text-gray-500">
@@ -95,12 +106,12 @@ function Form({ note = {}, isPending }) {
           <FaRegClock />
           <span>Last Edited</span>
         </p>
-        <p className="pl-2">{editValues.lastEdited || "Not saved yet"}</p>
+        <p className="pl-2">{lastEdited || "Not saved yet"}</p>
       </div>
 
       <Divider />
 
-      <TextArea control={control} />
+      <TextArea control={control} err={errors} />
 
       <div className="mt-4 hidden justify-end gap-5 lg:flex">
         <Button
