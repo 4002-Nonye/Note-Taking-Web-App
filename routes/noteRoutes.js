@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const sanitizeHtml = require('../utils/sanitizeHtml');
 
 require('../models/Notes');
 
@@ -46,16 +45,11 @@ module.exports = (app) => {
 
   // create new note
   app.post('/api/new-note', requireLogin, async (req, res) => {
-  
     const { content, title, lastEdited, tags } = req.body;
-
-    // sanitize content to prevent xss attacks
-    const sanitizedContent = sanitizeHtml(content);
-    console.log(sanitizedContent)
 
     try {
       const newNote = new Notes({
-        content: sanitizedContent,
+        content,
         title,
         lastEdited,
         tags,
