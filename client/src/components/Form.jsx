@@ -13,6 +13,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ErrMsg from "./ErrMsg";
 import NoteCTA from "./NoteCTA";
+import _ from "lodash";
+
 
 function Form({ note = {}, isError }) {
   const navigate = useNavigate();
@@ -23,31 +25,23 @@ function Form({ note = {}, isError }) {
   const { createNote, isPending: isCreatingNote } = useCreateNote();
   const { editNote, isPending: isEditingNote } = useEditNote();
   const { title, content, tags, lastEdited } = editValues;
-  console.log(tags);
+  const defaultFormValues = {
+    title,
+    content,
+    tags: tags?.join(", "),
+  };
 
   const {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
-    defaultValues: isEditSession
-      ? {
-          title,
-          content,
-          tags: tags.join(", "),
-        }
-      : {},
+    defaultValues: isEditSession ? defaultFormValues : {},
   });
 
   const onSubmit = async (data) => {
-    const newData = JSON.stringify(data);
-    const prevData = JSON.stringify({ title, content, tags });
-    if (newData === prevData) {
-      toast("No changes were made", { icon: "⚠️" });
-      return;
-    }
-
     const date = new Date();
 
     const noteData = {
@@ -56,12 +50,21 @@ function Form({ note = {}, isError }) {
       lastEdited: formatDate(date),
     };
 
-    if (isEditSession) {
-      editNote({ id: editId, updatedContent: noteData });
-    } else {
+    if (!isEditSession) {
+      // Always create a new note when not in edit mode
       const newNote = await createNote(noteData);
       navigate(`/notes/${newNote.note._id}`);
+      return;
     }
+
+    const noChangesMade = _.isEqual(data, defaultFormValues);
+
+    if (noChangesMade) {
+      toast("No changes were made", { icon: "⚠️" });
+      return;
+    }
+
+    editNote({ id: editId, updatedContent: noteData });
   };
 
   const onError = (errors) => {
@@ -70,14 +73,21 @@ function Form({ note = {}, isError }) {
 
   const isLoading = isCreatingNote || isEditingNote;
 
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
       className="dark:bg-darkbg flex flex-col xl:flex-row-reverse"
     >
-      {!isError && <NoteCTA isArchive={note.archive} />}
+      {!isError && (
+        <NoteCTA
+          isArchive={note.archive}
+          reset={reset}
+          defaultFormValues={defaultFormValues}
+        />
+      )}
 
-      <div className="dark:border-darkBorder flex flex-1  flex-grow flex-col border-r-[1px] border-gray-300 pb-16 xl:pb-0">
+      <div className="dark:border-darkBorder flex flex-1 flex-grow flex-col border-r-[1px] border-gray-300 pb-16 xl:pb-0">
         <div className="flex items-center justify-between">
           <input
             type="text"
@@ -130,11 +140,16 @@ function Form({ note = {}, isError }) {
           >
             {isLoading ? <ClipLoader color="white" size={22} /> : "Save note"}
           </Button>
-          <Button customClass="bg-gray-300 rounded-md text-black w-24 justify-center font-medium">
+          <Button
+            onclick={() => reset(defaultFormValues)}
+            btnType="button"
+            customClass="bg-gray-300 rounded-md text-black w-24 justify-center font-medium"
+          >
             Cancel
           </Button>
         </div>
       </div>
+    
     </form>
   );
 }

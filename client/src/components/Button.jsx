@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function Button({ children, type, customClass, purpose, href, onclick }) {
+function Button({
+  children,
+  type,
+  customClass,
+  purpose,
+  href,
+  onclick,
+  btnType,
+}) {
   const baseStyles = "flex outline-0   p-2 text-center cursor-pointer";
   const styles = {
     authBtn: "rounded-md bg-primaryBlue w-[85%] text-white justify-center py-3",
@@ -26,7 +34,7 @@ function Button({ children, type, customClass, purpose, href, onclick }) {
   else {
     return (
       <button
-       
+        type={btnType}
         onClick={onclick}
         className={`${baseStyles} ${customClass} ${styles[type]}`}
       >
@@ -49,4 +57,5 @@ Button.propTypes = {
   purpose: PropTypes.string,
   href: PropTypes.string,
   onclick: PropTypes.func,
+  btnType: PropTypes.string,
 };

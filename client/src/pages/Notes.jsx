@@ -7,16 +7,16 @@ import NoNotes from "../components/NoNotes";
 import CreateButton from "../components/CreateButton";
 import { useGetNotes } from "../features/notes/useGetNotes";
 
-
 function Notes() {
   const location = useLocation();
 
-  
   const isViewingNote =
     location.pathname !== "/notes" && !location.pathname.startsWith("/tags");
   const { notes, isPending: isFetchingNotes } = useGetNotes();
 
   if (isFetchingNotes) return;
+
+  const filtererdNotes = notes.notes.filter((note) => note.archive === false);
 
   return (
     <>
@@ -30,10 +30,10 @@ function Notes() {
         >
           <CreateButton />
 
-          {notes.notes?.length === 0 ? (
+          {filtererdNotes?.length === 0 ? (
             <NoNotes message="You don’t have any notes yet. Start a new note to capture your thoughts and ideas." />
           ) : (
-            <NoteList notes={notes.notes} path="notes" />
+            <NoteList notes={filtererdNotes} path="notes" />
           )}
         </div>
 
@@ -44,7 +44,7 @@ function Notes() {
           transition={{ duration: 0.7, ease: "easeInOut" }}
           className="w-full"
         >
-          <Outlet/>
+          <Outlet />
         </motion.div>
       </div>
     </>

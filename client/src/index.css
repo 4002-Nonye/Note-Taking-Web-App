@@ -10,11 +10,21 @@
   --color-bgCard: #232530;
   --color-bgTag: #2b303b;
 }
+
+@theme {
+  --breakpoint-xsm: 400px;
+ 
+}
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  @apply bg-bgColor dark:bg-bgCard m-auto dark:text-white;
+  @apply bg-bgColor dark:bg-bgCard m-auto dark:text-white ;
 }
+
+.no-scroll {
+  @apply h-screen overflow-hidden;
+}
+
 ul li {
   @apply list-none;
 }
@@ -83,5 +93,5 @@ ul li {
 
 .dark .toast {
   background-color: #232530 !important;
-  color:white !important
+  color: white !important;
 }

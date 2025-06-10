@@ -6,7 +6,7 @@ import Button from "./Button";
 function MoveBack({ text, navigateTo, className }) {
   const navigate = useNavigate();
   return (
-    <Button onclick={() => navigate(navigateTo)} customClass={className}>
+    <Button  btnType="button" onclick={() => navigate(navigateTo)} customClass={className}>
       <FaArrowLeft className="group-hover:text-primaryBlue text-sm transition-all duration-500" />
       <span>{text}</span>
     </Button>

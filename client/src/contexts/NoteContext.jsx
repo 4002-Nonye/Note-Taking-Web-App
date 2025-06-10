@@ -3,32 +3,7 @@ import { createContext, useContext, useReducer } from "react";
 const NoteContext = createContext();
 
 const initialState = {
-  notes: [
-    {
-      id: 1,
-      title: "Work Task",
-      content: "Complete project",
-      tags: ["work", "server"],
-      isArchive: false,
-      date: new Date(),
-    },
-    {
-      id: 2,
-      title: "Shopping",
-      content: "Buy groceries",
-      tags: ["personal"],
-      isArchive: false,
-      date: new Date(),
-    },
-    {
-      id: 3,
-      title: "Meeting",
-      content: "Team sync",
-      tags: ["work"],
-      isArchive: false,
-      date: new Date(),
-    },
-  ],
+  showCta: false,
   searchQuery: "",
 };
 
@@ -36,15 +11,11 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "SET_SEARCH_QUERY":
       return { ...state, searchQuery: action.payload };
-
-    default: {
-      state;
-    }
   }
 };
 
 function NoteProvider({ children }) {
-  const [{ notes, searchQuery }, dispatch] = useReducer(reducer, initialState);
+  const [{ searchQuery }, dispatch] = useReducer(reducer, initialState);
 
   const handleSearch = (value) => {
     dispatch({
@@ -53,11 +24,12 @@ function NoteProvider({ children }) {
     });
   };
 
-  
-
   return (
     <NoteContext.Provider
-      value={{ notes, handleSearch, searchQuery }}
+      value={{
+        handleSearch,
+        searchQuery,
+      }}
     >
       {children}
     </NoteContext.Provider>

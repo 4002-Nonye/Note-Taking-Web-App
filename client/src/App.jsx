@@ -26,6 +26,7 @@ import TaggedNotes from "./pages/TaggedNotes";
 import SearchTab from "./pages/SearchTab";
 import ChangePassword from "./components/ChangePassword";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import { ModalProvider } from "./contexts/ModalContext";
 
 const queryClient = new QueryClient({
   queries: {
@@ -125,37 +126,39 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <NoteProvider>
-        <FontProvider>
-          <ThemeProvider>
-            <RouterProvider router={router} />
+      <ModalProvider>
+        <NoteProvider>
+          <FontProvider>
+            <ThemeProvider>
+              <RouterProvider router={router} />
 
-            <Toaster
-              position="top-center"
-              gutter={12}
-              containerStyle={{
-                margin: "8px",
-              }}
-              toastOptions={{
-                success: {
-                  duration: 3000,
-                },
-                error: {
-                  duration: 3000,
-                },
-                style: {
-                  fontSize: "14px",
-                  maxWidth: "500px",
-                  textAlign: "center",
-                  backgroundColor: "#fff",
-                  color: "#000",
-                },
-                className: "toast",
-              }}
-            />
-          </ThemeProvider>
-        </FontProvider>
-      </NoteProvider>
+              <Toaster
+                position="top-center"
+                gutter={12}
+                containerStyle={{
+                  margin: "8px",
+                }}
+                toastOptions={{
+                  success: {
+                    duration: 3000,
+                  },
+                  error: {
+                    duration: 3000,
+                  },
+                  style: {
+                    fontSize: "14px",
+                    maxWidth: "500px",
+                    textAlign: "center",
+                    backgroundColor: "#fff",
+                    color: "#000",
+                  },
+                  className: "toast",
+                }}
+              />
+            </ThemeProvider>
+          </FontProvider>
+        </NoteProvider>
+      </ModalProvider>
     </QueryClientProvider>
   );
 }

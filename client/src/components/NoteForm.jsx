@@ -12,7 +12,8 @@ import { useParams } from "react-router-dom";
 import { useGetNoteById } from "../features/notes/useGetNoteById";
 import Form from "./Form";
 
-function NoteForm({ isArchive }) {
+
+function NoteForm() {
   const isDark = document.documentElement.classList.contains("dark");
 
   const { noteId } = useParams();
@@ -46,6 +47,7 @@ function NoteForm({ isArchive }) {
           isError={isError}
         />
       )}
+    
     </div>
   );
 }
