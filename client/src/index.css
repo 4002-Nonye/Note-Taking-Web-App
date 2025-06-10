@@ -18,7 +18,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  @apply bg-bgColor dark:bg-bgCard m-auto dark:text-white ;
+  @apply bg-bgColor dark:bg-bgCard m-auto dark:text-white;
 }
 
 .no-scroll {

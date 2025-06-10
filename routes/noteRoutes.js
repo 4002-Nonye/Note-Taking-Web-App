@@ -50,7 +50,6 @@ module.exports = (app) => {
 
     // sanitize content to prevent xss attacks
     const sanitizedContent = sanitizeHtml(content);
-    console.log(sanitizedContent);
 
     try {
       const newNote = new Notes({
@@ -79,6 +78,7 @@ module.exports = (app) => {
   app.put('/api/note/edit/:id', requireLogin, async (req, res) => {
     try {
       const filter = { _id: req.params.id, _user: req.user.id };
+    
       // params.id => the document _id (selects the document where the _id === id from the param)
       // user.id => the current user logged in (makes sure that the current user can only change his document)
       // $set => updates only the fields provided in req.body to avoid overwriting unchanged data

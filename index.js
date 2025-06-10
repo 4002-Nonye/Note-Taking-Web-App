@@ -33,6 +33,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-  console.log(`Test server running at http://localhost:${PORT}`);
-});
+app.listen(PORT)

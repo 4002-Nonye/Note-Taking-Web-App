@@ -8,9 +8,11 @@ import CtaCard from "./CtaCard";
 
 import MoveBack from "./MoveBack";
 import { useModal } from "../contexts/ModalContext";
+import { useParams } from "react-router-dom";
 
 function NoteCTA({ isArchive, reset, defaultFormValues }) {
   const { showModal, handleShowModal } = useModal();
+  const { noteId } = useParams();
 
   return (
     <div className="dark:border-darkBorder flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:border-b-0 xl:px-0">
@@ -55,7 +57,7 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
           Save
         </Button>
       </div>
-      {showModal && <CtaCard />}
+      {showModal && <CtaCard noteId={noteId} />}
     </div>
   );
 }

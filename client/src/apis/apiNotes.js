@@ -49,3 +49,14 @@ export const editNote = async ({ id, updatedContent }) => {
     throw err.response.data;
   }
 };
+
+export const deleteNote = async (id) => {
+  try {
+    const response = await axios.delete(`/api/note/del/${id}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+};
