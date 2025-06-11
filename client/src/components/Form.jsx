@@ -127,7 +127,7 @@ function Form({ note = {}, isError }) {
           <div className="flex items-center text-sm text-gray-700 dark:text-gray-500">
             <label
               htmlFor="tags"
-              className="inline-flex w-24 items-center gap-1 font-medium md:w-32"
+              className="inline-flex w-28 items-center gap-1 font-medium md:w-32"
             >
               <FiTag />
               <span>Tags</span>
@@ -163,7 +163,7 @@ function Form({ note = {}, isError }) {
         </div>
 
         <div className="mt-3 mb-3 ml-4 flex text-sm text-gray-700 dark:text-gray-500">
-          <p className="inline-flex w-24 items-center gap-1 font-medium md:w-32">
+          <p className="inline-flex w-28 items-center gap-1 font-medium md:w-32">
             <FaRegClock />
             <span>Last Edited</span>
           </p>
