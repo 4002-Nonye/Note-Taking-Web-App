@@ -32,7 +32,7 @@ function Form({ note = {}, isError }) {
   const defaultFormValues = {
     title,
     content,
-    tags: tags.join(", "),
+    tags: tags?.join(", "),
   };
 
   const {
@@ -48,6 +48,10 @@ function Form({ note = {}, isError }) {
 
   const handleSuggestTags = () => {
     const { title } = getValues();
+    if (!title || title === "") {
+      toast("Provide a title to generate tags",{ icon: "⚠️" });
+      return;
+    }
     if (title === editValues.title) {
       toast("No changes were made", { icon: "⚠️" });
       return;
@@ -113,7 +117,7 @@ function Form({ note = {}, isError }) {
           <input
             type="text"
             placeholder="Enter a title..."
-            className="mt-4 border-0 text-xl font-bold text-black outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
+            className="mt-4 border-0 text-xl font-bold text-black capitalize outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
             {...register("title", {
               required: "Provide a valid title",
             })}

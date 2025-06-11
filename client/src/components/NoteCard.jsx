@@ -11,7 +11,7 @@ function NoteCard({ note, path }) {
       className="dark:hover:bg-bgCard flex flex-col transition-colors duration-700 hover:bg-gray-200"
     >
       <Link to={`/${path}/${note._id}`} className="py-2">
-        <h3 className="px-7 text-[16px] font-bold md:px-7 md:text-[18px] xl:text-sm">
+        <h3 className="px-7 text-[16px] capitalize font-bold md:px-7 md:text-[18px] xl:text-sm">
           {note.title}
         </h3>
 
