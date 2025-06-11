@@ -3,7 +3,7 @@ import { FaTrashRestoreAlt } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
+
 import Button from "./Button";
 import { useModal } from "../contexts/ModalContext";
 import { useDeleteNote } from "../features/notes/useDeleteNote";
@@ -13,7 +13,7 @@ function CtaCard({ noteId }) {
   const { handleHideModal, action } = useModal();
   const { deleteNote, isPending: isDeleting } = useDeleteNote();
   const { editNote, isPending: isEditing } = useEditNote();
-  const navigate = useNavigate();
+
 
   const handleArchive = () => {
     editNote(
@@ -21,11 +21,6 @@ function CtaCard({ noteId }) {
       {
         onSuccess: () => {
           handleHideModal();
-          navigate("/archive");
-        },
-        onError: () => {
-          // You might want to show an error toast here
-          console.error("Failed to archive note");
         },
       },
     );
@@ -37,7 +32,6 @@ function CtaCard({ noteId }) {
       {
         onSuccess: () => {
           handleHideModal();
-          navigate("/notes");
         },
       },
     );

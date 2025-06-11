@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { formatDate } from "../utils/formatDate";
 import { FiTag } from "react-icons/fi";
 import { FaRegClock } from "react-icons/fa";
+import { FaMagic } from "react-icons/fa";
 import Divider from "./Divider";
 import { useCreateNote } from "../features/notes/useCreateNote";
 import { useEditNote } from "../features/notes/useEditNote";
@@ -14,7 +15,7 @@ import toast from "react-hot-toast";
 import ErrMsg from "./ErrMsg";
 import NoteCTA from "./NoteCTA";
 import _ from "lodash";
-
+import { useSuggestTags } from "../features/ai/useSuggestTags";
 
 function Form({ note = {}, isError }) {
   const navigate = useNavigate();
@@ -22,13 +23,16 @@ function Form({ note = {}, isError }) {
   const { _id: editId, ...editValues } = note;
   const isEditSession = Boolean(editId);
 
+  const { suggestTags, isPending: isSuggestingTags } = useSuggestTags();
+
   const { createNote, isPending: isCreatingNote } = useCreateNote();
   const { editNote, isPending: isEditingNote } = useEditNote();
   const { title, content, tags, lastEdited } = editValues;
+
   const defaultFormValues = {
     title,
     content,
-    tags: tags?.join(", "),
+    tags: tags.join(", "),
   };
 
   const {
@@ -37,9 +41,27 @@ function Form({ note = {}, isError }) {
     handleSubmit,
     reset,
     formState: { errors },
+    getValues,
   } = useForm({
     defaultValues: isEditSession ? defaultFormValues : {},
   });
+
+  const handleSuggestTags = () => {
+    const { title } = getValues();
+    if (title === editValues.title) {
+      toast("No changes were made", { icon: "⚠️" });
+      return;
+    }
+
+    suggestTags(title, {
+      onSuccess: (data) => {
+        const generatedTags = data.tags?.join(", ");
+        if (generatedTags) {
+          reset({ ...getValues(), tags: generatedTags });
+        }
+      },
+    });
+  };
 
   const onSubmit = async (data) => {
     const date = new Date();
@@ -73,7 +95,6 @@ function Form({ note = {}, isError }) {
 
   const isLoading = isCreatingNote || isEditingNote;
 
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onError)}
@@ -88,40 +109,61 @@ function Form({ note = {}, isError }) {
       )}
 
       <div className="dark:border-darkBorder flex flex-1 flex-grow flex-col border-r-[1px] border-gray-300 pb-16 xl:pb-0">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col px-4">
           <input
             type="text"
             placeholder="Enter a title..."
-            className="mt-4 border-0 pl-4 text-xl font-bold text-black outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
+            className="mt-4 border-0 text-xl font-bold text-black outline-0 placeholder:text-black xl:text-2xl dark:text-white dark:placeholder:text-white"
             {...register("title", {
               required: "Provide a valid title",
             })}
           />
-          {errors.title && <ErrMsg err={errors.title.message} />}
+          {errors.title && (
+            <ErrMsg err={errors.title.message} className="mt-1" />
+          )}
         </div>
 
-        <div className="mt-3 ml-4 flex text-sm text-gray-700 dark:text-gray-500">
-          <label
-            htmlFor="tags"
-            className="inline-flex w-36 items-center gap-1 font-medium"
-          >
-            <FiTag />
-            <span>Tags</span>
-          </label>
-          <input
-            className="border-px dark:border-darkBorder w-[60%] border-gray-400 p-2 outline-0"
-            type="text"
-            id="tags"
-            placeholder="Add tags separated by commas (e.g Work, Planning)"
-            {...register("tags", {
-              required: "Provide a valid tag",
-            })}
-          />
-          {errors.tags && <ErrMsg err={errors.tags.message} />}
+        <div className="mt-3 px-4">
+          <div className="flex items-center text-sm text-gray-700 dark:text-gray-500">
+            <label
+              htmlFor="tags"
+              className="inline-flex w-24 items-center gap-1 font-medium md:w-32"
+            >
+              <FiTag />
+              <span>Tags</span>
+            </label>
+            <div className="flex flex-1 flex-col">
+              <div className="flex gap-2">
+                <input
+                  className="dark:border-darkBorder w-[80%] border-b border-gray-400 p-2 outline-0"
+                  type="text"
+                  id="tags"
+                  placeholder="Add tags separated by commas (e.g Work, Planning)"
+                  {...register("tags", {
+                    required: "Provide a valid tag",
+                  })}
+                />
+                <Button
+                  onclick={() => handleSuggestTags()}
+                  btnType="button"
+                  customClass="bg-primaryBlue rounded-md text-white font-medium flex justify-center items-center px-4"
+                >
+                  {isSuggestingTags ? (
+                    <ClipLoader color="white" size={22} />
+                  ) : (
+                    <FaMagic />
+                  )}
+                </Button>
+              </div>
+              {errors.tags && (
+                <ErrMsg err={errors.tags.message} className="mt-1" />
+              )}
+            </div>
+          </div>
         </div>
 
         <div className="mt-3 mb-3 ml-4 flex text-sm text-gray-700 dark:text-gray-500">
-          <p className="inline-flex w-36 items-center gap-1 font-medium">
+          <p className="inline-flex w-24 items-center gap-1 font-medium md:w-32">
             <FaRegClock />
             <span>Last Edited</span>
           </p>
@@ -149,7 +191,6 @@ function Form({ note = {}, isError }) {
           </Button>
         </div>
       </div>
-    
     </form>
   );
 }

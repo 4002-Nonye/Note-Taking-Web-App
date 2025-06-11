@@ -60,3 +60,4 @@ export const deleteNote = async (id) => {
     throw err.response.data;
   }
 };
+

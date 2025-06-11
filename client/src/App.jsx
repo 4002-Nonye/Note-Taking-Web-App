@@ -25,8 +25,10 @@ import { NoteProvider } from "./contexts/NoteContext";
 import TaggedNotes from "./pages/TaggedNotes";
 import SearchTab from "./pages/SearchTab";
 import ChangePassword from "./components/ChangePassword";
-import ProtectedRoutes from "./components/ProtectedRoutes";
+
 import { ModalProvider } from "./contexts/ModalContext";
+import ProtectedRoute from "./components/ProtectedRoutes";
+import PublicRoute from "./components/PublicRoute";
 
 const queryClient = new QueryClient({
   queries: {
@@ -37,17 +39,25 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage />,
+    element: (
+      <PublicRoute>
+        <LoginPage />
+      </PublicRoute>
+    ),
   },
   {
     path: "/register",
-    element: <RegisterPage />,
+    element: (
+      <PublicRoute>
+        <RegisterPage />
+      </PublicRoute>
+    ),
   },
   {
     element: (
-      <ProtectedRoutes>
+      <ProtectedRoute>
         <AppLayout />
-      </ProtectedRoutes>
+      </ProtectedRoute>
     ),
     children: [
       {

@@ -19,6 +19,7 @@ require('./routes/oAuthRoutes')(app);
 require('./routes/localAuthRoutes')(app);
 require('./routes/noteRoutes')(app);
 require('./routes/accountSettings')(app);
+require('./routes/geminiAIRoutes')(app);
 
 // HANDLING ROUTES IN PRODUCTION
 if (process.env.NODE_ENV === 'production') {
@@ -33,4 +34,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 8000;
 
-app.listen(PORT)
+app.listen(PORT);

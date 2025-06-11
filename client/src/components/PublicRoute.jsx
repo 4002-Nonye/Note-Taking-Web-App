@@ -1,22 +1,20 @@
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useUser } from "../features/authentication/useUser";
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import { ClipLoader } from "react-spinners";
 
-
-function ProtectedRoute({ children }) {
+function PublicRoute({ children }) {
+  const { user, isLoading } = useUser();
+  const isDark = document.documentElement.classList.contains("dark");
   const navigate = useNavigate();
-  const { isLoading, user } = useUser();
-
-
   useEffect(() => {
-    if (!user && !isLoading) navigate("/");
-  }, [isLoading, navigate, user]);
+    if (user && !isLoading) {
+      navigate("/notes");
+    }
+  }, [user, isLoading, navigate]);
 
-  if (isLoading) {
-    const isDark = document.documentElement.classList.contains("dark");
-
+  if (isLoading)
     return (
       <div className="flex h-screen items-center justify-center">
         <ClipLoader
@@ -28,16 +26,12 @@ function ProtectedRoute({ children }) {
         />
       </div>
     );
-  }
 
-  if (user) return children;
-
-  
-  return null;
+  return children;
 }
 
-ProtectedRoute.propTypes = {
+export default PublicRoute;
+
+PublicRoute.propTypes = {
   children: PropTypes.node,
 };
-
-export default ProtectedRoute;

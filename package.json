@@ -14,10 +14,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/genai": "^1.4.0",
     "bcryptjs": "^3.0.2",
     "concurrently": "^9.1.2",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.2",
