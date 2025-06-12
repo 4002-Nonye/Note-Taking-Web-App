@@ -1,16 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../features/authentication/useUser";
-import { useEffect } from "react";
-import PropTypes from "prop-types";
-import { ClipLoader } from "react-spinners";
+import { useEffect } from 'react';
+
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
+
+import { useUser } from '../features/authentication/useUser';
 
 function PublicRoute({ children }) {
   const { user, isLoading } = useUser();
-  
+
   const navigate = useNavigate();
   useEffect(() => {
     if (user && !isLoading) {
-      navigate("/notes");
+      navigate('/notes');
     }
   }, [user, isLoading, navigate]);
 

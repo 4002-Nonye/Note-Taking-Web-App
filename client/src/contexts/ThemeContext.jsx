@@ -1,14 +1,14 @@
-import { createContext, useCallback, useContext, useReducer } from "react";
+import { createContext, useCallback, useContext, useReducer } from 'react';
 
 const ThemeContext = createContext();
 
 const initialState = {
-  themeColor: "light",
+  themeColor: 'light',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_THEME":
+    case 'SET_THEME':
       return { ...state, themeColor: action.payload };
 
     default:
@@ -22,35 +22,33 @@ const ThemeProvider = ({ children }) => {
   const handleServerTheme = useCallback(
     (serverTheme) => {
       dispatch({
-        type: "SET_THEME",
+        type: 'SET_THEME',
         payload: serverTheme,
       });
 
       applyTheme(serverTheme);
     },
-    [dispatch],
+    [dispatch]
   );
 
   const handleChangeTheme = useCallback(
     (theme) => {
-      dispatch({ type: "SET_THEME", payload: theme });
+      dispatch({ type: 'SET_THEME', payload: theme });
       applyTheme(theme);
     },
-    [dispatch],
+    [dispatch]
   );
 
   const applyTheme = (selectedTheme) => {
     const html = document.documentElement;
 
-    if (selectedTheme === "dark") html.classList.add("dark");
+    if (selectedTheme === 'dark') html.classList.add('dark');
     else {
-      html.classList.remove("dark");
+      html.classList.remove('dark');
     }
   };
   return (
-    <ThemeContext.Provider
-      value={{ themeColor, handleChangeTheme, handleServerTheme }}
-    >
+    <ThemeContext.Provider value={{ themeColor, handleChangeTheme, handleServerTheme }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -59,7 +57,7 @@ const ThemeProvider = ({ children }) => {
 const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined)
-    throw new Error("Theme context can not be used outside theme provider");
+    throw new Error('Theme context can not be used outside theme provider');
   return context;
 };
 

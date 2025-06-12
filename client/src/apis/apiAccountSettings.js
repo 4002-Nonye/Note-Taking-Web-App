@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getAccountSettings = async () => {
   try {
-    const response = await axios.get("/api/account/settings", {
+    const response = await axios.get('/api/account/settings', {
       withCredentials: true,
     });
     return response.data;
@@ -14,7 +14,7 @@ export const getAccountSettings = async () => {
 export const editAccountSettings = async ({ fontTheme, colorTheme }) => {
   try {
     const response = await axios.put(
-      "/api/account/settings",
+      '/api/account/settings',
       {
         fontTheme,
         colorTheme,
@@ -23,7 +23,7 @@ export const editAccountSettings = async ({ fontTheme, colorTheme }) => {
         withCredentials: true,
       },
     );
-   
+
     return response.data;
   } catch (err) {
     throw err.response.data;

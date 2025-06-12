@@ -1,9 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-import toast from "react-hot-toast";
-
-import { register as registerApi } from "../../apis/apiAuth";
+import { register as registerApi } from '../../apis/apiAuth';
 
 export function useRegister() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export function useRegister() {
     mutationFn: registerApi,
     onSuccess: (data) => {
       toast.success(data.message);
-      navigate("/notes", { replace: true });
+      navigate('/notes', { replace: true });
     },
     onError: (err) => {
       toast.error(err.error);

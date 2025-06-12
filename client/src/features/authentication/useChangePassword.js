@@ -1,6 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
-import { changePassword as changePasswordApi } from "../../apis/apiAuth";
-import toast from "react-hot-toast";
+import { useMutation } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+
+import { changePassword as changePasswordApi } from '../../apis/apiAuth';
 
 export function useChangePassword() {
   const mutation = useMutation({

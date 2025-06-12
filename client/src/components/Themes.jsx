@@ -1,14 +1,16 @@
-import { MdWbSunny, MdLogout } from "react-icons/md";
-import { AiOutlineFontSize } from "react-icons/ai";
-import { IoIosLock } from "react-icons/io";
-import Nav from "./Nav";
-import Button from "./Button";
-import { useLogout } from "../features/authentication/useLogout";
+import { AiOutlineFontSize } from 'react-icons/ai';
+import { IoIosLock } from 'react-icons/io';
+import { MdLogout,MdWbSunny } from 'react-icons/md';
+
+import { useLogout } from '../features/authentication/useLogout';
+
+import Button from './Button';
+import Nav from './Nav';
 
 const navItems = [
-  { to: "color-theme", icon: MdWbSunny, label: "Color Theme" },
-  { to: "font-theme", icon: AiOutlineFontSize, label: "Font Theme" },
-  { to: "change-password", icon: IoIosLock, label: "Change Password" },
+  { to: 'color-theme', icon: MdWbSunny, label: 'Color Theme' },
+  { to: 'font-theme', icon: AiOutlineFontSize, label: 'Font Theme' },
+  { to: 'change-password', icon: IoIosLock, label: 'Change Password' },
 ];
 
 function Themes() {
@@ -25,7 +27,7 @@ function Themes() {
 
       <div className="dark:border-darkBorder my-3 w-full border-t border-gray-300" />
 
-      <Button customClass="px-7 items-center gap-2 w-full" onclick={()=>logout()}>
+      <Button customClass="px-7 items-center gap-2 w-full" onclick={() => logout()}>
         <MdLogout />
         <span>Logout</span>
       </Button>

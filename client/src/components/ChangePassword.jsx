@@ -1,15 +1,14 @@
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { ClipLoader } from 'react-spinners';
 
-import { useForm } from "react-hook-form";
+import { useChangePassword } from '../features/authentication/useChangePassword';
+import { useVisibility } from '../utils/useVisibility';
 
-import PasswordVisibility from "./PasswordVisibility";
-import Button from "./Button";
-
-import { useChangePassword } from "../features/authentication/useChangePassword";
-import { useVisibility } from "../utils/useVisibility";
-import MoveBack from "./MoveBack";
-import { ClipLoader } from "react-spinners";
-import ErrMsg from "./ErrMsg";
+import Button from './Button';
+import ErrMsg from './ErrMsg';
+import MoveBack from './MoveBack';
+import PasswordVisibility from './PasswordVisibility';
 
 function ChangePassword() {
   const { visibility, toggleVisibility } = useVisibility();
@@ -24,7 +23,7 @@ function ChangePassword() {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log("Password change submitted:", data);
+    console.log('Password change submitted:', data);
     const { currentPassword, newPassword } = data;
     changePassword({ currentPassword, newPassword });
     reset();
@@ -45,12 +44,9 @@ function ChangePassword() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
-          <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            className="flex flex-col gap-4"
-          >
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col gap-4">
             {/* Visually hidden username/email field for accessibility & autofill */}
             <input
               type="email"
@@ -58,10 +54,10 @@ function ChangePassword() {
               autoComplete="username"
               defaultValue="" // You can get this from context or props
               style={{
-                position: "absolute",
+                position: 'absolute',
                 opacity: 0,
                 height: 0,
-                pointerEvents: "none",
+                pointerEvents: 'none',
               }}
               tabIndex={-1}
             />
@@ -73,21 +69,19 @@ function ChangePassword() {
 
               <input
                 autoComplete="current-password"
-                type={visibility.current ? "text" : "password"}
+                type={visibility.current ? 'text' : 'password'}
                 id="currentPassword"
                 className="dark:border-darkBorder mt-2 w-full rounded-md border-2 border-gray-300 p-3 outline-0"
-                {...register("currentPassword", {
-                  required: "Current password is required",
+                {...register('currentPassword', {
+                  required: 'Current password is required',
                 })}
               />
               <PasswordVisibility
                 customClass="absolute top-12 right-2"
                 passwordVisible={visibility.current}
-                setPasswordVisible={() => toggleVisibility("current")}
+                setPasswordVisible={() => toggleVisibility('current')}
               />
-              {errors.currentPassword && (
-                <ErrMsg err={errors.currentPassword.message} />
-              )}
+              {errors.currentPassword && <ErrMsg err={errors.currentPassword.message} />}
             </div>
 
             {/* New Password */}
@@ -98,29 +92,27 @@ function ChangePassword() {
 
               <input
                 autoComplete="new-password"
-                type={visibility.new ? "text" : "password"}
+                type={visibility.new ? 'text' : 'password'}
                 id="newPassword"
                 className="dark:border-darkBorder mt-2 w-full rounded-md border-2 border-gray-300 p-3 outline-0"
-                {...register("newPassword", {
-                  required: "New password is required",
+                {...register('newPassword', {
+                  required: 'New password is required',
                   minLength: {
                     value: 8,
-                    message: "New password must be at least 8 characters",
+                    message: 'New password must be at least 8 characters',
                   },
                 })}
               />
               <PasswordVisibility
                 customClass="absolute top-12 right-2"
                 passwordVisible={visibility.new}
-                setPasswordVisible={() => toggleVisibility("new")}
+                setPasswordVisible={() => toggleVisibility('new')}
               />
 
               <p className="text-[12px] text-gray-700 italic dark:text-gray-500">
                 At least 8 characters
               </p>
-              {errors.newPassword && (
-                <ErrMsg err={errors.newPassword.message} />
-              )}
+              {errors.newPassword && <ErrMsg err={errors.newPassword.message} />}
             </div>
 
             {/* Confirm Password */}
@@ -131,35 +123,28 @@ function ChangePassword() {
 
               <input
                 autoComplete="new-password"
-                type={visibility.confirm ? "text" : "password"}
+                type={visibility.confirm ? 'text' : 'password'}
                 id="confirmPassword"
                 className="dark:border-darkBorder mt-2 w-full rounded-md border-2 border-gray-300 p-3 outline-0"
-                {...register("confirmPassword", {
-                  required: "Please confirm your password",
+                {...register('confirmPassword', {
+                  required: 'Please confirm your password',
                   validate: (value) =>
-                    value === getValues("newPassword") ||
-                    "Passwords do not match",
+                    value === getValues('newPassword') || 'Passwords do not match',
                 })}
               />
               <PasswordVisibility
                 customClass="absolute top-12 right-2"
                 passwordVisible={visibility.confirm}
-                setPasswordVisible={() => toggleVisibility("confirm")}
+                setPasswordVisible={() => toggleVisibility('confirm')}
               />
-              {errors.confirmPassword && (
-                <ErrMsg err={errors.confirmPassword.message} />
-              )}
+              {errors.confirmPassword && <ErrMsg err={errors.confirmPassword.message} />}
             </div>
 
             <div className="relative flex w-full justify-end md:w-3/4 xl:w-2/4">
               <Button
-                customClass={`bg-primaryBlue text-white rounded-md justify-center md:w-[35%] w-2/4 ${isPending ? "pointer-events-none" : ""}`}
+                customClass={`bg-primaryBlue text-white rounded-md justify-center md:w-[35%] w-2/4 ${isPending ? 'pointer-events-none' : ''}`}
               >
-                {isPending ? (
-                  <ClipLoader color="white" size={22} />
-                ) : (
-                  "Save Password"
-                )}
+                {isPending ? <ClipLoader color="white" size={22} /> : 'Save Password'}
               </Button>
             </div>
           </form>

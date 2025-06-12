@@ -1,14 +1,14 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { IoSearchOutline } from 'react-icons/io5';
+import { IoSettingsOutline } from 'react-icons/io5';
+import { NavLink } from 'react-router-dom';
 
-import { IoSearchOutline } from "react-icons/io5";
-import { IoSettingsOutline } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchBar from './SearchBar';
 
 function Header({ head, customClass }) {
   return (
     <div
-      className={`mt-4 flex items-center justify-between px-3 py-4 md:px-7 xl:mt-0 ${customClass}  `}
+      className={`mt-4 flex items-center justify-between px-3 py-4 md:px-7 xl:mt-0 ${customClass} `}
     >
       <h1 className="text-2xl font-bold">{head}</h1>
 
@@ -19,10 +19,10 @@ function Header({ head, customClass }) {
         <NavLink
           to="/account/settings"
           className={({ isActive }) =>
-            `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+            `flex flex-col items-center ${isActive ? 'text-primaryBlue' : ''}`
           }
         >
-          {" "}
+          {' '}
           <IoSettingsOutline className="text-2xl" />
         </NavLink>
       </div>

@@ -1,34 +1,29 @@
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { Toaster } from "react-hot-toast";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import AppLayout from "./components/AppLayout";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import NoteForm from "./components/NoteForm";
+import AppLayout from './components/AppLayout';
+import ChangePassword from './components/ChangePassword';
+import ColorTab from './components/ColorTab';
+import FontTab from './components/FontTab';
+import NoteForm from './components/NoteForm';
+import ProtectedRoute from './components/ProtectedRoutes';
+import PublicRoute from './components/PublicRoute';
+import { FontProvider } from './contexts/FontContext';
+import { ModalProvider } from './contexts/ModalContext';
+import { NoteProvider } from './contexts/NoteContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import Archive from './pages/Archive';
+import LoginPage from './pages/LoginPage';
+import Notes from './pages/Notes';
+import RegisterPage from './pages/RegisterPage';
+import SearchTab from './pages/SearchTab';
+import Settings from './pages/Settings';
+import TaggedNotes from './pages/TaggedNotes';
+import Tags from './pages/Tags';
 
-import Notes from "./pages/Notes";
-import Archive from "./pages/Archive";
-import Settings from "./pages/Settings";
-import ColorTab from "./components/ColorTab";
-import FontTab from "./components/FontTab";
-import { FontProvider } from "./contexts/FontContext";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import Tags from "./pages/Tags";
-
-import { NoteProvider } from "./contexts/NoteContext";
-import TaggedNotes from "./pages/TaggedNotes";
-import SearchTab from "./pages/SearchTab";
-import ChangePassword from "./components/ChangePassword";
-
-import { ModalProvider } from "./contexts/ModalContext";
-import ProtectedRoute from "./components/ProtectedRoutes";
-import PublicRoute from "./components/PublicRoute";
+import './index.css'
 
 const queryClient = new QueryClient({
   queries: {
@@ -38,7 +33,7 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: (
       <PublicRoute>
         <LoginPage />
@@ -46,7 +41,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/register",
+    path: '/register',
     element: (
       <PublicRoute>
         <RegisterPage />
@@ -61,69 +56,69 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/notes",
+        path: '/notes',
         element: <Notes />,
         children: [
           {
-            path: ":noteId",
+            path: ':noteId',
             element: <NoteForm />, // Single note view/edit
           },
           {
-            path: "new",
+            path: 'new',
             element: <NoteForm />, // create new note
           },
         ],
       },
       {
-        path: "/archive",
+        path: '/archive',
         element: <Archive />,
         children: [
           {
-            path: ":noteId",
+            path: ':noteId',
             element: <NoteForm isArchive={true} />, // Archived note view/edit
           },
         ],
       },
       {
-        path: "/tags/:tag",
+        path: '/tags/:tag',
         element: <TaggedNotes />,
         children: [
           {
-            path: "/tags/:tag/:noteId",
+            path: '/tags/:tag/:noteId',
             element: <NoteForm />,
           },
         ],
       },
 
       {
-        path: "/tags",
+        path: '/tags',
         element: <Tags />,
         children: [],
       },
       {
-        path: "/account/settings",
+        path: '/account/settings',
         element: <Settings />,
         children: [
           {
-            path: "color-theme",
+            path: 'color-theme',
             element: <ColorTab />,
           },
           {
-            path: "font-theme",
+            path: 'font-theme',
             element: <FontTab />,
           },
           {
-            path: "change-password",
+            path: 'change-password',
             element: <ChangePassword />,
           },
         ],
       },
       {
-        path: "/search",
+        path: '/search',
         element: <SearchTab />,
         children: [
           {
-            path: ":noteId",
+            path: ':noteId',
             element: <NoteForm />, // Single note view/edit
           },
         ],
@@ -146,7 +141,7 @@ function App() {
                 position="top-center"
                 gutter={12}
                 containerStyle={{
-                  margin: "8px",
+                  margin: '8px',
                 }}
                 toastOptions={{
                   success: {
@@ -156,13 +151,13 @@ function App() {
                     duration: 3000,
                   },
                   style: {
-                    fontSize: "14px",
-                    maxWidth: "500px",
-                    textAlign: "center",
-                    backgroundColor: "#fff",
-                    color: "#000",
+                    fontSize: '14px',
+                    maxWidth: '500px',
+                    textAlign: 'center',
+                    backgroundColor: '#fff',
+                    color: '#000',
                   },
-                  className: "toast",
+                  className: 'toast',
                 }}
               />
             </ThemeProvider>

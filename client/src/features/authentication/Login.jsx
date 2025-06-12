@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
-import { FcGoogle } from "react-icons/fc";
-import { ClipLoader } from "react-spinners";
+import { useForm } from 'react-hook-form';
+import { FcGoogle } from 'react-icons/fc';
+import { Link } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
-import { useLogin } from "./useLogin";
+import darkLogo from '../../assets/icon-logo.svg';
+import logo from '../../assets/icon-logo-white.svg';
+import AuthHeader from '../../components/AuthHeader';
+import Button from '../../components/Button';
+import ErrMsg from '../../components/ErrMsg';
+import PasswordVisibility from '../../components/PasswordVisibility';
 
-import logo from "../../assets/icon-logo-white.svg";
-import darkLogo from "../../assets/icon-logo.svg";
-import Button from "../../components/Button";
-import AuthHeader from "../../components/AuthHeader";
-import PasswordVisibility from "../../components/PasswordVisibility";
-import ErrMsg from "../../components/ErrMsg";
+import { useLogin } from './useLogin';
 
 function Login() {
   const {
@@ -22,8 +22,8 @@ function Login() {
     reset,
   } = useForm({
     defaultValues: {
-      email: "ojukwuchinonye@gmail.com",
-      password: "1234509000007",
+      email: 'ojukwuchinonye@gmail.com',
+      password: '1234509000007',
     },
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -60,11 +60,11 @@ function Login() {
             id="userEmail"
             placeholder="email@example.com"
             className="border-gray dark:border-darkBorder w-full rounded-md border-2 border-gray-300 p-2 outline-0 dark:text-gray-400"
-            {...register("email", {
-              required: "Email address is required",
+            {...register('email', {
+              required: 'Email address is required',
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email format",
+                message: 'Invalid email format',
               },
             })}
           />
@@ -78,12 +78,12 @@ function Login() {
 
           <input
             autoComplete="true"
-            type={passwordVisible ? "text" : "password"}
+            type={passwordVisible ? 'text' : 'password'}
             name="userPassword"
             id="userPassword"
             className="dark:border-darkBorder mb-3 w-full rounded-md border-2 border-gray-300 p-2 outline-0 dark:text-gray-400"
-            {...register("password", {
-              required: "Password is required",
+            {...register('password', {
+              required: 'Password is required',
             })}
           />
           <PasswordVisibility
@@ -94,28 +94,21 @@ function Login() {
         </div>
       </div>
 
-      <Button
-        type="authBtn"
-        customClass={isPending ? "pointer-events-none" : ""}
-      >
-        {isPending ? <ClipLoader color="white" size={22} /> : "Login"}
+      <Button type="authBtn" customClass={isPending ? 'pointer-events-none' : ''}>
+        {isPending ? <ClipLoader color="white" size={22} /> : 'Login'}
       </Button>
       <div className="dark:border-darkBorder my-6 w-[85%] border-t-2 border-gray-200" />
 
       <p className="dark:text-gray-400">or Log in with:</p>
 
       <Button type="googleBtn" purpose="link" href="/auth/google">
-        <FcGoogle />{" "}
-        <span className="text-sm font-medium text-gray-500">
-          {" "}
-          &nbsp; Google
-        </span>
+        <FcGoogle /> <span className="text-sm font-medium text-gray-500"> &nbsp; Google</span>
       </Button>
 
       <div className="dark:border-darkBorder my-7 w-[85%] border-t-2 border-gray-200" />
 
       <p className="dark:text-gray-400">
-        No account yet?{" "}
+        No account yet?{' '}
         <Link to="/register">
           <span className="text-primaryBlue underline">Sign up</span>
         </Link>

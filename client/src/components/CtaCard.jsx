@@ -1,19 +1,19 @@
-import { MdOutlineArchive } from "react-icons/md";
-import { FaTrashRestoreAlt } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import { FaTrashRestoreAlt } from 'react-icons/fa';
+import { MdOutlineArchive } from 'react-icons/md';
+import { MdDelete } from 'react-icons/md';
 
-import Button from "./Button";
-import { useModal } from "../contexts/ModalContext";
-import { useDeleteNote } from "../features/notes/useDeleteNote";
-import { useEditNote } from "../features/notes/useEditNote";
+import { useModal } from '../contexts/ModalContext';
+import { useDeleteNote } from '../features/notes/useDeleteNote';
+import { useEditNote } from '../features/notes/useEditNote';
+
+import Button from './Button';
 
 function CtaCard({ noteId }) {
   const { handleHideModal, action } = useModal();
   const { deleteNote, isPending: isDeleting } = useDeleteNote();
   const { editNote, isPending: isEditing } = useEditNote();
-
 
   const handleArchive = () => {
     editNote(
@@ -22,7 +22,7 @@ function CtaCard({ noteId }) {
         onSuccess: () => {
           handleHideModal();
         },
-      },
+      }
     );
   };
 
@@ -33,7 +33,7 @@ function CtaCard({ noteId }) {
         onSuccess: () => {
           handleHideModal();
         },
-      },
+      }
     );
   };
 
@@ -46,25 +46,25 @@ function CtaCard({ noteId }) {
   const modalOptions = {
     archive: {
       icon: MdOutlineArchive,
-      head: "Archive Note",
-      text: "Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.",
-      confirmLabel: "Archive",
+      head: 'Archive Note',
+      text: 'Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.',
+      confirmLabel: 'Archive',
       action: handleArchive,
       loading: isEditing,
     },
     restore: {
       icon: FaTrashRestoreAlt,
-      head: "Restore Note",
-      text: "Are you sure you want to restore this note? This note will be restored to All Notes section.",
-      confirmLabel: "Restore",
+      head: 'Restore Note',
+      text: 'Are you sure you want to restore this note? This note will be restored to All Notes section.',
+      confirmLabel: 'Restore',
       action: handleRestore,
       loading: isEditing,
     },
     delete: {
       icon: MdDelete,
-      head: "Delete Note",
-      text: "Are you sure you want to delete this note permanently? This action cannot be undone.",
-      confirmLabel: "Delete",
+      head: 'Delete Note',
+      text: 'Are you sure you want to delete this note permanently? This action cannot be undone.',
+      confirmLabel: 'Delete',
       action: handleDelete,
       loading: isDeleting,
     },
@@ -124,12 +124,12 @@ function CtaCard({ noteId }) {
           <Button
             onclick={modalAction}
             customClass={`rounded-md px-6 text-white ${
-              action === "delete" ? "bg-red-500" : "bg-primaryBlue"
+              action === 'delete' ? 'bg-red-500' : 'bg-primaryBlue'
             }`}
             btnType="button"
             disabled={loading}
           >
-            {loading ? "Processing..." : confirmLabel}
+            {loading ? 'Processing...' : confirmLabel}
           </Button>
         </div>
       </motion.div>

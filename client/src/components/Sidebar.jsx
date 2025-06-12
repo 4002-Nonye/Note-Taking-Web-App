@@ -1,15 +1,13 @@
-import { Link, NavLink } from "react-router-dom";
+import { AiOutlineHome } from 'react-icons/ai';
+import { FiTag } from 'react-icons/fi';
+import { MdOutlineArchive } from 'react-icons/md';
+import { Link, NavLink } from 'react-router-dom';
 
-import { FiTag } from "react-icons/fi";
-import { MdOutlineArchive } from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
+import darkLogo from '../assets/icon-logo.svg';
+import logo from '../assets/icon-logo-white.svg';
+import { useGetNotes } from '../features/notes/useGetNotes';
 
-import logo from "../assets/icon-logo-white.svg";
-import darkLogo from "../assets/icon-logo.svg";
-
-import Nav from "./Nav";
-
-import { useGetNotes } from "../features/notes/useGetNotes";
+import Nav from './Nav';
 
 function Sidebar() {
   const { notes, isPending } = useGetNotes();
@@ -36,7 +34,7 @@ function Sidebar() {
       <div className="dark:border-darkBorder mt-4 hidden border-t-[1px] border-gray-300 p-3 xl:block">
         <h2 className="font-medium text-gray-500">Tags</h2>
 
-        <ul className="mt-4 flex flex-col gap-3 h-96 overflow-auto no-scrollbar">
+        <ul className="no-scrollbar mt-4 flex h-96 flex-col gap-3 overflow-auto">
           {uniqueTags.map((tag) => (
             <li key={tag}>
               <NavLink
@@ -46,11 +44,7 @@ function Sidebar() {
                 {({ isActive }) => (
                   <>
                     <FiTag className="text-xl" />
-                    <span
-                      className={`text-sm ${isActive && "text-primaryBlue"}`}
-                    >
-                      {tag}
-                    </span>
+                    <span className={`text-sm ${isActive && 'text-primaryBlue'}`}>{tag}</span>
                   </>
                 )}
               </NavLink>

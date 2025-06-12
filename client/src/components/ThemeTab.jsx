@@ -1,19 +1,11 @@
-import { motion } from "framer-motion";
-import PropTypes from "prop-types";
-import Button from "./Button";
+import { motion } from 'framer-motion';
+import PropTypes from 'prop-types';
+import { ClipLoader } from 'react-spinners';
 
-import { ClipLoader } from "react-spinners";
-import MoveBack from "./MoveBack";
+import Button from './Button';
+import MoveBack from './MoveBack';
 
-function ThemeTab({
-  options,
-  head,
-  subHead,
-  themeName,
-  onChange,
-  handleSave,
-  isPending,
-}) {
+function ThemeTab({ options, head, subHead, themeName, onChange, handleSave, isPending }) {
   return (
     <>
       <MoveBack
@@ -31,7 +23,7 @@ function ThemeTab({
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
           className="flex flex-col gap-7"
         >
           {options.map((option) => {
@@ -43,7 +35,7 @@ function ThemeTab({
                 layout
                 onClick={() => onChange(option.id)}
                 className="dark:border-darkBorder relative flex cursor-pointer items-center justify-between gap-3 rounded-md border-[1px] border-gray-300 p-4 xl:w-2/4"
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 {/* Left side content */}
                 <div className="flex items-center gap-3">
@@ -53,7 +45,7 @@ function ThemeTab({
                       layoutId="highlight"
                       className="dark:bg-bgCard absolute inset-0 z-0 rounded-md bg-gray-200"
                       transition={{
-                        type: "spring",
+                        type: 'spring',
                         stiffness: 300,
                         damping: 20,
                       }}
@@ -76,9 +68,9 @@ function ThemeTab({
                 <motion.div
                   layout
                   className={`z-10 h-2 w-2 rounded-full bg-white ring-4 ${
-                    selected ? "ring-primaryBlue" : "ring-gray-400"
+                    selected ? 'ring-primaryBlue' : 'ring-gray-400'
                   }`}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 />
               </motion.div>
             );
@@ -86,14 +78,10 @@ function ThemeTab({
           <div className="relative mt-5 flex justify-end md:w-full xl:w-2/4">
             <Button
               customClass={`bg-primaryBlue text-white rounded-md justify-center 
-              w-2/4 md:w-[20%] xl:w-[30%] ${isPending ? "pointer-events-none" : ""}`}
+              w-2/4 md:w-[20%] xl:w-[30%] ${isPending ? 'pointer-events-none' : ''}`}
               onclick={handleSave}
             >
-              {isPending ? (
-                <ClipLoader color="white" size={22} />
-              ) : (
-                "Save changes"
-              )}
+              {isPending ? <ClipLoader color="white" size={22} /> : 'Save changes'}
             </Button>
           </div>
         </motion.div>

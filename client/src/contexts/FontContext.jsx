@@ -1,15 +1,14 @@
-import { createContext, useCallback, useContext, useReducer } from "react";
-
+import { createContext, useCallback, useContext, useReducer } from 'react';
 
 const FontContext = createContext();
 
 const initialState = {
-  font: "sans-serif",
+  font: 'sans-serif',
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "SET_FONT":
+    case 'SET_FONT':
       return { ...state, font: action.payload };
 
     default:
@@ -22,49 +21,54 @@ const FontProvider = ({ children }) => {
 
   const applyFontClass = useCallback((selectedFont) => {
     const html = document.documentElement;
-  
-    html.classList.remove("font-sans", "font-serif", "font-mono");
+
+    html.classList.remove('font-sans', 'font-serif', 'font-mono');
     switch (selectedFont) {
-      case "sans-serif":
-        html.classList.add("font-sans");
+      case 'sans-serif':
+        html.classList.add('font-sans');
         break;
-      case "serif":
-        html.classList.add("font-serif");
+      case 'serif':
+        html.classList.add('font-serif');
         break;
-      case "mono":
-        html.classList.add("font-mono");
+      case 'mono':
+        html.classList.add('font-mono');
         break;
       default:
-        html.classList.add("font-sans");
+        html.classList.add('font-sans');
         break;
     }
   }, []);
-  
-  const handleFontChange = useCallback((newFont) => {
-    dispatch({
-      type: "SET_FONT",
-      payload: newFont,
-    });
-  
-    applyFontClass(newFont);
-  }, [dispatch, applyFontClass]);
-  
-  const handleServerTheme = useCallback((serverTheme) => {
-    dispatch({
-      type: "SET_THEME",
-      payload: serverTheme,
-    });
-  
-    handleFontChange(serverTheme);
-  }, [dispatch, handleFontChange]);
-  
+
+  const handleFontChange = useCallback(
+    (newFont) => {
+      dispatch({
+        type: 'SET_FONT',
+        payload: newFont,
+      });
+
+      applyFontClass(newFont);
+    },
+    [dispatch, applyFontClass]
+  );
+
+  const handleServerTheme = useCallback(
+    (serverTheme) => {
+      dispatch({
+        type: 'SET_THEME',
+        payload: serverTheme,
+      });
+
+      handleFontChange(serverTheme);
+    },
+    [dispatch, handleFontChange]
+  );
 
   return (
     <FontContext.Provider
       value={{
         font,
         handleFontChange,
-        handleServerTheme
+        handleServerTheme,
       }}
     >
       {children}
@@ -74,8 +78,7 @@ const FontProvider = ({ children }) => {
 
 const useFont = () => {
   const context = useContext(FontContext);
-  if (context === undefined)
-    throw new Error("Font context can not be used outside font provider");
+  if (context === undefined) throw new Error('Font context can not be used outside font provider');
   return context;
 };
 

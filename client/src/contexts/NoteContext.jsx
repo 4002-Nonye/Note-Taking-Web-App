@@ -1,15 +1,15 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from 'react';
 
 const NoteContext = createContext();
 
 const initialState = {
   showCta: false,
-  searchQuery: "",
+  searchQuery: '',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SET_SEARCH_QUERY":
+    case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.payload };
   }
 };
@@ -19,7 +19,7 @@ function NoteProvider({ children }) {
 
   const handleSearch = (value) => {
     dispatch({
-      type: "SET_SEARCH_QUERY",
+      type: 'SET_SEARCH_QUERY',
       payload: value,
     });
   };
@@ -38,9 +38,8 @@ function NoteProvider({ children }) {
 
 const useNotes = () => {
   const context = useContext(NoteContext);
-  if (context === undefined)
-    throw new Error("Can not use NoteProvider outside Note context");
+  if (context === undefined) throw new Error('Can not use NoteProvider outside Note context');
   return context;
 };
 
-export { useNotes, NoteProvider };
+export { NoteProvider,useNotes };

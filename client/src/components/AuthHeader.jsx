@@ -1,19 +1,27 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
-function AuthHeader({ children ,header, subHead }) {
+/**
+ * Authentication Header Component
+ *
+ * A reusable header component for authentication pages (login, signup, etc.)
+ * that displays a title, subtitle, and optional children components.
+ *
+ */
+function AuthHeader({ children, header, subHead }) {
   return (
     <>
-     {children}
+      {children}
       <h1 className="text-2xl font-extrabold">{header}</h1>
       <p className="my-2 text-center text-sm">{subHead}</p>
     </>
   );
 }
 
-export default AuthHeader;
-
+// Prop type validation
 AuthHeader.propTypes = {
   children: PropTypes.node,
-  header: PropTypes.string,
-  subHead: PropTypes.string,
+  header: PropTypes.string.isRequired,
+  subHead: PropTypes.string.isRequired,
 };
+
+export default AuthHeader;

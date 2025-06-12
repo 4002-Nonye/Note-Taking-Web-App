@@ -1,20 +1,13 @@
-import { FaRegClock } from "react-icons/fa6";
-import { FiTag } from "react-icons/fi";
+import { useParams } from 'react-router-dom';
+import { ClipLoader } from 'react-spinners';
 
-import NoteCTA from "./NoteCTA";
-import Button from "./Button";
-import TextArea from "./TextArea";
-import Divider from "./Divider";
+import { useGetNoteById } from '../features/notes/useGetNoteById';
 
-import { ClipLoader } from "react-spinners";
-
-import { useParams } from "react-router-dom";
-import { useGetNoteById } from "../features/notes/useGetNoteById";
-import Form from "./Form";
+import Form from './Form'
 
 
 function NoteForm() {
-  const isDark = document.documentElement.classList.contains("dark");
+  const isDark = document.documentElement.classList.contains('dark');
 
   const { noteId } = useParams();
 
@@ -26,28 +19,21 @@ function NoteForm() {
       <div className="flex h-full items-center justify-center">
         <ClipLoader
           size={50}
-          color={isDark ? "#ffffff" : "#000000"}
+          color={isDark ? '#ffffff' : '#000000'}
           cssOverride={{
-            borderWidth: "5px",
+            borderWidth: '5px',
           }}
         />
       </div>
     );
 
   return (
-    <div >
+    <div>
       {isError ? (
-        <div className="mt-10 flex items-center justify-center">
-          {error.error}💥
-        </div>
+        <div className="mt-10 flex items-center justify-center">{error.error}💥</div>
       ) : (
-        <Form
-          note={noteId ? note?.data : {}}
-          isPending={isPending}
-          isError={isError}
-        />
+        <Form note={noteId ? note?.data : {}} isPending={isPending} isError={isError} />
       )}
-    
     </div>
   );
 }

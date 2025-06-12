@@ -1,13 +1,8 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { FaEyeSlash } from 'react-icons/fa';
+import { FaEye } from 'react-icons/fa';
 
-import { FaEyeSlash } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
-
-function PasswordVisibility({
-  passwordVisible,
-  setPasswordVisible,
-  customClass,
-}) {
+function PasswordVisibility({ passwordVisible, setPasswordVisible, customClass }) {
   const handlePasswordVisible = () => {
     setPasswordVisible((visible) => !visible);
   };
@@ -15,15 +10,9 @@ function PasswordVisibility({
   return (
     <>
       {passwordVisible ? (
-        <FaEyeSlash
-          className={`${customClass} cursor-pointer`}
-          onClick={handlePasswordVisible}
-        />
+        <FaEyeSlash className={`${customClass} cursor-pointer`} onClick={handlePasswordVisible} />
       ) : (
-        <FaEye
-          className={`${customClass} cursor-pointer`}
-          onClick={handlePasswordVisible}
-        />
+        <FaEye className={`${customClass} cursor-pointer`} onClick={handlePasswordVisible} />
       )}
     </>
   );

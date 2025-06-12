@@ -1,10 +1,8 @@
+import Button from './Button';
+import NoNotes from './NoNotes';
+import NoteCard from './NoteCard';
 
-import Button from "./Button";
-import NoNotes from "./NoNotes";
-import NoteCard from "./NoteCard";
-
-function NoteList({ notes, path = "notes" }) {
-
+function NoteList({ notes, path = 'notes' }) {
   return (
     <div className="pb-24 xl:pt-5 xl:pb-0">
       <div className="no-scrollbar mt-4 flex flex-col text-[13px] xl:h-[calc(100vh-16rem)] xl:overflow-y-auto">

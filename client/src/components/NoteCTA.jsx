@@ -1,14 +1,13 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { MdOutlineArchive } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 
-import { MdOutlineArchive } from "react-icons/md";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { useModal } from '../contexts/ModalContext';
 
-import Button from "./Button";
-import CtaCard from "./CtaCard";
-
-import MoveBack from "./MoveBack";
-import { useModal } from "../contexts/ModalContext";
-import { useParams } from "react-router-dom";
+import Button from './Button';
+import CtaCard from './CtaCard';
+import MoveBack from './MoveBack';
 
 function NoteCTA({ isArchive, reset, defaultFormValues }) {
   const { showModal, handleShowModal } = useModal();
@@ -27,20 +26,17 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
           btnType="button"
           customClass="group justify-center  items-center"
           type="ctaBtn"
-          onclick={() => handleShowModal(isArchive ? "restore" : "archive")}
+          onclick={() => handleShowModal(isArchive ? 'restore' : 'archive')}
         >
           <MdOutlineArchive className="group-hover:text-primaryBlue text-xl text-gray-500 transition-all duration-500 lg:text-2xl" />
-          <span className="hidden lg:block">
-            {" "}
-            {isArchive ? "Restore Note" : "Archive Note"}
-          </span>
+          <span className="hidden lg:block"> {isArchive ? 'Restore Note' : 'Archive Note'}</span>
         </Button>
 
         <Button
           customClass="group justify-center"
           type="ctaBtn"
           btnType="button"
-          onclick={() => handleShowModal("delete")}
+          onclick={() => handleShowModal('delete')}
         >
           <FaRegTrashAlt className="group-hover:text-primaryBlue text-lg text-gray-500 transition-all duration-500 lg:text-xl" />
           <span className="hidden lg:block">Delete Note</span>
@@ -53,9 +49,7 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
         >
           Cancel
         </Button>
-        <Button customClass="text-primaryBlue w-2/4 lg:text-xl text-sm lg:hidden">
-          Save
-        </Button>
+        <Button customClass="text-primaryBlue w-2/4 lg:text-xl text-sm lg:hidden">Save</Button>
       </div>
       {showModal && <CtaCard noteId={noteId} />}
     </div>

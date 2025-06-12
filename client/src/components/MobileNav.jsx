@@ -1,15 +1,15 @@
-import { FiTag } from "react-icons/fi";
-import { MdOutlineArchive } from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
-import { IoSearchOutline, IoSettingsOutline } from "react-icons/io5";
-import { NavLink } from "react-router-dom";
+import { AiOutlineHome } from 'react-icons/ai';
+import { FiTag } from 'react-icons/fi';
+import { IoSearchOutline, IoSettingsOutline } from 'react-icons/io5';
+import { MdOutlineArchive } from 'react-icons/md';
+import { NavLink } from 'react-router-dom';
 
 const navItems = [
-  { to: "/notes", icon: AiOutlineHome, label: "Home" },
-  { to: "/search", icon: IoSearchOutline, label: "Search" },
-  { to: "/archive", icon: MdOutlineArchive, label: "Archived Notes" },
-  { to: "/tags", icon: FiTag, label: "Tags" },
-  { to: "/account/settings", icon: IoSettingsOutline, label: "Settings" },
+  { to: '/notes', icon: AiOutlineHome, label: 'Home' },
+  { to: '/search', icon: IoSearchOutline, label: 'Search' },
+  { to: '/archive', icon: MdOutlineArchive, label: 'Archived Notes' },
+  { to: '/tags', icon: FiTag, label: 'Tags' },
+  { to: '/account/settings', icon: IoSettingsOutline, label: 'Settings' },
 ];
 
 function MobileNav() {
@@ -21,7 +21,7 @@ function MobileNav() {
             <NavLink
               to={to}
               className={({ isActive }) =>
-                `flex flex-col items-center ${isActive ? "text-primaryBlue" : ""}`
+                `flex flex-col items-center ${isActive ? 'text-primaryBlue' : ''}`
               }
             >
               <Icon className="text-xl" />

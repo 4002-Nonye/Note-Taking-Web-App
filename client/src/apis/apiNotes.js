@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const createNote = async (newNote) => {
   try {
     const response = await axios.post(
-      "/api/new-note",
+      '/api/new-note',
       {
         ...newNote,
       },
@@ -17,7 +17,7 @@ export const createNote = async (newNote) => {
 
 export const getNotes = async () => {
   try {
-    const response = await axios.get("/api/notes", {
+    const response = await axios.get('/api/notes', {
       withCredentials: true,
     });
     return response.data;
@@ -60,4 +60,3 @@ export const deleteNote = async (id) => {
     throw err.response.data;
   }
 };
-

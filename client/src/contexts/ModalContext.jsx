@@ -1,51 +1,51 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 const ModalContext = createContext();
 
 const initialState = {
   showModal: false,
-  action: "",
+  action: '',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "SHOW_MODAL":
+    case 'SHOW_MODAL':
       return { ...state, showModal: true, action: action.payload };
-    case "HIDE_MODAL":
-      return { ...state, showModal: false, action: "" };
+    case 'HIDE_MODAL':
+      return { ...state, showModal: false, action: '' };
     default:
       state;
   }
 };
 
 function ModalProvider({ children }) {
-  const [{ showModal,action }, dispatch] = useReducer(reducer, initialState);
+  const [{ showModal, action }, dispatch] = useReducer(reducer, initialState);
 
   const handleShowModal = (action) => {
     dispatch({
-      type: "SHOW_MODAL",
+      type: 'SHOW_MODAL',
       payload: action,
     });
 
-    document.body.classList.add("no-scroll");
+    document.body.classList.add('no-scroll');
   };
 
   const handleHideModal = () => {
     dispatch({
-      type: "HIDE_MODAL",
+      type: 'HIDE_MODAL',
     });
-    document.body.classList.remove("no-scroll");
+    document.body.classList.remove('no-scroll');
   };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") handleHideModal();
+      if (e.key === 'Escape') handleHideModal();
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, []);
 
@@ -54,7 +54,8 @@ function ModalProvider({ children }) {
       value={{
         showModal,
         handleShowModal,
-        handleHideModal,action
+        handleHideModal,
+        action,
       }}
     >
       {children}
@@ -63,9 +64,8 @@ function ModalProvider({ children }) {
 }
 const useModal = () => {
   const context = useContext(ModalContext);
-  if (context === undefined)
-    throw new Error("can not use ModalProvider outside ModalContext");
+  if (context === undefined) throw new Error('can not use ModalProvider outside ModalContext');
   return context;
 };
 
-export { useModal, ModalProvider };
+export { ModalProvider,useModal };
