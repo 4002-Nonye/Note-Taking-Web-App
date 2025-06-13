@@ -18,8 +18,8 @@ This is a full-stack note-taking app built with the **MERN stack** (MongoDB, Exp
 - ⌨️ Full keyboard navigation support
 - 📱 Responsive layout across devices
 - 💡 Hover and focus states for all interactive elements
-> ✨ Auto-tagging is powered by title analysis logic from the backend  
-> 🤖 Built with help from **Gemini AI**
+- ✨ Auto-tagging is powered by title analysis logic from the backend  
+- 🤖 Built with help from **Gemini AI**
 
 ### 🔐 Bonus (Full-Stack):
 
@@ -43,7 +43,6 @@ This is a full-stack note-taking app built with the **MERN stack** (MongoDB, Exp
 
 ```bash
 git clone https://github.com/4002-Nonye/Note-Taking-Web-App.git
-cd server
 ```
 
 2. Install dependencies for both frontend and backend:
@@ -54,7 +53,7 @@ cd server
 npm install
 
 # Frontend
-cd /client
+cd server/client
 npm install
 ```
 
