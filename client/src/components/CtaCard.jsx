@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { FaTrashRestoreAlt } from 'react-icons/fa';
-import { MdOutlineArchive } from 'react-icons/md';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete,MdOutlineArchive } from 'react-icons/md';
+import { ClipLoader } from 'react-spinners';
 
 import { useModal } from '../contexts/ModalContext';
 import { useDeleteNote } from '../features/notes/useDeleteNote';
@@ -11,10 +11,14 @@ import { useEditNote } from '../features/notes/useEditNote';
 import Button from './Button';
 
 function CtaCard({ noteId }) {
+  // Modal context gives current action (archive, restore, delete) and function to hide modal
   const { handleHideModal, action } = useModal();
+
+  // Hooks for deleting and editing notes, including loading states
   const { deleteNote, isPending: isDeleting } = useDeleteNote();
   const { editNote, isPending: isEditing } = useEditNote();
 
+  // Archive note handler
   const handleArchive = () => {
     editNote(
       { id: noteId, updatedContent: { archive: true } },
@@ -26,6 +30,7 @@ function CtaCard({ noteId }) {
     );
   };
 
+  // Restore note handler
   const handleRestore = () => {
     editNote(
       { id: noteId, updatedContent: { archive: false } },
@@ -37,12 +42,14 @@ function CtaCard({ noteId }) {
     );
   };
 
+  // Delete note handler
   const handleDelete = () => {
     deleteNote(noteId, {
       onSuccess: handleHideModal,
     });
   };
 
+  // Different modal options based on current action
   const modalOptions = {
     archive: {
       icon: MdOutlineArchive,
@@ -70,6 +77,7 @@ function CtaCard({ noteId }) {
     },
   };
 
+  // Grab current modal info based on action
   const {
     icon: Icon,
     head,
@@ -79,10 +87,12 @@ function CtaCard({ noteId }) {
     loading,
   } = modalOptions[action] || {};
 
+  // If action is not recognized, don't render anything
   if (!modalOptions[action]) return null;
 
   return (
     <>
+      {/* Overlay backdrop */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -92,6 +102,7 @@ function CtaCard({ noteId }) {
         onClick={handleHideModal}
       />
 
+      {/* Modal content */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -99,6 +110,7 @@ function CtaCard({ noteId }) {
         transition={{ duration: 0.5 }}
         className="dark:bg-bgTag fixed top-[50%] left-1/2 z-[1000] flex w-[90%] -translate-x-1/2 -translate-y-1/2 flex-col rounded-md bg-white px-5 py-8 text-black shadow-xl md:w-[32rem] dark:text-white dark:shadow-none"
       >
+        {/* Icon and title */}
         <div className="flex items-start justify-between gap-5">
           <div className="rounded-md p-2 dark:bg-[#717784] dark:text-white">
             <Icon className="text-2xl" />
@@ -112,6 +124,7 @@ function CtaCard({ noteId }) {
 
         <hr className="my-4 w-full border-t border-gray-300 dark:border-gray-600" />
 
+        {/* Action buttons */}
         <div className="xsm:justify-end mt-3 flex justify-center gap-4">
           <Button
             onclick={handleHideModal}
@@ -129,7 +142,7 @@ function CtaCard({ noteId }) {
             btnType="button"
             disabled={loading}
           >
-            {loading ? 'Processing...' : confirmLabel}
+            {loading ? <ClipLoader color="white" size={22} /> : confirmLabel}
           </Button>
         </div>
       </motion.div>

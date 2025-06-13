@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { formatDate } from '../utils/formatDate';
@@ -28,3 +29,8 @@ function NoteCard({ note, path }) {
 }
 
 export default NoteCard;
+
+NoteCard.propTypes = {
+  note: PropTypes.object,
+  path: PropTypes.string,
+};

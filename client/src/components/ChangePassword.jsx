@@ -3,17 +3,27 @@ import { useForm } from 'react-hook-form';
 import { ClipLoader } from 'react-spinners';
 
 import { useChangePassword } from '../features/authentication/useChangePassword';
-import { useVisibility } from '../utils/useVisibility';
+import { useVisibility } from '../hooks/useVisibility';
 
 import Button from './Button';
 import ErrMsg from './ErrMsg';
 import MoveBack from './MoveBack';
 import PasswordVisibility from './PasswordVisibility';
 
+/**
+ * Change Password Form Component
+ * 
+ * - Handles password change functionality with form validation
+ * - password visibility toggle
+ */
 function ChangePassword() {
+  // Password visibility toggle management
   const { visibility, toggleVisibility } = useVisibility();
+  
+  // Password change mutation
   const { changePassword, isPending } = useChangePassword();
 
+  // Form management
   const {
     register,
     handleSubmit,
@@ -22,37 +32,51 @@ function ChangePassword() {
     reset,
   } = useForm();
 
+  /**
+   * Handles form submission
+   * @param {Object} data - Form data containing current and new passwords
+   */
   const onSubmit = (data) => {
     console.log('Password change submitted:', data);
     const { currentPassword, newPassword } = data;
     changePassword({ currentPassword, newPassword });
     reset();
   };
+
+  /**
+   * Handles form errors
+   * @param {Object} err - Form errors
+   */
   const onError = (err) => {
-    console.log(err);
+    console.error(err);
   };
 
   return (
     <>
+      {/* Mobile back button */}
       <MoveBack
         text="Settings"
         navigateTo="/account/settings"
         className="group flex items-center gap-2 px-3 pt-3 text-sm text-gray-500 lg:hidden"
       />
+
+      {/* Main form container */}
       <div className="px-7 pt-9 pb-7">
         <h3 className="mb-6 text-lg font-bold">Change Password</h3>
+        
+        {/* Animated form container */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col gap-4">
-            {/* Visually hidden username/email field for accessibility & autofill */}
+            {/* Hidden email field for better password manager compatibility */}
             <input
               type="email"
               name="email"
               autoComplete="username"
-              defaultValue="" // You can get this from context or props
+              defaultValue=""
               style={{
                 position: 'absolute',
                 opacity: 0,
@@ -61,12 +85,12 @@ function ChangePassword() {
               }}
               tabIndex={-1}
             />
-            {/* Current Password */}
+
+            {/* Current Password Field */}
             <div className="relative w-full md:w-3/4 xl:w-2/4">
               <label htmlFor="currentPassword" className="text-sm">
                 Old Password
               </label>
-
               <input
                 autoComplete="current-password"
                 type={visibility.current ? 'text' : 'password'}
@@ -84,12 +108,11 @@ function ChangePassword() {
               {errors.currentPassword && <ErrMsg err={errors.currentPassword.message} />}
             </div>
 
-            {/* New Password */}
+            {/* New Password Field */}
             <div className="relative w-full md:w-3/4 xl:w-2/4">
               <label htmlFor="newPassword" className="text-sm">
                 New Password
               </label>
-
               <input
                 autoComplete="new-password"
                 type={visibility.new ? 'text' : 'password'}
@@ -108,19 +131,17 @@ function ChangePassword() {
                 passwordVisible={visibility.new}
                 setPasswordVisible={() => toggleVisibility('new')}
               />
-
               <p className="text-[12px] text-gray-700 italic dark:text-gray-500">
                 At least 8 characters
               </p>
               {errors.newPassword && <ErrMsg err={errors.newPassword.message} />}
             </div>
 
-            {/* Confirm Password */}
+            {/* Confirm Password Field */}
             <div className="relative w-full md:w-3/4 xl:w-2/4">
               <label htmlFor="confirmPassword" className="text-sm">
                 Confirm New Password
               </label>
-
               <input
                 autoComplete="new-password"
                 type={visibility.confirm ? 'text' : 'password'}
@@ -140,9 +161,12 @@ function ChangePassword() {
               {errors.confirmPassword && <ErrMsg err={errors.confirmPassword.message} />}
             </div>
 
+            {/* Submit Button */}
             <div className="relative flex w-full justify-end md:w-3/4 xl:w-2/4">
               <Button
-                customClass={`bg-primaryBlue text-white rounded-md justify-center md:w-[35%] w-2/4 ${isPending ? 'pointer-events-none' : ''}`}
+                customClass={`bg-primaryBlue text-white rounded-md justify-center md:w-[35%] w-2/4 ${
+                  isPending ? 'pointer-events-none' : ''
+                }`}
               >
                 {isPending ? <ClipLoader color="white" size={22} /> : 'Save Password'}
               </Button>

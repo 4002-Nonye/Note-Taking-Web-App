@@ -4,6 +4,7 @@ import { IoSearchOutline, IoSettingsOutline } from 'react-icons/io5';
 import { MdOutlineArchive } from 'react-icons/md';
 import { NavLink } from 'react-router-dom';
 
+// Navigation items with route, icon, and label
 const navItems = [
   { to: '/notes', icon: AiOutlineHome, label: 'Home' },
   { to: '/search', icon: IoSearchOutline, label: 'Search' },
@@ -18,6 +19,7 @@ function MobileNav() {
       <ul className="flex justify-between px-9 py-6">
         {navItems.map(({ to, icon: Icon, label }) => (
           <li key={to}>
+            {/* NavLink adds active class if route matches */}
             <NavLink
               to={to}
               className={({ isActive }) =>
@@ -25,6 +27,7 @@ function MobileNav() {
               }
             >
               <Icon className="text-xl" />
+              {/* Hide label on small screens */}
               <span className="hidden md:block">{label}</span>
             </NavLink>
           </li>

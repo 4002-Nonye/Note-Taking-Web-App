@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
+import PropTypes from 'prop-types';
+
 const ModalContext = createContext();
 
 const initialState = {
@@ -69,3 +71,7 @@ const useModal = () => {
 };
 
 export { ModalProvider,useModal };
+
+ModalProvider.propTypes={
+  children:PropTypes.node
+}

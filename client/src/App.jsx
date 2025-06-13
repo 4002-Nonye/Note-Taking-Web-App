@@ -23,6 +23,7 @@ import Settings from './pages/Settings';
 import TaggedNotes from './pages/TaggedNotes';
 import Tags from './pages/Tags';
 
+import 'react-loading-skeleton/dist/skeleton.css'
 import './index.css'
 
 const queryClient = new QueryClient({
@@ -118,11 +119,16 @@ const router = createBrowserRouter([
         element: <SearchTab />,
         children: [
           {
-            path: ':noteId',
+            path: ':query?/:noteId',
             element: <NoteForm />, // Single note view/edit
           },
         ],
       },
+
+      {
+        path:'*',
+        element:<Notes/>
+      }
     ],
   },
 ]);

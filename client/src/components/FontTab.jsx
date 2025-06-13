@@ -7,20 +7,28 @@ import { useEditSettings } from '../features/accountSettings/useEditSettings';
 import ThemeTab from './ThemeTab';
 
 function FontTab() {
+  // Get current theme font and function to change it
   const { font, handleFontChange } = useFont();
+
+  // Hook for editing account settings
   const { isPending, editAccountSettings } = useEditSettings();
 
+  // Save the selected theme font if it changed
   const saveFontTheme = async () => {
-    // prevent save when no change was made
     const prevTheme = localStorage.getItem('fontTheme');
+
+    // If no change, show a warning toast and stop
     if (prevTheme && prevTheme === font) {
       toast('No changes were made', { icon: '⚠️' });
       return;
     }
+
+    // Save new theme font in account settings and localStorage
     editAccountSettings({ fontTheme: font });
     localStorage.setItem('fontTheme', font);
   };
 
+  // Options for theme selection
   const options = [
     {
       id: 'sans-serif',

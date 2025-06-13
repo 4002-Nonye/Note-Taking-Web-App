@@ -1,5 +1,7 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 
+import PropTypes from 'prop-types';
+
 const FontContext = createContext();
 
 const initialState = {
@@ -83,3 +85,7 @@ const useFont = () => {
 };
 
 export { FontProvider, useFont };
+
+FontProvider.propTypes={
+  children:PropTypes.node
+}

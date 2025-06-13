@@ -1,5 +1,7 @@
 import { createContext, useContext, useReducer } from 'react';
 
+import PropTypes from 'prop-types';
+
 const NoteContext = createContext();
 
 const initialState = {
@@ -43,3 +45,7 @@ const useNotes = () => {
 };
 
 export { NoteProvider,useNotes };
+
+NoteProvider.propTypes={
+  children:PropTypes.node
+}

@@ -1,20 +1,23 @@
 import { FiTag } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
+import SkeletonLoader from '../components/SkeletonLoader';
 import { useGetNotes } from '../features/notes/useGetNotes';
 
 function Tags() {
   const { notes, isPending } = useGetNotes();
-  if (isPending) return;
 
-  const tags = notes.notes.flatMap((note) => note.tags);
+  const tags = notes?.notes?.flatMap((note) => note.tags);
   const uniqueTags = [...new Set(tags)];
   return (
     <>
       <div className="mt-4 px-5 xl:hidden">
         <h2 className="text-2xl font-bold text-gray-500">Tags</h2>
-        <ul className="mt-4 flex flex-col gap-3">
-          {uniqueTags.map((tag) => {
+        <ul className="mt-4 flex flex-col gap-3 h-[32rem] overflow-auto no-scrollbar  pb-24">
+          {/* Show loading skeleton while fetching */}
+          {isPending && <SkeletonLoader type="tag" />}
+
+          {uniqueTags?.map((tag) => {
             return (
               <li
                 key={tag}

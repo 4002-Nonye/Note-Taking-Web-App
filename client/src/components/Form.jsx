@@ -236,7 +236,7 @@ function Form({ note = {}, isError }) {
 // PropTypes for type checking
 Form.propTypes = {
   note: PropTypes.object,
-  isError: PropTypes.string,
+  isError: PropTypes.bool,
 };
 
 export default Form;

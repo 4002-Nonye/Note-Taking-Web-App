@@ -15,6 +15,7 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
 
   return (
     <div className="dark:border-darkBorder flex w-full flex-row items-center justify-between border-b-[1px] border-gray-300 pt-9 pb-6 text-gray-500 lg:px-4 xl:w-64 xl:items-start xl:gap-6 xl:border-b-0 xl:px-0">
+      {/* Back button for smaller screens */}
       <MoveBack
         text="Go back"
         navigateTo={-1}
@@ -22,9 +23,10 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
       />
 
       <div className="flex items-center gap-3 xl:w-64 xl:flex-col xl:gap-6">
+        {/* Archive or Restore button */}
         <Button
           btnType="button"
-          customClass="group justify-center  items-center"
+          customClass="group justify-center items-center"
           type="ctaBtn"
           onclick={() => handleShowModal(isArchive ? 'restore' : 'archive')}
         >
@@ -32,6 +34,7 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
           <span className="hidden lg:block"> {isArchive ? 'Restore Note' : 'Archive Note'}</span>
         </Button>
 
+        {/* Delete button */}
         <Button
           customClass="group justify-center"
           type="ctaBtn"
@@ -42,6 +45,7 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
           <span className="hidden lg:block">Delete Note</span>
         </Button>
 
+        {/* Cancel and Save buttons for mobile */}
         <Button
           btnType="button"
           customClass="w-1/4 lg:text-xl text-sm lg:hidden"
@@ -51,13 +55,17 @@ function NoteCTA({ isArchive, reset, defaultFormValues }) {
         </Button>
         <Button customClass="text-primaryBlue w-2/4 lg:text-xl text-sm lg:hidden">Save</Button>
       </div>
+
+      {/* Modal with confirm actions */}
       {showModal && <CtaCard noteId={noteId} />}
     </div>
   );
 }
+
 NoteCTA.propTypes = {
   isArchive: PropTypes.bool,
   reset: PropTypes.func,
   defaultFormValues: PropTypes.object,
 };
+
 export default NoteCTA;

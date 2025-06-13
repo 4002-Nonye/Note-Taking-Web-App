@@ -1,5 +1,7 @@
 import { createContext, useCallback, useContext, useReducer } from 'react';
 
+import PropTypes from 'prop-types';
+
 const ThemeContext = createContext();
 
 const initialState = {
@@ -62,3 +64,7 @@ const useTheme = () => {
 };
 
 export { ThemeProvider, useTheme };
+
+ThemeProvider.propTypes={
+  children:PropTypes.node
+}

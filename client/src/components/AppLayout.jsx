@@ -44,7 +44,7 @@ function AppLayout() {
   }, [getAccountSettings, isLoading, handleServerThemeColor, handleServerThemeFont]);
 
   return (
-    <div className="dark:bg-darkbg flex min-h-screen w-full flex-col xl:flex-row">
+    <div className="dark:bg-darkbg flex min-h-screen w-full flex-col xl:flex-row mx-auto max-w-screen-2xl">
       {/* Desktop sidebar - shown on larger screens */}
       <Sidebar />
 

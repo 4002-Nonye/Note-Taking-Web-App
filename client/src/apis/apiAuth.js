@@ -32,6 +32,10 @@ export const getUser = async () => {
 
     return response.data;
   } catch (err) {
+    if (err.response?.status === 401) {
+      // No user is logged in — return null instead of throwing
+      return null;
+    }
     throw err.response.data;
   }
 };

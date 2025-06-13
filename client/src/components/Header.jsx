@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { IoSearchOutline } from 'react-icons/io5';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { NavLink } from 'react-router-dom';
 
@@ -22,7 +21,7 @@ function Header({ head, customClass }) {
             `flex flex-col items-center ${isActive ? 'text-primaryBlue' : ''}`
           }
         >
-          {' '}
+        
           <IoSettingsOutline className="text-2xl" />
         </NavLink>
       </div>
