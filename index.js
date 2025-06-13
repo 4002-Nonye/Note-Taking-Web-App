@@ -10,6 +10,11 @@ mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+
+// ✅ Enable proxy trust (important for rate limiting behind Render)
+app.set('trust proxy', 1);
+
+
 // to parse data to req.body
 app.use(express.json());
 app.use(cookieParser());
