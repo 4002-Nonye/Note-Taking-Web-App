@@ -128,7 +128,7 @@ function CtaCard({ noteId }) {
         <div className="xsm:justify-end mt-3 flex justify-center gap-4">
           <Button
             onclick={handleHideModal}
-            customClass="rounded-md bg-white px-6 text-black shadow-md dark:shadow-none"
+            customClass="rounded-md bg-white text-black shadow-md dark:shadow-none  w-24 flex items-center text-center justify-center"
             btnType="button"
             disabled={loading}
           >
@@ -136,7 +136,7 @@ function CtaCard({ noteId }) {
           </Button>
           <Button
             onclick={modalAction}
-            customClass={`rounded-md px-6 text-white ${
+            customClass={`rounded-md text-center text-white w-24 flex items-center text-center justify-center ${
               action === 'delete' ? 'bg-red-500' : 'bg-primaryBlue'
             }`}
             btnType="button"

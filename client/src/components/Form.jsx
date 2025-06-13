@@ -214,7 +214,7 @@ function Form({ note = {}, isError }) {
         {/* Form action buttons (desktop only) */}
         <div className="mt-4 hidden justify-end gap-5 lg:flex">
           <Button
-            customClass={`bg-primaryBlue rounded-md text-white w-24 justify-center font-medium ${
+            customClass={`bg-primaryBlue rounded-md text-white w-30 justify-center font-medium ${
               isLoading ? 'pointer-events-none' : ''
             }`}
           >
@@ -223,7 +223,7 @@ function Form({ note = {}, isError }) {
           <Button
             onclick={() => reset(defaultFormValues)}
             btnType="button"
-            customClass="bg-gray-300 rounded-md text-black w-24 justify-center font-medium"
+            customClass="bg-gray-300 rounded-md text-black w-30 justify-center font-medium"
           >
             Cancel
           </Button>
