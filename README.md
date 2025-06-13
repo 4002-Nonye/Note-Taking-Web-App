@@ -49,21 +49,19 @@ git clone https://github.com/4002-Nonye/Note-Taking-Web-App.git
 
 ```bash
 # Backend
-cd server
 npm install
 
 # Frontend
-cd server/client
+cd client
 npm install
 ```
 
-3. Set up your environment variables (`/server/config/dev` ).
+3. Set up your environment variables (`/config/dev` ).
 
 4. Run the app:
 
 ```bash
 # Backend
-cd server
 npm run dev
 ```
 
