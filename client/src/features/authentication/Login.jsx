@@ -20,12 +20,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({
-    defaultValues: {
-      email: 'ojukwuchinonye@gmail.com',
-      password: '1234509000007',
-    },
-  });
+  } = useForm();
   const [passwordVisible, setPasswordVisible] = useState(false);
   const { login, isPending } = useLogin();
 
