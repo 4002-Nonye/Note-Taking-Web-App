@@ -176,18 +176,6 @@ All API routes (except login and registration) are **protected** and require aut
 
 ---
 
-## 🗂️ Project Structure
-
-```
-project-root/
-│
-├── client/          # React frontend
-├── server/          # Node/Express backend
-├── README.md        # You're here
-└── ...
-```
-
----
 
 ## 📦 Tech Stack
 
