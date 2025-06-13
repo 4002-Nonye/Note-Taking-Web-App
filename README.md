@@ -71,7 +71,6 @@ npm run dev
 
 All API routes (except login and registration) are **protected** and require authentication via the `requireLogin` middleware.
 
-
 ### 🧑‍💼 Authentication
 
 #### `POST /api/register`
@@ -82,12 +81,10 @@ All API routes (except login and registration) are **protected** and require aut
     "email": "user@example.com",
     "password": "securePassword"
   }
-````
-
+  ```
 - **Response:** Registered user or error
 
 #### `POST /api/login`
-
 - **Description:** Login an existing user
 - **Request Body:**
   ```json
@@ -103,18 +100,15 @@ All API routes (except login and registration) are **protected** and require aut
 ### 🗒️ Notes
 
 #### `GET /api/notes`
-
 - **Description:** Fetch all notes for the logged-in user
 - **Query:** None
 - **Response:** List of notes
 
 #### `GET /api/note/:id`
-
 - **Description:** Fetch a specific note by its ID
 - **Response:** Note object or error
 
 #### `POST /api/new-note`
-
 - **Description:** Create a new note
 - **Request Body:**
   ```json
@@ -128,7 +122,6 @@ All API routes (except login and registration) are **protected** and require aut
 - **Response:** Created note
 
 #### `PUT /api/note/edit/:id`
-
 - **Description:** Update a note by ID
 - **Request Body:** Any of the following fields:
   ```json
@@ -142,7 +135,6 @@ All API routes (except login and registration) are **protected** and require aut
   ```
 
 #### `DELETE /api/note/del/:id`
-
 - **Description:** Delete a note permanently
 
 ---
@@ -150,7 +142,6 @@ All API routes (except login and registration) are **protected** and require aut
 ### 📁 Archive
 
 #### `GET /api/notes/archive`
-
 - **Description:** Fetch all archived notes
 
 ---
@@ -158,7 +149,6 @@ All API routes (except login and registration) are **protected** and require aut
 ### ⚙️ User Settings
 
 #### `PUT /api/account/settings`
-
 - **Description:** Update user preferences
 - **Request Body:**
   ```json
@@ -173,7 +163,6 @@ All API routes (except login and registration) are **protected** and require aut
 ### 🔒 Password Management
 
 #### `PUT /api/account/passwordchange`
-
 - **Description:** Change user password
 - **Request Body:**
   ```json
@@ -209,4 +198,3 @@ project-root/
 - **Validation/Security:** Express middleware, XSS sanitization  
 - **Deployment:** Render  
 ---
-
