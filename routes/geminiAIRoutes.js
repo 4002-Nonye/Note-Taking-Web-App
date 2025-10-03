@@ -20,7 +20,7 @@ module.exports = (app) => {
         const prompt = suggestTagsPrompt(title);
 
         const response = await ai.models.generateContent({
-          model: 'models/gemini-1.5-flash',
+          model: 'gemini-2.5-flash',
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
         });
 
@@ -31,8 +31,6 @@ module.exports = (app) => {
         console.error('AI tag generation error:', error);
         res.status(500).json({
           error: 'Failed to generate tags',
-          details:
-            process.env.NODE_ENV === 'development' ? error.message : undefined,
         });
       }
     }
